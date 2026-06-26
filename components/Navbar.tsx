@@ -347,7 +347,7 @@ export default function Navbar() {
               {/* Resume in drawer */}
               <motion.a
                 href="/resume.pdf"
-                download
+                download="Hanan's Resume.pdf"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0  }}
                 transition={{ delay: NAV_ITEMS.length * 0.055 + 0.08, duration: 0.3 }}
