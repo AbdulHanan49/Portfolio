@@ -275,9 +275,9 @@ function MemoryGame() {
             className="mem-card"
             style={{
               cursor:      card.flipped || card.matched ? "default" : "pointer",
-              borderColor: card.matched ? `${card.color}55` : undefined,
-              background:  card.flipped || card.matched ? `${card.color}16` : undefined,
-              opacity:     card.matched ? 0.5 : 1,
+              borderColor: card.matched ? `${card.color}99` : undefined,
+              background:  card.flipped || card.matched ? `${card.color}38` : undefined,
+              opacity:     card.matched ? 0.82 : 1,
             }}
           >
             {card.flipped || card.matched ? (
@@ -286,7 +286,12 @@ function MemoryGame() {
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 280, damping: 18 }}
                 className="mem-card-label"
-                style={{ color: card.color }}
+                style={{
+                  color: card.color,
+                  fontWeight: 800,
+                  fontSize: "0.7rem",
+                  textShadow: `0 0 8px ${card.color}cc, 0 1px 3px rgba(0,0,0,0.55)`,
+                }}
               >
                 {card.label}
               </motion.span>

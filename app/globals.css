@@ -72,6 +72,11 @@ html {
   overflow-x: hidden;
 }
 
+/* Lock scroll while loading screen is visible — :has() is pure CSS, no JS race */
+html:has(#loading-overlay) {
+  overflow: hidden;
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -151,6 +156,18 @@ body::after {
 .loader-code .property { color: var(--accent-secondary); }
 
 @keyframes fadeInLine { to { opacity: 1; } }
+@keyframes fadeInPath { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes equalize {
+  0%, 100% { transform: scaleY(0.12); }
+  50%       { transform: scaleY(1);   }
+}
+
+/* Loading screen auto-fade — CSS-driven so it fires regardless of JS parse time */
+@keyframes loadingFade {
+  0%, 60% { opacity: 1; }
+  100%     { opacity: 0; }
+}
 
 .loader-bar-track {
   width: 220px;
@@ -283,7 +300,7 @@ body::after {
 .hero-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(60px);
   opacity: 0.35;
   animation: orbFloat 20s ease-in-out infinite;
   pointer-events: none;
@@ -362,14 +379,21 @@ body::after {
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  background-image: url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=80");
-  background-size: cover;
-  background-position: 40% 50%;
+  background-image: linear-gradient(
+    135deg,
+    #562abd 0%,
+    #7856FF 25%,
+    #00FFB2 45%,
+    #562abd 65%,
+    #9B79FF 85%,
+    #00FFB2 100%
+  );
+  background-size: 300% 300%;
+  animation: nebulaGradient 10s ease infinite;
   user-select: none;
   cursor: default;
   position: relative;
   text-transform: uppercase;
-  transition: background-position 0.1s ease-out;
 }
 
 /* Fallback gradient nebula for when image isn't loaded */
@@ -428,6 +452,125 @@ body::after {
   margin-left: 2px;
   vertical-align: text-bottom;
   animation: blink 1s step-end infinite;
+}
+
+/* Hero CSS animations — replace Framer Motion initial reveals */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(44px); filter: blur(12px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes heroLineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.75rem 1.9rem; border-radius: 999px;
+  background: linear-gradient(135deg, #9B79FF 0%, #7856FF 40%, #562abd 100%);
+  color: #fff; text-decoration: none;
+  font-family: var(--font-fira); font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 0 1px rgba(120,86,255,0.45), 0 4px 24px rgba(120,86,255,0.45), inset 0 1px 0 rgba(255,255,255,0.22);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hero-btn-primary:hover { transform: scale(1.04) translateY(-3px); box-shadow: 0 0 0 3px rgba(120,86,255,0.2), 0 14px 44px rgba(120,86,255,0.6); }
+.hero-btn-primary:active { transform: scale(0.97); }
+
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.74rem 1.9rem; border-radius: 999px;
+  background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+              linear-gradient(135deg, rgba(155,121,255,0.65), rgba(0,255,178,0.35)) border-box;
+  border: 1.5px solid transparent;
+  color: var(--text-secondary); text-decoration: none;
+  font-family: var(--font-fira); font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.hero-btn-secondary:hover { transform: scale(1.04) translateY(-3px); color: #9B79FF; }
+.hero-btn-secondary:active { transform: scale(0.97); }
+
+.hero-social-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(120,86,255,0.07);
+  border: 1px solid rgba(120,86,255,0.22);
+  color: var(--text-secondary); text-decoration: none;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+.hero-social-icon:hover { transform: translateY(-3px) scale(1.08); background: rgba(120,86,255,0.18); border-color: rgba(120,86,255,0.55); }
+.hero-social-icon:active { transform: scale(0.94); }
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes cardScan {
+  0%   { transform: translateY(-60px); opacity: 0; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(440px); opacity: 0; }
+}
+
+/* About background orb floats */
+@keyframes aboutOrb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(14px, -28px) scale(1.12); }
+}
+@keyframes aboutOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-18px, 22px) scale(0.88); }
+}
+
+/* Generic opacity pulse — card decorations */
+@keyframes opacityPulse {
+  0%, 100% { opacity: 0.05; }
+  50%       { opacity: 0.10; }
+}
+
+/* Contact ambient orb pulses */
+@keyframes contactOrb1 {
+  0%, 100% { transform: scale(1);    opacity: 0.28; }
+  50%       { transform: scale(1.2);  opacity: 0.40; }
+}
+@keyframes contactOrb2 {
+  0%, 100% { transform: scale(1);    opacity: 0.20; }
+  50%       { transform: scale(1.14); opacity: 0.30; }
+}
+@keyframes contactOrb3 {
+  0%, 100% { transform: scale(1);    opacity: 0.12; }
+  50%       { transform: scale(1.1);  opacity: 0.22; }
+}
+
+/* Footer heartbeat */
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.4); }
+}
+
+/* TechStackGrid scanning beam — 4s sweep then 3s pause (7s total) */
+@keyframes shimmerBeam {
+  0%    { transform: translateX(-160px); }
+  57%   { transform: translateX(2000px); }
+  57.1%, 100% { transform: translateX(-160px); }
+}
+
+/* Experience proficiency dots */
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.7; }
+  50%       { transform: scale(1.5); opacity: 1; }
+}
+
+/* Experience timeline dot glow — uses CSS vars --dot-color and --dot-glow */
+@keyframes timelineDotGlow {
+  0%, 100% { box-shadow: 0 0 0 3px var(--bg-primary), 0 0 14px var(--dot-glow), 0 0 28px var(--dot-glow); }
+  50%       { box-shadow: 0 0 0 3px var(--bg-primary), 0 0 22px var(--dot-color), 0 0 44px var(--dot-glow); }
 }
 
 @keyframes blink {
@@ -543,7 +686,6 @@ body::after {
   align-items: center;
   gap: 0.6rem;
   padding: 0.875rem 2.1rem;
-  /* Gradient border via padding-box / border-box */
   background:
     linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
     linear-gradient(135deg, rgba(155, 121, 255, 0.65), rgba(0, 255, 178, 0.35)) border-box;
@@ -688,7 +830,7 @@ body::after {
 
 .skill-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  background: var(--accent);
   border-radius: 999px;
   transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1184,6 +1326,14 @@ body::after {
   transition: background 0.2s ease;
 }
 
+.contact-field-ring {
+  box-shadow: 0 0 0 1px var(--border);
+  transition: box-shadow 0.2s;
+}
+.contact-field-ring.focused {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 20px var(--accent-glow);
+}
+
 .contact-input-v2:focus {
   background: color-mix(in srgb, var(--bg-tertiary) 80%, var(--accent) 20%);
 }
@@ -1359,12 +1509,11 @@ body::after {
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--accent), var(--accent-secondary));
+  background: var(--border);
   border-radius: 999px;
-  opacity: 0.7;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, var(--accent-light), var(--accent-secondary));
+  background: var(--accent);
 }
 
 /* ============================================
@@ -1931,9 +2080,17 @@ body::after {
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  background-image: url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=80");
-  background-size: cover;
-  background-position: 40% 50%;
+  background-image: linear-gradient(
+    135deg,
+    #562abd 0%,
+    #7856FF 25%,
+    #00FFB2 45%,
+    #562abd 65%,
+    #9B79FF 85%,
+    #00FFB2 100%
+  );
+  background-size: 300% 300%;
+  animation: nebulaGradient 10s ease infinite;
   text-transform: uppercase;
   text-align: left;
   margin-bottom: 1.4rem;
@@ -2547,29 +2704,72 @@ body::after {
   background: var(--accent-glow);
 }
 
+/* Dark mode — vivid violet board */
+[data-theme="dark"] .game-panel {
+  background: linear-gradient(160deg, #12093a 0%, #0b0820 60%, #0d0a28 100%);
+  border-color: rgba(120,86,255,0.45);
+  box-shadow:
+    0 0 0 1px rgba(120,86,255,0.15),
+    0 24px 64px rgba(0,0,0,0.55),
+    0 0 80px rgba(86,42,189,0.12) inset;
+}
+
+[data-theme="dark"] .game-panel::before {
+  background: radial-gradient(ellipse, rgba(120,86,255,0.28) 0%, transparent 68%);
+}
+
+[data-theme="dark"] .ttt-grid,
+[data-theme="dark"] .mem-grid {
+  background: rgba(86,42,189,0.12);
+  border-color: rgba(120,86,255,0.22);
+}
+
+[data-theme="dark"] .ttt-cell {
+  background: linear-gradient(135deg, rgba(86,42,189,0.22) 0%, rgba(10,6,30,0.80) 100%);
+  border-color: rgba(120,86,255,0.30);
+  box-shadow: inset 0 1px 0 rgba(155,121,255,0.07);
+}
+
+[data-theme="dark"] .ttt-cell:hover:not([style*="default"]) {
+  border-color: rgba(120,86,255,0.72);
+  background: linear-gradient(135deg, rgba(86,42,189,0.40) 0%, rgba(10,6,30,0.70) 100%);
+  box-shadow: 0 0 22px rgba(120,86,255,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .mem-card {
+  background: linear-gradient(135deg, rgba(86,42,189,0.25) 0%, rgba(10,6,30,0.82) 50%, rgba(120,86,255,0.10) 100%);
+  border-color: rgba(120,86,255,0.30);
+  box-shadow: inset 0 1px 0 rgba(155,121,255,0.07);
+}
+
+[data-theme="dark"] .game-reset-btn {
+  border-color: rgba(120,86,255,0.35);
+  color: rgba(196,181,253,0.7);
+}
+
 /* Light mode overrides for game board */
-:root .game-panel {
+[data-theme="light"] .game-panel {
   background: #ffffff;
   box-shadow: 0 0 0 1px rgba(86,42,189,0.1), 0 16px 48px rgba(0,0,0,0.08);
 }
 
-:root .ttt-grid,
-:root .mem-grid {
+[data-theme="light"] .ttt-grid,
+[data-theme="light"] .mem-grid {
   background: rgba(86,42,189,0.05);
   border-color: rgba(86,42,189,0.12);
 }
 
-:root .ttt-cell {
+[data-theme="light"] .ttt-cell {
   background: linear-gradient(135deg, rgba(86,42,189,0.07) 0%, rgba(244,243,246,0.9) 100%);
   border-color: rgba(86,42,189,0.18);
 }
 
-:root .mem-card {
+[data-theme="light"] .mem-card {
   background: linear-gradient(135deg, rgba(86,42,189,0.1) 0%, rgba(244,243,246,0.9) 100%);
   border-color: rgba(86,42,189,0.18);
 }
 
-:root .game-panel::before {
+[data-theme="light"] .game-panel::before {
   background: radial-gradient(ellipse, rgba(86,42,189,0.10) 0%, transparent 70%);
 }
 

@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
-import SplitText from "./SplitText";
-import { FiGithub, FiArrowRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 interface Project {
   number: string;
@@ -24,9 +24,9 @@ const projects: Project[] = [
     title: "MixClip",
     subtitle: "AI Video SaaS · KCube Solutions",
     description:
-      "Production AI-powered video editing SaaS built end-to-end as sole engineer. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, Node.js/Remotion rendering microservice, Azure Speech SDK auto-subtitles, Google Gemini AI, Stripe multi-currency billing across 17+ currencies, and zero-downtime Azure CI/CD.",
+      "Sole engineer on a live AI video editing SaaS — full ownership from zero to production. Enabled billing in 17+ currency markets via Stripe, achieved zero-downtime deployments on Azure CI/CD, and shipped AI auto-subtitles (Azure Speech SDK) and Google Gemini features. Stack: React 18 / TypeScript frontend, FastAPI / PostgreSQL backend, Node.js / Remotion rendering microservice, Docker.",
     tags: ["React 18", "TypeScript", "FastAPI", "PostgreSQL", "Remotion", "Stripe", "Azure", "Docker"],
-    liveUrl: "#",
+    liveUrl: "https://mix-clip.com/en?c=eur",
     gradient: "linear-gradient(135deg,#562abd 0%,#210C6E 60%,#0E0636 100%)",
     glow: "rgba(120,86,255,0.5)",
   },
@@ -35,9 +35,9 @@ const projects: Project[] = [
     title: "Job Wallet",
     subtitle: "AI Job Tracking SaaS · Visnext Software Solutions",
     description:
-      "Rebuilt the full frontend of an AI-powered job tracking SaaS — migrating legacy UI to Vue 3/Quasar Framework with Pinia and Tailwind CSS. Engineered 10+ Django REST APIs, JWT + RBAC auth, Celery + Redis async task queue for interview reminders, and Stripe freemium billing with dual-channel notifications.",
+      "Modernised a struggling legacy UI into a production-grade SaaS — full frontend rebuilt in Vue 3 / Quasar with Pinia and Tailwind. Delivered 10+ Django REST APIs, JWT + RBAC auth, Celery / Redis async queue cutting manual follow-up effort for users, and Stripe freemium billing with dual-channel notifications (email + in-app).",
     tags: ["Vue 3", "Quasar", "Django REST", "Python", "MySQL", "Celery", "Redis", "Stripe"],
-    liveUrl: "#",
+    liveUrl: "https://jobwallet.co",
     gradient: "linear-gradient(135deg,#059669 0%,#065F46 60%,#022C22 100%)",
     glow: "rgba(5,150,105,0.5)",
   },
@@ -46,7 +46,7 @@ const projects: Project[] = [
     title: "Screen Sizzle",
     subtitle: "Movie Seat Booking System · MERN",
     description:
-      "Full-stack MERN movie seat booking platform with real-time seat availability, concurrent session handling, and atomic update patterns to prevent double-booking across simultaneous users. Features Stripe payment checkout and Nodemailer booking confirmation emails.",
+      "Solved the hardest problem in booking systems — concurrent double-booking. Implemented atomic MongoDB update patterns and real-time seat locking so multiple users racing for the same seat never both succeed. Full-stack MERN with Stripe checkout and Nodemailer confirmation emails.",
     tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Stripe", "Nodemailer", "MERN"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/Screen-Sizzle",
@@ -58,7 +58,7 @@ const projects: Project[] = [
     title: "SmartLib",
     subtitle: "Library Management System · ASP.NET",
     description:
-      "Full-stack library management system with an ASP.NET backend and SQL Server. Implemented role-based access for librarians and patrons, book issuance and return tracking, and automated fine calculation for overdue returns.",
+      "Replaced manual paper-based library operations with a full digital workflow. Role-based access separates librarian and patron views, automated fine calculation eliminates manual overdue tracking, and a full issuance / return ledger gives librarians complete audit history.",
     tags: ["ASP.NET", "SQL Server", "HTML", "CSS", "JavaScript"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/LibApp",
@@ -70,7 +70,7 @@ const projects: Project[] = [
     title: "TourVista",
     subtitle: "Android Tour Booking App · Kotlin",
     description:
-      "Android tour booking and management app built with Kotlin and Jetpack Compose. Features Firebase Authentication, Firestore real-time data sync, role-based access for travelers and tour operators, and an end-to-end booking flow covering tour search, participant selection, scheduling, and operator confirmation.",
+      "End-to-end Android booking app covering the full traveller journey — search, participant selection, scheduling, and operator confirmation — all synced in real-time via Firestore. Firebase Auth handles secure login; MVVM architecture keeps the codebase testable and maintainable as features grow.",
     tags: ["Kotlin", "Jetpack Compose", "Firebase Auth", "Firestore", "MVVM", "Android"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/TourVista",
@@ -80,9 +80,9 @@ const projects: Project[] = [
   {
     number: "06",
     title: "Brain Tumor Detection",
-    subtitle: "Image Processing · Python / OpenCV",
+    subtitle: "Medical Imaging Pipeline · Python / OpenCV",
     description:
-      "Medical image preprocessing and visualization pipeline for brain tumor detection. Loads MRI images from tumor and non-tumor datasets, resizes to 224×224, converts BGR to RGB via OpenCV, and renders labeled sample grids using Matplotlib for visual analysis.",
+      "Built a reproducible MRI preprocessing pipeline capable of ingesting mixed tumor / non-tumor datasets and outputting labelled sample grids for visual QA. Standardised input to 224×224 RGB, enabling drop-in compatibility with standard CNN classifiers — the bottleneck most ML projects skip.",
     tags: ["Python", "OpenCV", "Matplotlib", "NumPy", "Jupyter", "Data Science"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/Brain-Tumor-Detection",
@@ -151,6 +151,80 @@ function GalleryCard({ project, delay }: { project: Project; delay: number }) {
   );
 }
 
+/* ── Project preview mockups ── */
+function ScreenshotPreview({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div style={{ width:"100%", height:"100%", overflow:"hidden", position:"relative" }}>
+      <Image
+        src={src} alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+        style={{ objectFit:"cover", objectPosition:"top" }}
+        loading="lazy"
+        quality={72}
+      />
+    </div>
+  );
+}
+
+
+
+
+function TourVistaPreview() {
+  const tours = [
+    { name:"Lahore City Tour", price:"PKR 2,500", stars:4 },
+    { name:"Murree Weekend",   price:"PKR 8,000", stars:5 },
+  ];
+  return (
+    <div style={{ width:"100%", height:"100%", background:"linear-gradient(160deg,#041820 0%,#083344 100%)", display:"flex", alignItems:"center", justifyContent:"center" }}>
+      <div style={{ width:90, height:114, border:"2px solid rgba(8,145,178,0.5)", borderRadius:14, background:"rgba(0,0,0,0.5)", overflow:"hidden", boxShadow:"0 0 20px rgba(8,145,178,0.14)" }}>
+        <div style={{ height:14, background:"rgba(8,145,178,0.25)", display:"flex", alignItems:"center", justifyContent:"center" }}>
+          <div style={{ width:20, height:4, background:"rgba(255,255,255,0.2)", borderRadius:2 }} />
+        </div>
+        <div style={{ padding:"5px 6px 3px", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ height:4, width:50, background:"rgba(255,255,255,0.2)", borderRadius:2, marginBottom:2 }} />
+          <div style={{ height:3, width:30, background:"rgba(8,145,178,0.4)", borderRadius:2 }} />
+        </div>
+        {tours.map((t, i) => (
+          <div key={i} style={{ margin:"4px 5px", padding:"4px 5px", background:i===0?"rgba(8,145,178,0.15)":"rgba(255,255,255,0.05)", border:`1px solid ${i===0?"rgba(8,145,178,0.4)":"rgba(255,255,255,0.07)"}`, borderRadius:5 }}>
+            <div style={{ fontFamily:"monospace", fontSize:5.5, color:"rgba(255,255,255,0.8)", marginBottom:2, lineHeight:1.3 }}>{t.name}</div>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+              <span style={{ fontSize:6, letterSpacing:1, color:"#FBBF24" }}>{"★".repeat(t.stars)}</span>
+              <span style={{ fontFamily:"monospace", fontSize:5, color:"rgba(8,145,178,0.9)" }}>{t.price}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BrainTumorPreview() {
+  const scans = ["tumor","normal","tumor","normal","tumor","normal"] as const;
+  return (
+    <div style={{ width:"100%", height:"100%", background:"linear-gradient(160deg,#0E0520 0%,#1A0945 100%)", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:6 }}>
+      <div style={{ fontFamily:"monospace", fontSize:6.5, color:"rgba(167,139,250,0.7)", letterSpacing:"0.1em", textTransform:"uppercase" }}>MRI Classification</div>
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:6 }}>
+        {scans.map((type, i) => (
+          <div key={i} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:3 }}>
+            <div style={{ width:34, height:34, borderRadius:6, background:type==="tumor"?"radial-gradient(circle at 55% 45%,rgba(180,0,0,0.6) 0%,rgba(60,20,80,0.9) 50%,rgba(20,10,40,1) 100%)":"radial-gradient(circle,rgba(80,80,80,0.8) 0%,rgba(30,30,60,0.9) 60%,rgba(10,5,30,1) 100%)", border:`1px solid ${type==="tumor"?"rgba(239,68,68,0.5)":"rgba(34,197,94,0.35)"}`, boxShadow:type==="tumor"?"0 0 6px rgba(239,68,68,0.22)":"none" }} />
+            <span style={{ fontFamily:"monospace", fontSize:5.5, fontWeight:700, color:type==="tumor"?"rgba(239,68,68,0.8)":"rgba(34,197,94,0.7)" }}>{type==="tumor"?"Tumor":"Normal"}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PROJECT_PREVIEWS: Record<string, ReactNode> = {
+  "01": <ScreenshotPreview src="/projects/mixclip.png"     alt="MixClip screenshot" />,
+  "02": <ScreenshotPreview src="/projects/jobwallet.png"   alt="Job Wallet screenshot" />,
+  "03": <ScreenshotPreview src="/projects/screensizzle.png" alt="Screen Sizzle screenshot" />,
+  "04": <ScreenshotPreview src="/projects/smartlib.png"    alt="SmartLib screenshot" />,
+  "05": <ScreenshotPreview src="/projects/tourvista.jpg" alt="TourVista screenshot" />,
+  "06": <BrainTumorPreview />,
+};
+
 /* ── Detailed project card ── */
 function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -174,7 +248,9 @@ function ProjectCard({ project }: { project: Project }) {
         onMouseMove={handleMove}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHovered(false); }}
-        onClick={() => project.githubUrl && window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
+        onClick={() => {
+          if (project.liveUrl !== "#") window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+        }}
         animate={{
           boxShadow: hovered
             ? `0 24px 64px ${project.glow.replace("0.5", "0.3")}`
@@ -190,11 +266,49 @@ function ProjectCard({ project }: { project: Project }) {
           flexDirection: "column",
           transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
           transition: "transform 0.2s ease-out",
-          cursor: project.githubUrl ? "pointer" : "default",
+          cursor: project.liveUrl !== "#" ? "pointer" : "default",
         }}
       >
         {/* Gradient banner */}
         <div style={{ height: 4, background: project.gradient, boxShadow: `0 0 12px ${project.glow.replace("0.5","0.6")}` }} />
+
+        {/* Visual preview mockup */}
+        <div style={{ height: 148, position: "relative", overflow: "hidden", borderBottom: "1px solid var(--border)" }}>
+          {/* Image — blurs on hover */}
+          <div style={{
+            position: "absolute", inset: 0,
+            filter: hovered ? "blur(3px) brightness(0.6)" : "blur(0px) brightness(1)",
+            transform: hovered ? "scale(1.04)" : "scale(1)",
+            transition: "filter 0.35s ease, transform 0.35s ease",
+          }}>
+            {PROJECT_PREVIEWS[project.number]}
+          </div>
+
+          {/* Dark overlay + CTA — fades in on hover */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "rgba(0,0,0,0.55)",
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 0.3s ease",
+            display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center", gap: "0.5rem",
+            pointerEvents: "none",
+          }}>
+            <span style={{
+              display: "inline-flex", alignItems: "center", gap: "0.4rem",
+              fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
+              color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase",
+              background: project.gradient,
+              padding: "0.45rem 1.1rem", borderRadius: 999,
+              boxShadow: `0 0 20px ${project.glow}`,
+            }}>
+              {project.liveUrl !== "#" ? "View Live ↗" : "Preview"}
+            </span>
+          </div>
+
+          {/* Bottom fade into card */}
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 32, background: "linear-gradient(to bottom, transparent, var(--card-bg))", pointerEvents: "none" }} />
+        </div>
 
         <div style={{ padding: "clamp(1.25rem, 3vw, 1.75rem) clamp(1rem, 3vw, 2rem)", display: "flex", flexDirection: "column", flex: 1 }}>
           {/* Header */}
@@ -207,28 +321,6 @@ function ProjectCard({ project }: { project: Project }) {
                 {project.number} / {project.subtitle}
               </span>
             </div>
-            {project.githubUrl && (
-              <div style={{ display: "flex", gap: "0.5rem" }}>
-                <motion.a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  whileHover={{ scale: 1.12, y: -2, color: "var(--accent)" }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  style={{
-                    width: 34, height: 34, borderRadius: 8,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    background: "var(--bg-tertiary)", border: "1px solid var(--border)",
-                    color: "var(--text-muted)", textDecoration: "none",
-                  }}
-                  aria-label="GitHub"
-                >
-                  <FiGithub size={15} />
-                </motion.a>
-              </div>
-            )}
           </div>
 
           <h3 style={{
@@ -263,9 +355,9 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
 
-          {project.githubUrl ? (
+          {project.liveUrl !== "#" ? (
             <motion.a
-              href={project.githubUrl}
+              href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
@@ -277,7 +369,7 @@ function ProjectCard({ project }: { project: Project }) {
                 color: "var(--accent-secondary)", textDecoration: "none", letterSpacing: "0.05em",
               }}
             >
-              View on GitHub
+              Live Site
               <motion.span
                 variants={{ rest: { x: 0 }, hover: { x: 5 } }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -369,20 +461,20 @@ export default function Projects() {
               color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.28em",
               marginBottom: "0.75rem",
             }}>
-              04 — Projects
+              03 — Projects
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
               fontSize: "clamp(2rem, 4vw, 3.4rem)", lineHeight: 1.05,
               color: "var(--text-primary)", letterSpacing: "-0.02em", marginBottom: "0.6rem",
             }}>
-              <SplitText text="Selected work" by="word" stagger={0.08} />
+              Selected work
               <br />
               <span
                 className="serif-italic"
                 style={{ color: "var(--accent-secondary)", fontWeight: 700, letterSpacing: "-0.01em" }}
               >
-                <SplitText text="I'm proud of" by="word" stagger={0.09} delay={0.2} />
+                I&apos;m proud of
               </span>
             </h2>
           </div>

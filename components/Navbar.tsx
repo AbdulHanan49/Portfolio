@@ -8,10 +8,9 @@ import { useTheme } from "./ThemeProvider";
 const NAV_ITEMS = [
   { label: "Home",       href: "#home"       },
   { label: "About",      href: "#about"      },
-  { label: "Skills",     href: "#skills"     },
   { label: "Experience", href: "#experience" },
   { label: "Projects",   href: "#projects"   },
-  { label: "Games",      href: "#games"      },
+  { label: "Skills",     href: "#skills"     },
   { label: "Contact",    href: "#contact"    },
 ];
 
@@ -23,12 +22,28 @@ export default function Navbar() {
   const dark = theme === "dark";
 
   useEffect(() => {
+    // On mount: scroll to the hash if present (enables deep-linking)
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+      }, 120);
+    }
+  }, []);
+
+  useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
       const pos = window.scrollY + 200;
       for (let i = NAV_ITEMS.length - 1; i >= 0; i--) {
         const el = document.querySelector(NAV_ITEMS[i].href) as HTMLElement | null;
-        if (el && el.offsetTop <= pos) { setActive(NAV_ITEMS[i].href.slice(1)); break; }
+        if (el && el.offsetTop <= pos) {
+          const id = NAV_ITEMS[i].href.slice(1);
+          setActive(id);
+          // Keep URL in sync as user scrolls
+          window.history.replaceState(null, "", NAV_ITEMS[i].href);
+          break;
+        }
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -37,6 +52,8 @@ export default function Navbar() {
 
   const go = (href: string) => {
     setMenuOpen(false);
+    // Update URL immediately on click
+    window.history.pushState(null, "", href);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -172,7 +189,7 @@ export default function Navbar() {
             {/* Resume — desktop only; mobile users get it inside the drawer */}
             <motion.a
               href="/resume.pdf"
-              download
+              download="Hanan's Resume.pdf"
               className="hidden lg:flex"
               whileHover={{ y: -1.5 }}
               whileTap={{ scale: 0.95 }}

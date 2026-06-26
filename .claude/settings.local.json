@@ -6,7 +6,8 @@
       "WebFetch(domain:afgprogrammer.com)",
       "WebFetch(domain:red1-for-hek.vercel.app)",
       "WebFetch(domain:sawad.framer.website)",
-      "WebFetch(domain:21st.dev)"
+      "WebFetch(domain:21st.dev)",
+      "PowerShell(gh api *)"
     ]
   }
 }

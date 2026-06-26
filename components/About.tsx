@@ -11,7 +11,8 @@ function StatCounter({
 }: {
   target: number; label: string; suffix?: string;
 }) {
-  const [count, setCount] = useState(0);
+  const [count,   setCount]   = useState(target); // show real number immediately
+  const [started, setStarted] = useState(false);
   const ref         = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
@@ -22,13 +23,14 @@ function StatCounter({
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true;
+          setStarted(true); // flip display to animated count (still shows target for this frame)
           const start = performance.now();
           const step  = (now: number) => {
             const p = Math.min((now - start) / 2000, 1);
             setCount(Math.floor((1 - Math.pow(1 - p, 3)) * target));
             if (p < 1) requestAnimationFrame(step);
           };
-          requestAnimationFrame(step);
+          requestAnimationFrame(step); // first frame sets count from target → small value
         }
       },
       { threshold: 0.5 }
@@ -36,6 +38,10 @@ function StatCounter({
     observer.observe(el);
     return () => observer.disconnect();
   }, [target]);
+
+  // Before animation: show target so there's never a "0+" flash
+  // During animation: show animated count
+  const display = started ? count : target;
 
   return (
     <motion.div
@@ -51,7 +57,7 @@ function StatCounter({
         WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
         backgroundClip: "text",
       }}>
-        {count}{suffix}
+        {display}{suffix}
       </div>
       <div style={{
         fontFamily: "var(--font-fira)", fontSize: "0.62rem", fontWeight: 700,
@@ -66,7 +72,7 @@ function StatCounter({
 
 const TRAITS = [
   { icon: FiMapPin,    label: "Pakistan 🇵🇰"    },
-  { icon: FiBook,      label: "FAST-NUCES '24"  },
+  { icon: FiBook,      label: "FAST-NUCES '25"  },
   { icon: FiBriefcase, label: "Open to Remote"  },
   { icon: FiMoon,      label: "Night Owl Coder" },
 ];
@@ -87,26 +93,24 @@ export default function About() {
         WebkitMask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
-      <motion.div
-        animate={{ y: [0, -28, 0], x: [0, 14, 0], scale: [1, 1.12, 1] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+      <div
         aria-hidden="true"
         style={{
           position: "absolute", top: "4%", left: "-10%",
           width: 520, height: 520, borderRadius: "50%",
           background: "radial-gradient(circle, rgba(33,12,110,0.45) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(55px)",
+          animation: "aboutOrb1 9s ease-in-out infinite",
         }}
       />
-      <motion.div
-        animate={{ y: [0, 22, 0], x: [0, -18, 0], scale: [1, 0.88, 1] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      <div
         aria-hidden="true"
         style={{
           position: "absolute", bottom: "10%", right: "-6%",
           width: 400, height: 400, borderRadius: "50%",
           background: "radial-gradient(circle, rgba(0,255,178,0.09) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(60px)",
+          animation: "aboutOrb2 12s ease-in-out 3s infinite",
         }}
       />
 
@@ -143,11 +147,7 @@ export default function About() {
               </div>
 
               {/* ── Welcome intro — reference style ── */}
-              <motion.h3
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.12, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              <h3
                 style={{
                   fontFamily: "var(--font-serif, Georgia, serif)", fontWeight: 800,
                   fontStyle: "italic",
@@ -157,13 +157,9 @@ export default function About() {
                 }}
               >
                 Welcome,
-              </motion.h3>
+              </h3>
 
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.22, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              <p
                 style={{
                   fontFamily: "var(--font-sora)", fontWeight: 400,
                   fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)",
@@ -172,6 +168,7 @@ export default function About() {
                 }}
               >
                 I am{" "}
+
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Abdul Hanan</span>
                 , a{" "}
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Full-Stack Software Engineer</span>
@@ -185,7 +182,7 @@ export default function About() {
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>FastAPI</span>
                 {" "}and{" "}
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>TypeScript</span>
-                {" "}as sole engineer with end-to-end ownership.
+                {" "}as lead engineer in a cross-functional team of 4.
                 Previously at{" "}
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Visnext Software Solutions</span>
                 {", "}building Job Wallet — an AI-powered job tracking SaaS — using{" "}
@@ -195,17 +192,13 @@ export default function About() {
                 {" "}and{" "}
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Python</span>
                 .
-              </motion.p>
+              </p>
 
               {/* Trait pills — staggered entrance + hover */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
                 {TRAITS.map(({ icon: Icon, label }, i) => (
                   <motion.span
                     key={label}
-                    initial={{ opacity: 0, scale: 0.75, y: 14 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.09, duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{
                       scale: 1.06, y: -3,
                       boxShadow: "0 6px 20px rgba(120,86,255,0.32)",
@@ -254,21 +247,9 @@ export default function About() {
                   pointerEvents: "none",
                 }} />
                 <StatCounter target={14} label="Months Exp."      suffix="+" />
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  whileInView={{ height: 44, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  style={{ width: 1, background: "var(--border)" }}
-                />
+                <div style={{ width: 1, height: 44, background: "var(--border)" }} />
                 <StatCounter target={3}  label="SaaS Products"   suffix="+" />
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  whileInView={{ height: 44, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.45, duration: 0.5 }}
-                  style={{ width: 1, background: "var(--border)" }}
-                />
+                <div style={{ width: 1, height: 44, background: "var(--border)" }} />
                 <StatCounter target={30} label="Technologies"     suffix="+" />
               </motion.div>
             </ScrollReveal>
@@ -356,7 +337,7 @@ export default function About() {
                     fontFamily: "var(--font-sora)", fontSize: "0.75rem",
                     color: "var(--text-muted)", lineHeight: 1.6,
                   }}>
-                    BS Software Engineering<br />Class of 2024
+                    BS Software Engineering<br />Class of 2025
                   </p>
                 </motion.div>
               </ScrollReveal>
@@ -375,19 +356,18 @@ export default function About() {
                   cursor: "default",
                 }}
               >
-                <motion.div
-                  animate={{ opacity: [0.05, 0.1, 0.05] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                <div
                   aria-hidden="true"
                   style={{
                     position: "absolute", right: "-0.5rem", bottom: "-1.75rem",
                     fontFamily: "var(--font-space)", fontWeight: 900,
                     fontSize: "6rem", color: "var(--accent-secondary)",
                     lineHeight: 1, userSelect: "none",
+                    animation: "opacityPulse 4s ease-in-out infinite",
                   }}
                 >
                   &ldquo;
-                </motion.div>
+                </div>
                 <p style={{
                   fontFamily: "var(--font-sora)", fontSize: "0.9rem",
                   fontWeight: 500, color: "var(--text-secondary)",

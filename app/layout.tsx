@@ -94,7 +94,7 @@ const jsonLd = {
   email: "hananaslam90@gmail.com",
   sameAs: [
     "https://github.com/AbdulHanan49",
-    "https://linkedin.com/in/hanan-aslam-b6160723a",
+    "https://linkedin.com/in/hanan-aslam-dev",
   ],
   knowsAbout: [
     "React 18", "TypeScript", "FastAPI", "Python", "Node.js",

@@ -24,20 +24,11 @@ const footerColumns = [
     ],
   },
   {
-    title: "Contact",
+    title: "Connect",
     links: [
       { label: "Email Me", href: "mailto:hananaslam90@gmail.com" },
       { label: "LinkedIn", href: "https://linkedin.com/in/hanan-aslam-b6160723a" },
-      { label: "GitHub", href: "https://github.com/AbdulHanan49" },
-      { label: "Resume", href: "/resume.pdf" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Resume", href: "/resume.pdf" },
-      { label: "GitHub", href: "https://github.com/AbdulHanan49" },
-      { label: "LinkedIn", href: "https://linkedin.com/in/hanan-aslam-b6160723a" },
+      { label: "GitHub",   href: "https://github.com/AbdulHanan49" },
     ],
   },
 ];
@@ -107,10 +98,10 @@ export default function Footer() {
       {/* Footer content */}
       <div className="footer-content">
         <div className="max-w-[1200px] mx-auto px-6 py-12">
-          <div className="footer-col-grid grid grid-cols-1 md:grid-cols-12 gap-10">
+          <div className="footer-col-grid grid grid-cols-1 md:grid-cols-10 gap-10">
             {/* Brand column */}
             <motion.div
-              className="md:col-span-4"
+              className="md:col-span-5"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -177,7 +168,14 @@ export default function Footer() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.2 + ci * 0.08 + li * 0.06, duration: 0.35 }}
                     >
-                      <a href={link.href} className="footer-link">
+                      <a
+                        href={link.href}
+                        className="footer-link"
+                        {...(!link.href.startsWith("#") && {
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                        })}
+                      >
                         {link.label}
                       </a>
                     </motion.li>
@@ -197,13 +195,9 @@ export default function Footer() {
               style={{ color: "rgba(255,255,255,0.4)" }}
             >
               &copy; {new Date().getFullYear()} Abdul Hanan. Built with{" "}
-              <motion.span
-                animate={{ scale: [1, 1.4, 1] }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                style={{ display: "inline-flex" }}
-              >
+              <span style={{ display: "inline-flex", animation: "heartBeat 1.2s ease-in-out infinite" }}>
                 <FiHeart size={10} style={{ color: "#00FFB2" }} />
-              </motion.span>
+              </span>
             </p>
             <p
               className="text-xs"

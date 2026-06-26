@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -10,32 +9,13 @@ interface ScrollRevealProps {
   className?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const variants: Record<string, { initial: any; animate: any }> = {
-  up: {
-    initial: { opacity: 0, y: 70, filter: "blur(6px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  },
-  down: {
-    initial: { opacity: 0, y: -70, filter: "blur(6px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  },
-  left: {
-    initial: { opacity: 0, x: 70, filter: "blur(6px)" },
-    animate: { opacity: 1, x: 0, filter: "blur(0px)" },
-  },
-  right: {
-    initial: { opacity: 0, x: -70, filter: "blur(6px)" },
-    animate: { opacity: 1, x: 0, filter: "blur(0px)" },
-  },
-  scale: {
-    initial: { opacity: 0, scale: 0.82, filter: "blur(10px)" },
-    animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-  },
-  blur: {
-    initial: { opacity: 0, filter: "blur(20px)" },
-    animate: { opacity: 1, filter: "blur(0px)" },
-  },
+const INITIAL: Record<string, string> = {
+  up:    "opacity:0;transform:translateY(44px)",
+  down:  "opacity:0;transform:translateY(-44px)",
+  left:  "opacity:0;transform:translateX(44px)",
+  right: "opacity:0;transform:translateX(-44px)",
+  scale: "opacity:0;transform:scale(0.88);filter:blur(8px)",
+  blur:  "opacity:0;filter:blur(14px)",
 };
 
 export default function ScrollReveal({
@@ -44,21 +24,41 @@ export default function ScrollReveal({
   direction = "up",
   className = "",
 }: ScrollRevealProps) {
-  const { initial, animate } = variants[direction];
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Apply initial hidden state via style attribute (no JS loop cost)
+    const parts = INITIAL[direction].split(";");
+    parts.forEach(p => {
+      const [prop, val] = p.split(":");
+      // @ts-expect-error dynamic style prop
+      el.style[prop.trim().replace(/-([a-z])/g, (_: string, c: string) => c.toUpperCase())] = val;
+    });
+    el.style.transition = `opacity 0.65s ease ${delay}s, transform 0.65s ease ${delay}s, filter 0.65s ease ${delay}s`;
+    el.style.willChange = "opacity, transform";
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        el.style.opacity = "1";
+        el.style.transform = "none";
+        el.style.filter = "none";
+        el.style.willChange = "auto";
+        io.disconnect();
+      },
+      { threshold: 0.08, rootMargin: "-40px 0px" }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [delay, direction]);
 
   return (
-    <motion.div
-      initial={initial}
-      whileInView={animate}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        duration: 0.8,
-        delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }

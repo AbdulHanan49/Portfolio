@@ -1,82 +1,39 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiArrowRight } from "react-icons/fi";
-import dynamic from "next/dynamic";
-import HeroCanvas from "@/components/HeroCanvas";
-import SplitText from "@/components/SplitText";
-
-const BackgroundPaths = dynamic(() => import("@/components/BackgroundPaths"), { ssr: false });
-
-/* ── Typed text hook ── */
-function useTyped(texts: string[]) {
-  const [display, setDisplay] = useState("");
-  const state = useRef({ textIdx: 0, charIdx: 0, deleting: false, timer: null as ReturnType<typeof setTimeout> | null });
-  useEffect(() => {
-    const s = state.current;
-    s.textIdx = 0; s.charIdx = 0; s.deleting = false;
-    const tick = () => {
-      const cur = texts[s.textIdx];
-      if (!s.deleting) {
-        s.charIdx++;
-        setDisplay(cur.slice(0, s.charIdx));
-        if (s.charIdx >= cur.length) { s.deleting = true; s.timer = setTimeout(tick, 2500); return; }
-        s.timer = setTimeout(tick, 60);
-      } else {
-        s.charIdx--;
-        setDisplay(cur.slice(0, s.charIdx));
-        if (s.charIdx <= 0) { s.deleting = false; s.textIdx = (s.textIdx + 1) % texts.length; s.timer = setTimeout(tick, 350); return; }
-        s.timer = setTimeout(tick, 25);
-      }
-    };
-    s.timer = setTimeout(tick, 500);
-    return () => { if (s.timer) clearTimeout(s.timer); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return display;
-}
+import Image from "next/image";
 
 const SOCIALS = [
-  { Icon: FiGithub,   href: "https://github.com/AbdulHanan49",               label: "GitHub"   },
-  { Icon: FiLinkedin, href: "https://linkedin.com/in/hanan-aslam-b6160723a",  label: "LinkedIn" },
-  { Icon: FiMail,     href: "mailto:hananaslam90@gmail.com",                  label: "Email"    },
-];
-
-const TYPED_ROLES = [
-  "Full-Stack Software Engineer",
-  "Shipping Products, Not Just Code",
-  "Building Modern Web Apps That Scale",
-  "Turning Ideas into Scalable, Production-Ready Products",
-  "Full-Stack Engineer · Production-Grade SaaS",
+  { Icon: FiGithub,   href: "https://github.com/AbdulHanan49",         label: "GitHub"   },
+  { Icon: FiLinkedin, href: "https://linkedin.com/in/hanan-aslam-dev", label: "LinkedIn" },
+  { Icon: FiMail,     href: "mailto:hananaslam90@gmail.com",            label: "Email"    },
 ];
 
 const STATS = [
-  { value: "2",   label: "Companies"   },
-  { value: "14+", label: "Months Exp"  },
-  { value: "30+", label: "Technologies"},
-  { value: "3",   label: "SaaS Built"  },
+  { value: "2",   label: "Companies"    },
+  { value: "14+", label: "Months Exp"   },
+  { value: "30+", label: "Technologies" },
+  { value: "3",   label: "SaaS Built"   },
 ];
 
 /* ─────────────────────────────────────────
-   PROFILE CARD  — slide-up reveal on hover
-   Photo blurs + tints, details rise from bottom
+   PROFILE CARD — pure CSS transitions
 ───────────────────────────────────────── */
-function ProfileCard({ base }: { base: number }) {
+function ProfileCard() {
   const [hovered, setHovered] = useState(false);
 
   const INFO_ROWS = [
     { label: "Company",   value: "KCube Solutions",   accent: "#9B79FF" },
     { label: "Location",  value: "Lahore · Remote",   accent: "#00FFB2" },
     { label: "Education", value: "FAST NUCES · BSSE", accent: "#9B79FF" },
-    { label: "Graduated", value: "2024",               accent: "#00FFB2" },
+    { label: "Graduated", value: "2025",               accent: "#00FFB2" },
   ];
 
+  const ease = "cubic-bezier(0.16,1,0.3,1)";
+
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 60, scale: 0.88 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      transition={{ delay: base + 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => setHovered(v => !v)}
@@ -89,50 +46,49 @@ function ProfileCard({ base }: { base: number }) {
           ? "0 32px 80px rgba(86,42,189,0.6), 0 0 0 1.5px rgba(120,86,255,0.75), 0 0 60px rgba(120,86,255,0.2)"
           : "0 16px 48px rgba(86,42,189,0.28), 0 0 0 1px rgba(120,86,255,0.22)",
         transition: "box-shadow 0.45s ease",
+        animation: "heroFadeUp 0.9s 0.3s both",
       }}
     >
-      {/* ── Top accent bar ── */}
+      {/* Top accent bar */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 3, zIndex: 10,
         background: "linear-gradient(to right, #562abd, #9B79FF, #00FFB2)",
       }} />
 
-      {/* ── Photo (blurs + dims on hover) ── */}
-      <motion.img
-        src="/profile.png"
-        alt="Abdul Hanan"
-        animate={{
-          filter: hovered
-            ? "blur(4px) brightness(0.45) saturate(0.8)"
-            : "blur(0px) brightness(1) saturate(1)",
-          scale: hovered ? 1.06 : 1,
-        }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          position: "absolute", inset: 0,
-          width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: "top center",
-          zIndex: 1, transformOrigin: "center top",
-        }}
-      />
+      {/* Photo — blurs and dims on hover */}
+      <div style={{
+        position: "absolute", inset: 0, zIndex: 1,
+        transformOrigin: "center top",
+        filter: hovered ? "blur(4px) brightness(0.45) saturate(0.8)" : "blur(0px) brightness(1) saturate(1)",
+        transform: hovered ? "scale(1.06)" : "scale(1)",
+        transition: `filter 0.55s ${ease}, transform 0.55s ${ease}`,
+      }}>
+        <Image
+          src="/profile.png"
+          alt="Abdul Hanan"
+          fill
+          priority
+          sizes="(max-width: 480px) calc(100vw - 4rem), 300px"
+          style={{ objectFit: "cover", objectPosition: "top center" }}
+        />
+      </div>
 
-      {/* ── Resting bottom scrim (name readable when not hovered) ── */}
-      <motion.div
-        animate={{ opacity: hovered ? 0 : 1 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          position: "absolute", bottom: 0, left: 0, right: 0,
-          height: "50%", zIndex: 3, pointerEvents: "none",
-          background: "linear-gradient(to top, rgba(8,4,28,0.95) 0%, rgba(8,4,28,0.4) 60%, transparent 100%)",
-        }}
-      />
+      {/* Resting bottom scrim */}
+      <div style={{
+        position: "absolute", bottom: 0, left: 0, right: 0,
+        height: "50%", zIndex: 3, pointerEvents: "none",
+        background: "linear-gradient(to top, rgba(8,4,28,0.95) 0%, rgba(8,4,28,0.4) 60%, transparent 100%)",
+        opacity: hovered ? 0 : 1,
+        transition: "opacity 0.3s ease",
+      }} />
 
-      {/* ── Resting name + role (fades out on hover) ── */}
-      <motion.div
-        animate={{ opacity: hovered ? 0 : 1, y: hovered ? 12 : 0 }}
-        transition={{ duration: 0.3 }}
-        style={{ position: "absolute", bottom: 20, left: 18, right: 18, zIndex: 4 }}
-      >
+      {/* Resting name + role */}
+      <div style={{
+        position: "absolute", bottom: 20, left: 18, right: 18, zIndex: 4,
+        opacity: hovered ? 0 : 1,
+        transform: hovered ? "translateY(12px)" : "translateY(0)",
+        transition: "opacity 0.3s ease, transform 0.3s ease",
+      }}>
         <p style={{
           fontFamily: "var(--font-space)", fontWeight: 800,
           fontSize: "1.15rem", color: "#fff",
@@ -143,118 +99,93 @@ function ProfileCard({ base }: { base: number }) {
           color: "rgba(196,181,253,0.7)", letterSpacing: "0.07em",
           textTransform: "uppercase", margin: "0.3rem 0 0",
         }}>Full-Stack Engineer</p>
-      </motion.div>
+      </div>
 
-      {/* ── Employed badge ── */}
-      <motion.div
-        animate={hovered ? { y: 0 } : { y: [0, -4, 0] }}
-        transition={hovered
-          ? { duration: 0.25 }
-          : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: "absolute", top: 16, right: 14, zIndex: 12,
-          display: "inline-flex", alignItems: "center", gap: "0.35rem",
-          padding: "0.28rem 0.72rem", borderRadius: 999,
-          background: "rgba(8,4,28,0.65)",
-          border: "1px solid rgba(245,158,11,0.5)",
-          fontFamily: "var(--font-fira)", fontSize: "0.58rem", fontWeight: 700,
-          color: "#F59E0B", letterSpacing: "0.06em",
-        }}
-      >
+      {/* Employed badge — CSS float animation */}
+      <div style={{
+        position: "absolute", top: 16, right: 14, zIndex: 12,
+        display: "inline-flex", alignItems: "center", gap: "0.35rem",
+        padding: "0.28rem 0.72rem", borderRadius: 999,
+        background: "rgba(8,4,28,0.65)",
+        border: "1px solid rgba(245,158,11,0.5)",
+        fontFamily: "var(--font-fira)", fontSize: "0.58rem", fontWeight: 700,
+        color: "#F59E0B", letterSpacing: "0.06em",
+        animation: "badgeFloat 2.5s ease-in-out infinite",
+      }}>
         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#F59E0B", flexShrink: 0 }} />
         Employed
-      </motion.div>
+      </div>
 
-      {/* ── Corner brackets (appear on hover) ── */}
+      {/* Corner brackets */}
       {[
         { top: 12, left: 12, borderTop: true, borderLeft: true, color: "rgba(0,255,178,0.75)" },
         { bottom: 12, right: 12, borderBottom: true, borderRight: true, color: "rgba(120,86,255,0.75)" },
       ].map((c, i) => (
-        <motion.div key={i}
-          animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.6 }}
-          transition={{ duration: 0.3, delay: i * 0.05 }}
-          style={{
-            position: "absolute", zIndex: 12, width: 18, height: 18,
-            pointerEvents: "none",
-            ...(c.top    !== undefined ? { top:    c.top }    : {}),
-            ...(c.left   !== undefined ? { left:   c.left }   : {}),
-            ...(c.bottom !== undefined ? { bottom: c.bottom } : {}),
-            ...(c.right  !== undefined ? { right:  c.right }  : {}),
-            borderTop:    c.borderTop    ? `2px solid ${c.color}` : undefined,
-            borderLeft:   c.borderLeft   ? `2px solid ${c.color}` : undefined,
-            borderBottom: c.borderBottom ? `2px solid ${c.color}` : undefined,
-            borderRight:  c.borderRight  ? `2px solid ${c.color}` : undefined,
-          }}
-        />
+        <div key={i} style={{
+          position: "absolute", zIndex: 12, width: 18, height: 18,
+          pointerEvents: "none",
+          ...(c.top    !== undefined ? { top:    c.top }    : {}),
+          ...(c.left   !== undefined ? { left:   c.left }   : {}),
+          ...(c.bottom !== undefined ? { bottom: c.bottom } : {}),
+          ...(c.right  !== undefined ? { right:  c.right }  : {}),
+          borderTop:    c.borderTop    ? `2px solid ${c.color}` : undefined,
+          borderLeft:   c.borderLeft   ? `2px solid ${c.color}` : undefined,
+          borderBottom: c.borderBottom ? `2px solid ${c.color}` : undefined,
+          borderRight:  c.borderRight  ? `2px solid ${c.color}` : undefined,
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "scale(1)" : "scale(0.6)",
+          transition: `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`,
+        }} />
       ))}
 
-      {/* ── Scan line sweeping down on hover ── */}
-      <motion.div
-        animate={hovered
-          ? { y: ["-10%", "110%"], opacity: [0, 0.8, 0.8, 0] }
-          : { opacity: 0 }}
-        transition={hovered
-          ? { duration: 1.6, repeat: Infinity, ease: "linear", repeatDelay: 0.5 }
-          : { duration: 0.15 }}
-        style={{
-          position: "absolute", top: 0, left: 0, right: 0,
-          height: 60, zIndex: 11, pointerEvents: "none",
-          background: "linear-gradient(to bottom, transparent 0%, rgba(120,86,255,0.22) 45%, rgba(0,255,178,0.12) 55%, transparent 100%)",
-        }}
-      />
+      {/* Scan line — CSS animation on hover */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0,
+        height: 60, zIndex: 11, pointerEvents: "none",
+        background: "linear-gradient(to bottom, transparent 0%, rgba(120,86,255,0.22) 45%, rgba(0,255,178,0.12) 55%, transparent 100%)",
+        opacity: hovered ? 1 : 0,
+        animation: hovered ? "cardScan 1.6s linear 0.5s infinite" : "none",
+        transition: "opacity 0.15s ease",
+      }} />
 
-      {/* ────────────────────────────────────────
-          SLIDE-UP OVERLAY — covers FULL card.
-          Semi-transparent so blurred photo shows.
-      ──────────────────────────────────────── */}
-      <motion.div
-        animate={{ y: hovered ? "0%" : "100%" }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          position: "absolute", inset: 0, zIndex: 8,
-          background: "transparent",
-          borderTop: "none",
-          /* content sits at the bottom */
-          display: "flex", flexDirection: "column", justifyContent: "flex-end",
-          padding: "1.5rem 1.4rem",
-        }}
-      >
-        {/* Subtle scrim behind text only — for readability */}
-        <motion.div
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none",
-            background: "linear-gradient(to top, rgba(6,3,20,0.72) 0%, rgba(10,5,32,0.45) 55%, transparent 100%)",
-          }}
-        />
+      {/* Slide-up overlay */}
+      <div style={{
+        position: "absolute", inset: 0, zIndex: 8,
+        background: "transparent",
+        display: "flex", flexDirection: "column", justifyContent: "flex-end",
+        padding: "1.5rem 1.4rem",
+        transform: hovered ? "translateY(0%)" : "translateY(100%)",
+        transition: `transform 0.55s ${ease}`,
+      }}>
+        {/* Scrim behind text */}
+        <div style={{
+          position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none",
+          background: "linear-gradient(to top, rgba(6,3,20,0.72) 0%, rgba(10,5,32,0.45) 55%, transparent 100%)",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.4s ease",
+        }} />
 
         {/* Eyebrow */}
-        <motion.p
-          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 8 }}
-          transition={{ delay: hovered ? 0.08 : 0, duration: 0.3 }}
-          style={{
-            fontFamily: "var(--font-fira)", fontSize: "0.5rem", fontWeight: 700,
-            color: "rgba(120,86,255,0.8)", letterSpacing: "0.32em",
-            textTransform: "uppercase", margin: "0 0 0.9rem",
-          }}
-        >
-          About me
-        </motion.p>
+        <p style={{
+          fontFamily: "var(--font-fira)", fontSize: "0.5rem", fontWeight: 700,
+          color: "rgba(120,86,255,0.8)", letterSpacing: "0.32em",
+          textTransform: "uppercase", margin: "0 0 0.9rem",
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "translateY(0)" : "translateY(8px)",
+          transition: `opacity 0.3s ease ${hovered ? "0.08s" : "0s"}, transform 0.3s ease ${hovered ? "0.08s" : "0s"}`,
+        }}>About me</p>
 
-        {/* Info rows — staggered slide in */}
+        {/* Info rows — staggered */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           {INFO_ROWS.map(({ label, value, accent }, i, arr) => (
-            <motion.div
-              key={label}
-              animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 16 }}
-              transition={{ delay: hovered ? 0.14 + i * 0.07 : 0, duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-                padding: "0.58rem 0",
-                borderBottom: i < arr.length - 1 ? "1px solid rgba(120,86,255,0.12)" : "none",
-              }}
-            >
+            <div key={label} style={{
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "0.58rem 0",
+              borderBottom: i < arr.length - 1 ? "1px solid rgba(120,86,255,0.12)" : "none",
+              opacity: hovered ? 1 : 0,
+              transform: hovered ? "translateY(0)" : "translateY(16px)",
+              transition: `opacity 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s, transform 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s`,
+            }}>
               <span style={{
                 fontFamily: "var(--font-fira)", fontSize: "0.54rem", fontWeight: 600,
                 color: "rgba(196,181,253,0.45)", letterSpacing: "0.08em", textTransform: "uppercase",
@@ -263,20 +194,19 @@ function ProfileCard({ base }: { base: number }) {
                 fontFamily: "var(--font-sora)", fontSize: "0.7rem", fontWeight: 700,
                 color: accent,
               }}>{value}</span>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Status row */}
-        <motion.div
-          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
-          transition={{ delay: hovered ? 0.44 : 0, duration: 0.32 }}
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            marginTop: "0.8rem", paddingTop: "0.7rem",
-            borderTop: "1px solid rgba(120,86,255,0.18)",
-          }}
-        >
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          marginTop: "0.8rem", paddingTop: "0.7rem",
+          borderTop: "1px solid rgba(120,86,255,0.18)",
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "translateY(0)" : "translateY(10px)",
+          transition: `opacity 0.32s ease ${hovered ? "0.44s" : "0s"}, transform 0.32s ease ${hovered ? "0.44s" : "0s"}`,
+        }}>
           <span style={{
             fontFamily: "var(--font-fira)", fontSize: "0.54rem", fontWeight: 600,
             color: "rgba(196,181,253,0.45)", letterSpacing: "0.08em", textTransform: "uppercase",
@@ -288,9 +218,9 @@ function ProfileCard({ base }: { base: number }) {
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#F59E0B", flexShrink: 0 }} />
             Currently Employed
           </span>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -299,18 +229,6 @@ function ProfileCard({ base }: { base: number }) {
 ───────────────────────────────────────── */
 export default function Hero() {
   const spotlightRef = useRef<HTMLDivElement>(null);
-  const typedRole    = useTyped(TYPED_ROLES);
-  const base         = 2.5;
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const check = () =>
-      setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const mo = new MutationObserver(check);
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => mo.disconnect();
-  }, []);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -329,26 +247,18 @@ export default function Hero() {
 
       {/* Background */}
       <div className="hero-grid"      aria-hidden="true" />
-      <BackgroundPaths />
       <div className="hero-spotlight" ref={spotlightRef} aria-hidden="true" />
-      <div className="hidden lg:block">
-        <HeroCanvas
-          key={isDark ? "dark" : "light"}
-          canvasOpacity={isDark ? 0.65 : 0.55}
-          lineColor={isDark ? "156,217,249" : "86,42,189"}
-        />
-      </div>
       <div className="hero-orb hero-orb-1" aria-hidden="true" />
       <div className="hero-orb hero-orb-2" aria-hidden="true" />
       <div className="hero-orb hero-orb-3" aria-hidden="true" />
 
-      {/* ── Two-column layout ── */}
+      {/* Two-column layout */}
       <div
         className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 px-5 sm:px-8 lg:px-16"
         style={{ minHeight: "100vh", maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5rem, 10vw, 7rem)", paddingBottom: "3rem" }}
       >
 
-        {/* ════ LEFT — Name block ════ */}
+        {/* LEFT — Name block */}
         <div className="flex flex-col items-start text-left flex-1 min-w-0 w-full">
 
           {/* Overline */}
@@ -356,82 +266,55 @@ export default function Hero() {
             fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
             color: "var(--accent)", letterSpacing: "0.28em", textTransform: "uppercase",
             marginBottom: "0.75rem",
+            animation: "heroFadeIn 0.6s 0s both",
           }}>
-            <SplitText text="Full-Stack Engineer" delay={base} stagger={0.045} />
+            Full-Stack Engineer
           </p>
 
-          {/* Name */}
-          <motion.div
-            initial={{ opacity: 0, y: 40, filter: "blur(16px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: base + 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            style={{ marginBottom: "1.25rem" }}
-          >
-            <div style={{
-              display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "0.2rem",
-            }}>
+          {/* Name block */}
+          <div style={{ animation: "heroFadeUp 1s 0.1s both", marginBottom: "1.25rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "0.2rem" }}>
               <span style={{
                 fontFamily: "var(--font-fira)", fontSize: "0.82rem", fontWeight: 700,
                 color: "var(--accent)", letterSpacing: "0.38em", textTransform: "uppercase",
               }}>
                 ABDUL
               </span>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: base + 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  flex: 1, height: "1px",
-                  background: "linear-gradient(to right, rgba(120,86,255,0.55), transparent)",
-                  transformOrigin: "left",
-                }}
-              />
+              <div style={{
+                flex: 1, height: "1px",
+                background: "linear-gradient(to right, rgba(120,86,255,0.55), transparent)",
+                transformOrigin: "left",
+                animation: "heroLineGrow 0.8s 0.35s both ease",
+              }} />
             </div>
-            <motion.h1
-              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              style={{
-                fontFamily: "var(--font-space)", fontWeight: 900,
-                fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
-                lineHeight: 0.88, letterSpacing: "-0.04em", textTransform: "uppercase",
-                background: "linear-gradient(135deg, #EDE9FE 0%, #C4B5FD 25%, #9B79FF 50%, #562abd 75%, #C4B5FD 100%)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-                margin: 0,
-              }}
-            >
+            <h1 style={{
+              fontFamily: "var(--font-space)", fontWeight: 900,
+              fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
+              lineHeight: 0.88, letterSpacing: "-0.04em", textTransform: "uppercase",
+              background: "linear-gradient(135deg, #C4B5FD 0%, #7856FF 45%, #00FFB2 100%)",
+              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              margin: 0,
+            }}>
               HANAN
-            </motion.h1>
-          </motion.div>
+            </h1>
+          </div>
 
-          {/* Typed role */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: base + 0.42, duration: 0.5 }}
-            style={{ display: "flex", alignItems: "center", marginBottom: "1.5rem", minHeight: "1.8rem" }}
-          >
+          {/* Static role */}
+          <div style={{
+            display: "flex", alignItems: "center", marginBottom: "1.5rem",
+            animation: "heroFadeIn 0.5s 0.42s both",
+          }}>
             <span style={{
               fontFamily: "var(--font-fira)",
               fontSize: "clamp(0.82rem, 1.6vw, 1rem)",
               color: "var(--text-secondary)", letterSpacing: "0.06em",
             }}>
-              {typedRole}
-              <span style={{
-                display: "inline-block", width: "2px", height: "1.1em",
-                background: "var(--accent)", marginLeft: "3px",
-                verticalAlign: "text-bottom", animation: "blink 1s step-end infinite",
-              }} />
+              Full-Stack Software Engineer
             </span>
-          </motion.div>
+          </div>
 
           {/* Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: base + 0.55, duration: 0.5 }}
-            style={{ maxWidth: "440px", marginBottom: "2rem" }}
-          >
+          <div style={{ animation: "heroFadeUp 0.5s 0.55s both", maxWidth: "440px", marginBottom: "2rem" }}>
             <p style={{
               fontFamily: "var(--font-sora)", fontWeight: 600,
               fontSize: "clamp(0.95rem, 1.4vw, 1.05rem)",
@@ -447,103 +330,58 @@ export default function Hero() {
               Building full-stack products with React, FastAPI &amp; TypeScript —
               from first commit to production.
             </p>
-          </motion.div>
+          </div>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: base + 0.65, duration: 0.45 }}
-            style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "1.75rem" }}
-          >
-            <motion.a
+          {/* CTA buttons */}
+          <div style={{
+            display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "1.75rem",
+            animation: "heroFadeUp 0.45s 0.65s both",
+          }}>
+            <a
               href="#projects"
+              className="hero-btn-primary"
               onClick={e => { e.preventDefault(); document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }); }}
-              whileHover={{ scale: 1.04, y: -3, boxShadow: "0 0 0 3px rgba(120,86,255,0.2), 0 14px 44px rgba(120,86,255,0.65), inset 0 1px 0 rgba(255,255,255,0.28)" }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "0.55rem",
-                padding: "0.75rem 1.9rem", borderRadius: 999,
-                background: "linear-gradient(135deg, #9B79FF 0%, #7856FF 40%, #562abd 100%)",
-                color: "#fff", textDecoration: "none",
-                fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                letterSpacing: "0.06em",
-                boxShadow: "0 0 0 1px rgba(120,86,255,0.45), 0 4px 24px rgba(120,86,255,0.45), inset 0 1px 0 rgba(255,255,255,0.22)",
-                position: "relative", overflow: "hidden",
-              }}
             >
-              <motion.span
-                animate={{ x: ["-100%", "200%"] }}
-                transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 1.8, ease: "linear" }}
-                style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)", pointerEvents: "none" }}
-              />
               View my work
-              <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} style={{ display: "inline-flex" }}>
-                <FiArrowRight size={14} />
-              </motion.span>
-            </motion.a>
+              <FiArrowRight size={14} />
+            </a>
 
-            <motion.a
+            <a
               href="mailto:hananaslam90@gmail.com"
-              whileHover={{ scale: 1.04, y: -3, color: "#9B79FF" }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "0.55rem",
-                padding: "0.74rem 1.9rem", borderRadius: 999,
-                background: "linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box, linear-gradient(135deg, rgba(155,121,255,0.65), rgba(0,255,178,0.35)) border-box",
-                border: "1.5px solid transparent",
-                color: "var(--text-secondary)", textDecoration: "none",
-                fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                letterSpacing: "0.06em",
-              }}
+              className="hero-btn-secondary"
             >
               <FiMail size={14} />
               Hire me
-            </motion.a>
-          </motion.div>
+            </a>
+
+          </div>
 
           {/* Socials */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: base + 0.75, duration: 0.4 }}
-            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-          >
-            {SOCIALS.map(({ Icon, href, label }, i) => (
-              <motion.a
+          <div style={{
+            display: "flex", alignItems: "center", gap: "0.5rem",
+            animation: "heroFadeUp 0.4s 0.75s both",
+          }}>
+            {SOCIALS.map(({ Icon, href, label }) => (
+              <a
                 key={label}
                 href={href}
                 target="_blank" rel="noopener noreferrer" aria-label={label}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: base + 0.75 + i * 0.09, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -3, scale: 1.08, background: "rgba(120,86,255,0.18)", borderColor: "rgba(120,86,255,0.55)" }}
-                whileTap={{ scale: 0.94 }}
-                style={{
-                  display: "inline-flex", alignItems: "center", justifyContent: "center",
-                  width: 40, height: 40, borderRadius: 10,
-                  background: "rgba(120,86,255,0.07)",
-                  border: "1px solid rgba(120,86,255,0.22)",
-                  color: "var(--text-secondary)", textDecoration: "none",
-                }}
+                className="hero-social-icon"
               >
                 <Icon size={16} />
-              </motion.a>
+              </a>
             ))}
-          </motion.div>
+          </div>
 
         </div>
 
-        {/* ════ RIGHT — Card + Stats ════ */}
+        {/* RIGHT — Card + Stats */}
         <div className="flex flex-col items-center gap-6 flex-shrink-0">
 
-          <ProfileCard base={base} />
+          <ProfileCard />
 
           {/* Stats grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: base + 0.85, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          <div
             className="stats-grid"
             style={{
               display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
@@ -551,6 +389,7 @@ export default function Hero() {
               background: "rgba(120,86,255,0.06)",
               border: "1px solid rgba(120,86,255,0.18)",
               overflow: "hidden",
+              animation: "heroFadeUp 0.5s 0.85s both",
             }}
           >
             {STATS.map((s, i) => (
@@ -579,22 +418,20 @@ export default function Hero() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
 
         </div>
 
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <div
         className="scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: base + 1.2, duration: 0.5 }}
+        style={{ animation: "heroFadeIn 0.5s 1.2s both" }}
         aria-hidden="true"
       >
         <div className="scroll-line" />
-      </motion.div>
+      </div>
 
     </section>
   );

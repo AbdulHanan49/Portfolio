@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
@@ -14,6 +14,7 @@ interface ExpItem {
   points: string[];
   tags: string[];
   metrics: string[];
+  products?: string[];
   current?: boolean;
 }
 
@@ -27,12 +28,13 @@ const items: ExpItem[] = [
     description:
       "Owning the full stack of MixClip — a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and a containerised Node.js/Remotion microservice for scalable video rendering.",
     points: [
-      "Designed 70+ custom hooks across auth, subscription, projects, and AI domains",
+      "Lead engineer in a cross-functional team of 4 (PM, designer, 1 developer) — owned full-stack architecture end-to-end",
       "Delivered Stripe subscription system with multi-currency billing (USD, EUR, GBP+)",
       "Shipped zero-downtime deployments via GitHub Actions CI/CD with Docker + Azure",
       "Integrated Google Gemini AI and Azure Cognitive Services Speech SDK for auto-subtitle generation",
     ],
     metrics: ["70+ Custom Hooks", "17+ Currencies", "Zero-Downtime CI/CD"],
+    products: ["MixClip"],
     tags: ["React 18", "TypeScript", "FastAPI", "PostgreSQL", "Docker", "Azure", "Stripe", "Remotion"],
     current: true,
   },
@@ -45,16 +47,17 @@ const items: ExpItem[] = [
     description:
       "Rebuilt the full frontend of Job Wallet — an AI-powered job application tracking SaaS — migrating from a legacy UI to Vue 3 / Quasar Framework with Pinia and Tailwind CSS. Engineered 10+ Django REST Framework APIs across job descriptions, CV resumes, subscription plans, notifications, contacts, and files.",
     points: [
-      "Delivered 10+ feature screens including drag-and-drop job pipelines, interview calendar, contact management, file uploads, and real-time notifications",
+      "Sole engineer in a 2-person team (PM + developer) — delivered all frontend and backend features independently under PM-assigned sprint workflow",
       "Secured all APIs with JWT + RBAC; eliminated N+1 query patterns in Django ORM / MySQL reducing backend response overhead",
       "Implemented Celery + Redis async task queue for scheduled interview reminders and subscription lifecycle events",
       "Delivered Stripe freemium billing with 2 subscription tiers (Basic $0 / Unlimited $10/mo), webhook idempotency, and dual-channel notifications",
     ],
     metrics: ["10+ Feature Screens", "Celery + Redis", "Stripe Freemium"],
+    products: ["Job Wallet"],
     tags: ["Vue 3", "Quasar", "Pinia", "Tailwind CSS", "Django REST", "Python", "MySQL", "JWT", "Celery", "Redis", "Stripe"],
   },
   {
-    period: "2020 – 2024",
+    period: "2020 – 2025",
     year: "2020",
     title: "BS Software Engineering",
     company: "FAST-NUCES Lahore",
@@ -66,7 +69,8 @@ const items: ExpItem[] = [
       "Developed multiple full-stack web applications as semester and final-year projects",
       "Focused on practical software engineering and real-world problem solving",
     ],
-    metrics: ["Deep Learning FYP", "Full-Stack Projects", "4-Year Degree"],
+    metrics: [],
+    products: ["ScreenSizzle", "SmartLib", "Brain Tumor Detection"],
     tags: ["Python", "Java", "C++", "Data Structures", "Algorithms", "TensorFlow", "SQL"],
   },
 ];
@@ -115,7 +119,6 @@ export default function Experience() {
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
-      {/* Left deep indigo glow */}
       <div aria-hidden="true" style={{
         position: "absolute", top: "10%", left: "-8%",
         width: 480, height: 480, borderRadius: "50%", pointerEvents: "none",
@@ -123,13 +126,11 @@ export default function Experience() {
         filter: "blur(70px)",
       }} />
 
-      {/* Right ambient purple glow */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
         background: "radial-gradient(ellipse 55% 70% at 92% 50%, rgba(120,86,255,0.14) 0%, transparent 65%)",
       }} />
 
-      {/* Bottom mint accent */}
       <div aria-hidden="true" style={{
         position: "absolute", bottom: "0%", right: "15%",
         width: 350, height: 350, borderRadius: "50%", pointerEvents: "none",
@@ -147,7 +148,7 @@ export default function Experience() {
               color: "var(--accent)", textTransform: "uppercase",
               letterSpacing: "0.28em", marginBottom: "0.85rem",
             }}>
-              03 — Career
+              02 — Career
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
@@ -216,21 +217,14 @@ export default function Experience() {
               ? "linear-gradient(90deg,#00FFB2,rgba(0,255,178,0))"
               : "linear-gradient(90deg,#7856FF,rgba(120,86,255,0))";
             const metricColor = isEdu ? "#00FFB2" : "#9B79FF";
+            const productColor = isEdu ? "#00FFB2" : "#C4B5FD";
 
             return (
               <ScrollReveal key={idx} delay={idx * 0.1}>
                 <div style={{ position: "relative", paddingBottom: idx < items.length - 1 ? "2.5rem" : 0 }}>
 
                   {/* Timeline dot */}
-                  <motion.div
-                    animate={{
-                      boxShadow: [
-                        `0 0 0 3px var(--bg-primary), 0 0 14px ${dotGlow}, 0 0 28px ${dotGlow}`,
-                        `0 0 0 3px var(--bg-primary), 0 0 22px ${dotColor}, 0 0 44px ${dotGlow}`,
-                        `0 0 0 3px var(--bg-primary), 0 0 14px ${dotGlow}, 0 0 28px ${dotGlow}`,
-                      ],
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  <div
                     style={{
                       position: "absolute",
                       left: "calc(clamp(-2.25rem, -4vw, -1.5rem) - 7px)", top: "1.6rem",
@@ -238,7 +232,10 @@ export default function Experience() {
                       borderRadius: "50%",
                       background: dotColor,
                       zIndex: 10,
-                    }}
+                      "--dot-color": dotColor,
+                      "--dot-glow": dotGlow,
+                      animation: "timelineDotGlow 2.5s ease-in-out infinite",
+                    } as CSSProperties}
                   />
 
                   {/* Card */}
@@ -344,8 +341,37 @@ export default function Experience() {
                       </div>
                     </div>
 
+                    {/* ── Product / Project subheading ── */}
+                    {item.products && item.products.length > 0 && (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", marginBottom: "0.85rem" }}>
+                        {item.products.map((p) => (
+                          <a
+                            key={p}
+                            href="#projects"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                            }}
+                            style={{
+                              display: "inline-flex", alignItems: "center", gap: "0.25rem",
+                              fontFamily: "var(--font-space)", fontSize: "0.88rem", fontWeight: 700,
+                              color: productColor, textDecoration: "none",
+                              transition: "opacity 0.15s",
+                            }}
+                            onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.65"}
+                            onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
+                          >
+                            {p}
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M1 9L9 1M9 1H3M9 1v6"/>
+                            </svg>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
                     {/* ── Metrics row ── */}
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1rem" }}>
+                    <div style={{ display: item.metrics.length ? "flex" : "none", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1rem" }}>
                       {item.metrics.map((m) => (
                         <span
                           key={m}
@@ -379,20 +405,16 @@ export default function Experience() {
                       display: "flex", flexDirection: "column", gap: "0.45rem",
                     }}>
                       {item.points.map((pt, pi) => (
-                        <motion.li
+                        <li
                           key={pt}
-                          initial={{ opacity: 0, x: -18 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.06 + pi * 0.07, duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                           style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem" }}
                         >
-                          <motion.span
-                            animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
-                            transition={{ duration: 2 + pi * 0.3, repeat: Infinity, ease: "easeInOut", delay: pi * 0.4 }}
+                          <span
                             style={{
                               width: 5, height: 5, borderRadius: "50%",
                               background: dotColor, flexShrink: 0, marginTop: "0.5rem",
+                              display: "inline-block",
+                              animation: `dotPulse ${2 + pi * 0.3}s ease-in-out ${pi * 0.4}s infinite`,
                             }}
                           />
                           <span style={{
@@ -401,25 +423,20 @@ export default function Experience() {
                           }}>
                             {pt}
                           </span>
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
 
                     {/* Tech tags */}
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.38rem" }}>
-                      {item.tags.map((t, ti) => (
-                        <motion.span
+                      {item.tags.map((t) => (
+                        <span
                           key={t}
-                          initial={{ opacity: 0, scale: 0.75 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.04 + ti * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                          whileHover={{ scale: 1.08, y: -2 }}
                           className="timeline-tag"
                           style={{ cursor: "default" }}
                         >
                           {t}
-                        </motion.span>
+                        </span>
                       ))}
                     </div>
                   </motion.div>
