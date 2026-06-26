@@ -6,16 +6,19 @@ import { useEffect, useRef, useState } from "react";
 const DELAYS = [1.4, 1.2, 1.0, 0.8, 0.6, 0.4, 0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4];
 
 export default function LoadingScreen() {
-  const [done, setDone] = useState(false);
+  const [done,    setDone]    = useState(false);
+  const [mounted, setMounted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Always dismiss after 1.5s max — no hanging loader
+    // Only show on client — prevents SSR HTML from triggering the CSS animation
+    // twice (once on initial paint, once when React hydrates and restarts it).
+    setMounted(true);
     const timer = setTimeout(() => setDone(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  if (done) return null;
+  if (!mounted || done) return null;
 
   return (
     <div
