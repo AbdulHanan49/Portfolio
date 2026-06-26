@@ -24,7 +24,7 @@ const projects: Project[] = [
     title: "MixClip",
     subtitle: "AI Video SaaS · KCube Solutions",
     description:
-      "Sole engineer on a live AI video editing SaaS — full ownership from zero to production. Enabled billing in 17+ currency markets via Stripe, achieved zero-downtime deployments on Azure CI/CD, and shipped AI auto-subtitles (Azure Speech SDK) and Google Gemini features. Stack: React 18 / TypeScript frontend, FastAPI / PostgreSQL backend, Node.js / Remotion rendering microservice, Docker.",
+      "Lead engineer in a cross-functional team of 4 on a live AI video editing SaaS. Enabled billing in 17+ currency markets via Stripe, achieved zero-downtime deployments on Azure CI/CD, and shipped AI auto-subtitles (Azure Speech SDK) and Google Gemini features. Stack: React 18 / TypeScript frontend, FastAPI / PostgreSQL backend, Remotion 4 video rendering engine, Docker.",
     tags: ["React 18", "TypeScript", "FastAPI", "PostgreSQL", "Remotion", "Stripe", "Azure", "Docker"],
     liveUrl: "https://mix-clip.com/en?c=eur",
     gradient: "linear-gradient(135deg,#562abd 0%,#210C6E 60%,#0E0636 100%)",

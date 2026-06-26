@@ -26,7 +26,7 @@ const items: ExpItem[] = [
     company: "KCube Solutions",
     type: "Full-Time",
     description:
-      "Owning the full stack of MixClip — a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and a containerised Node.js/Remotion microservice for scalable video rendering.",
+      "Owning the full stack of MixClip — a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and Remotion 4 video rendering engine for scalable video exports.",
     points: [
       "Lead engineer in a cross-functional team of 4 (PM, designer, 1 developer) — owned full-stack architecture end-to-end",
       "Delivered Stripe subscription system with multi-currency billing (USD, EUR, GBP+)",

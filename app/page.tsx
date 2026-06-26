@@ -4,17 +4,19 @@ import dynamic from "next/dynamic";
 import ThemeProvider from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import LoadingScreen from "@/components/LoadingScreen";
 
-const About      = dynamic(() => import("@/components/About"),      { ssr: false });
-const Experience = dynamic(() => import("@/components/Experience"), { ssr: false });
-const Projects   = dynamic(() => import("@/components/Projects"),   { ssr: false });
-const Skills     = dynamic(() => import("@/components/Skills"),     { ssr: false });
-const Contact    = dynamic(() => import("@/components/Contact"),    { ssr: false });
-const Footer     = dynamic(() => import("@/components/Footer"),     { ssr: false });
+const About      = dynamic(() => import("@/components/About"));
+const Experience = dynamic(() => import("@/components/Experience"));
+const Projects   = dynamic(() => import("@/components/Projects"));
+const Skills     = dynamic(() => import("@/components/Skills"));
+const Contact    = dynamic(() => import("@/components/Contact"));
+const Footer     = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (
     <ThemeProvider>
+      <LoadingScreen />
       <Navbar />
       <main id="main-content">
         <Hero />

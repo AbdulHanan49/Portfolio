@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import { FiCloud, FiX } from "react-icons/fi";
+import { FiCloud, FiX, FiDatabase } from "react-icons/fi";
 
 const SVG = (p: string) => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style={{ display: "block" }}>
@@ -53,7 +53,7 @@ const columns: { title: string; accent: string; number: string; skills: Skill[] 
       { name: "React 18",     icon: SI.React,      color: "#61dafb", level: "Expert",       experience: "1+ yr",  description: "Production SaaS with 70+ custom hooks, TanStack Query v5, Zustand + Zundo, React Hook Form, i18next, PWA.",  tools: ["TanStack Query","Zustand","React Hook Form","i18next"] },
       { name: "TypeScript",   icon: SI.TypeScript, color: "#3178c6", level: "Expert",       experience: "1+ yr",  description: "Type-safe production code with generics, utility types, Pydantic-style validation, strict config.",           tools: ["Generics","Type Guards","Utility Types","Zod"] },
       { name: "JavaScript",   icon: SI.JavaScript, color: "#f7df1e", level: "Expert",       experience: "2+ yrs", description: "ES6+, async patterns, closures, DOM APIs — used daily across every project.",                               tools: ["ES6+","Promises","Web APIs","Async/Await"] },
-      { name: "Vue 3",        icon: SI.Vue,        color: "#42b883", level: "Advanced",     experience: "6 mo",   description: "Rebuilt Job Wallet frontend at Visnext — Vue 3 Composition API with Quasar Framework, Pinia state management, and Tailwind CSS across 10+ feature screens.",                tools: ["Composition API","Quasar Framework","Pinia","Tailwind CSS"] },
+      { name: "Vue 3",        icon: SI.Vue,        color: "#42b883", level: "Advanced",     experience: "6 mo",   description: "Rebuilt Job Wallet frontend at Visnext — Vue 3 Composition API with Quasar Framework, Pinia state management, and Tailwind CSS across 10+ feature screens.", tools: ["Composition API","Quasar Framework","Pinia","Tailwind CSS"] },
       { name: "Tailwind CSS", icon: SI.Tailwind,   color: "#06b6d4", level: "Expert",       experience: "1+ yr",  description: "Utility-first styling with Tailwind CSS 4, custom design systems, animations, responsive layouts.",          tools: ["CSS 4","Custom Themes","Animations","Dark Mode"] },
     ],
   },
@@ -62,27 +62,35 @@ const columns: { title: string; accent: string; number: string; skills: Skill[] 
     number: "02",
     accent: "#3178c6",
     skills: [
-      { name: "FastAPI",     icon: SI.FastAPI,    color: "#009688", level: "Expert",        experience: "1 yr",   description: "Primary backend at KCube — Pydantic v2, SQLModel, Alembic migrations, async endpoints, JWT + OAuth.",     tools: ["Pydantic v2","SQLModel","Alembic","Async Routes"] },
-      { name: "PostgreSQL",  icon: SI.PostgreSQL, color: "#4169e1", level: "Advanced",      experience: "1+ yr",  description: "Relational data modelling, complex queries, Alembic migrations, SQLAlchemy 2, query optimisation.",        tools: ["SQLAlchemy 2","Alembic","Migrations","Transactions"] },
-      { name: "Python",      icon: SI.Python,     color: "#3776ab", level: "Advanced",      experience: "2+ yrs", description: "Primary backend language — FastAPI at KCube for MixClip and Django REST at Visnext for Job Wallet. OpenCV + Matplotlib for image processing projects.",    tools: ["FastAPI","Django REST","OpenCV","Pydantic"] },
-      { name: "Node.js",     icon: SI.NodeJS,     color: "#68a063", level: "Advanced",      experience: "1+ yr",  description: "Express REST APIs at KCube and Remotion 4 video rendering engine for MixClip.",                           tools: ["Remotion 4","Express","REST APIs","Video Rendering"] },
-      { name: "Express.js",  icon: SI.Express,    color: "#c0c0c0", level: "Advanced",      experience: "1+ yr",  description: "Middleware patterns, routing, JWT auth, structured API contracts, validation.",                           tools: ["Middleware","JWT Auth","Rate Limiting","Validation"] },
-      { name: "Django REST", icon: SI.Django,     color: "#44b78b", level: "Advanced",      experience: "6 mo",   description: "Built 10+ resource APIs at Visnext — DRF serializers, viewsets, JWT + RBAC, Django ORM N+1 optimisation, Celery + Redis async tasks.",                      tools: ["Serializers","Viewsets","RBAC","Celery + Redis"] },
-      { name: "MySQL",       icon: SI.MySQL,      color: "#4479a1", level: "Advanced",      experience: "6 mo",   description: "Production database at Visnext for Job Wallet — schema design, N+1 query elimination via Django ORM select_related / prefetch_related, index-level query optimisation.",      tools: ["Django ORM","select_related","Indexes","Migrations"] },
+      { name: "FastAPI",     icon: SI.FastAPI,    color: "#009688", level: "Expert",   experience: "1 yr",   description: "Primary backend at KCube — Pydantic v2, SQLModel, Alembic migrations, async endpoints, JWT + OAuth.",                                                     tools: ["Pydantic v2","SQLModel","Alembic","Async Routes"] },
+      { name: "Python",      icon: SI.Python,     color: "#3776ab", level: "Advanced", experience: "2+ yrs", description: "Primary backend language — FastAPI at KCube for MixClip and Django REST at Visnext for Job Wallet. OpenCV + Matplotlib for image processing projects.", tools: ["FastAPI","Django REST","OpenCV","Pydantic"] },
+      { name: "Node.js",     icon: SI.NodeJS,     color: "#68a063", level: "Advanced", experience: "1+ yr",  description: "Express REST APIs at KCube and Remotion 4 video rendering engine for MixClip.",                                                                         tools: ["Remotion 4","Express","REST APIs","Video Rendering"] },
+      { name: "Express.js",  icon: SI.Express,    color: "#c0c0c0", level: "Advanced", experience: "1+ yr",  description: "Middleware patterns, routing, JWT auth, structured API contracts, validation.",                                                                          tools: ["Middleware","JWT Auth","Rate Limiting","Validation"] },
+      { name: "Django REST", icon: SI.Django,     color: "#44b78b", level: "Advanced", experience: "6 mo",   description: "Built 10+ resource APIs at Visnext — DRF serializers, viewsets, JWT + RBAC, Django ORM N+1 optimisation, Celery + Redis async tasks.",               tools: ["Serializers","Viewsets","RBAC","Celery + Redis"] },
+    ],
+  },
+  {
+    title: "Databases",
+    number: "03",
+    accent: "#F59E0B",
+    skills: [
+      { name: "PostgreSQL", icon: SI.PostgreSQL,      color: "#4169e1", level: "Advanced",      experience: "1+ yr", description: "Relational data modelling, complex queries, Alembic migrations, SQLAlchemy 2, query optimisation at KCube.",                                                           tools: ["SQLAlchemy 2","Alembic","Migrations","Transactions"] },
+      { name: "MySQL",      icon: SI.MySQL,           color: "#4479a1", level: "Advanced",      experience: "6 mo",  description: "Production database at Visnext for Job Wallet — schema design, N+1 query elimination via Django ORM select_related / prefetch_related, index-level optimisation.",    tools: ["Django ORM","select_related","Indexes","Migrations"] },
+      { name: "MongoDB",    icon: SI.MongoDB,         color: "#47a248", level: "Intermediate",  experience: "1 yr",  description: "Schema design, aggregation pipelines, Mongoose ODM — used in MERN-stack projects including Screen Sizzle.",                                                             tools: ["Mongoose","Aggregation","Atlas","Indexing"] },
+      { name: "Redis",      icon: <FiDatabase />,     color: "#DC382D", level: "Advanced",      experience: "6 mo",  description: "Async task queue backing with Celery at Visnext — scheduled interview reminders, subscription lifecycle events, and webhook processing.",                               tools: ["Celery","Task Queues","Pub/Sub","Caching"] },
     ],
   },
   {
     title: "DevOps & Tools",
-    number: "03",
+    number: "04",
     accent: "#00FFB2",
     skills: [
-      { name: "Docker",     icon: SI.Docker,     color: "#2496ed", level: "Advanced",     experience: "1+ yr",  description: "Multi-stage builds, Docker Compose, containerised micro-services — used in production Azure deployments.",  tools: ["Multi-stage","Compose","Azure ACR","Networks"] },
-      { name: "GH Actions", icon: SI.GHActions, color: "#2088ff", level: "Advanced",     experience: "1 yr",   description: "Automated CI/CD: build → test → push to Azure Container Registry → deploy to Azure Container Apps.",         tools: ["CI Pipelines","Docker Build","Release Gates","Env Secrets"] },
-      { name: "Azure",      icon: <FiCloud />,  color: "#0078d4", level: "Advanced",     experience: "1 yr",   description: "Azure Container Apps, Container Registry, Blob & Queue Storage, Cognitive Services Speech SDK.",            tools: ["Container Apps","Blob Storage","ACR","Speech SDK"] },
-      { name: "Stripe API", icon: SI.Stripe,    color: "#635bff", level: "Advanced",     experience: "1 yr",   description: "Production billing at both KCube and Visnext — subscriptions, 17+ currencies, webhooks, trial lifecycle.",  tools: ["Subscriptions","Webhooks","Multi-currency","Trials"] },
-      { name: "Git",        icon: SI.Git,       color: "#f05032", level: "Expert",       experience: "3+ yrs", description: "Branching strategies, rebasing, conflict resolution, CI workflow hooks.",                                    tools: ["GitHub Actions","Git Flow","Rebasing","Hooks"] },
-      { name: "MongoDB",    icon: SI.MongoDB,   color: "#47a248", level: "Intermediate",  experience: "1 yr",  description: "Schema design, aggregation pipelines, Mongoose ODM — used in MERN-stack side projects.",                   tools: ["Mongoose","Aggregation","Atlas","Indexing"] },
-      { name: "Gemini AI",  icon: SI.Gemini,   color: "#4285f4", level: "Intermediate",  experience: "< 1 yr", description: "Google Gemini AI API integrated into MixClip at KCube — content assistance for script writing and AI-generated video metadata generation.",              tools: ["Gemini API","Prompt Engineering","Content Gen","REST"] },
+      { name: "Docker",     icon: SI.Docker,     color: "#2496ed", level: "Advanced",    experience: "1+ yr",  description: "Multi-stage builds, Docker Compose, containerised micro-services — used in production Azure deployments.",         tools: ["Multi-stage","Compose","Azure ACR","Networks"] },
+      { name: "GH Actions", icon: SI.GHActions, color: "#2088ff", level: "Advanced",    experience: "1 yr",   description: "Automated CI/CD: build → test → push to Azure Container Registry → deploy to Azure Container Apps.",              tools: ["CI Pipelines","Docker Build","Release Gates","Env Secrets"] },
+      { name: "Azure",      icon: <FiCloud />,  color: "#0078d4", level: "Advanced",    experience: "1 yr",   description: "Azure Container Apps, Container Registry, Blob & Queue Storage, Cognitive Services Speech SDK.",                   tools: ["Container Apps","Blob Storage","ACR","Speech SDK"] },
+      { name: "Stripe API", icon: SI.Stripe,    color: "#635bff", level: "Advanced",    experience: "1 yr",   description: "Production billing at both KCube and Visnext — subscriptions, 17+ currencies, webhooks, trial lifecycle.",         tools: ["Subscriptions","Webhooks","Multi-currency","Trials"] },
+      { name: "Git",        icon: SI.Git,       color: "#f05032", level: "Expert",      experience: "3+ yrs", description: "Branching strategies, rebasing, conflict resolution, CI workflow hooks.",                                          tools: ["GitHub Actions","Git Flow","Rebasing","Hooks"] },
+      { name: "Gemini AI",  icon: SI.Gemini,   color: "#4285f4", level: "Intermediate", experience: "< 1 yr", description: "Google Gemini AI API integrated into MixClip at KCube — content assistance for script writing and AI-generated video metadata.", tools: ["Gemini API","Prompt Engineering","Content Gen","REST"] },
     ],
   },
 ];

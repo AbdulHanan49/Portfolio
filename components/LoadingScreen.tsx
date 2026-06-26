@@ -10,19 +10,9 @@ export default function LoadingScreen() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const onEnd = (e: AnimationEvent) => {
-      // Only react to the container's own animation, not bubbled bar events
-      if (e.target !== el) return;
-      // Let React unmount cleanly — el.remove() bypasses reconciliation
-      // and gets re-inserted on the next parent re-render (e.g. ThemeProvider setState)
-      setDone(true);
-    };
-
-    el.addEventListener("animationend", onEnd);
-    return () => el.removeEventListener("animationend", onEnd);
+    // Always dismiss after 1.5s max — no hanging loader
+    const timer = setTimeout(() => setDone(true), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   if (done) return null;
