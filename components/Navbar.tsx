@@ -59,11 +59,11 @@ export default function Navbar() {
 
   /* Theme-aware pill colours */
   const pillBg = dark
-    ? scrolled ? "rgba(11,8,18,0.88)"     : "rgba(11,8,18,0.62)"
-    : scrolled ? "rgba(250,250,248,0.92)" : "rgba(250,250,248,0.74)";
+    ? scrolled ? "rgba(28,43,57,0.96)"    : "rgba(28,43,57,0.80)"
+    : scrolled ? "rgba(236,240,241,0.96)" : "rgba(236,240,241,0.80)";
   const pillBorder = dark
     ? scrolled ? "rgba(0,255,178,0.22)"   : "rgba(0,255,178,0.12)"
-    : scrolled ? "rgba(0,140,106,0.18)"   : "rgba(0,140,106,0.10)";
+    : scrolled ? "rgba(44,62,80,0.18)"    : "rgba(44,62,80,0.10)";
   const pillShadow = scrolled
     ? dark
       ? "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(0,255,178,0.04)"
@@ -73,9 +73,9 @@ export default function Navbar() {
   const iconBtn = {
     width: 44, height: 44, borderRadius: 12,
     display: "flex" as const, alignItems: "center" as const, justifyContent: "center" as const,
-    background: dark ? "rgba(0,255,178,0.07)" : "rgba(0,140,106,0.06)",
-    border: `1px solid ${dark ? "rgba(0,255,178,0.18)" : "rgba(0,140,106,0.15)"}`,
-    color: dark ? "#00FFB2" : "#008C6A",
+    background: dark ? "rgba(0,255,178,0.07)" : "rgba(44,62,80,0.07)",
+    border: `1px solid ${dark ? "rgba(0,255,178,0.18)" : "rgba(44,62,80,0.15)"}`,
+    color: dark ? "#00FFB2" : "#2C3E50",
     cursor: "pointer" as const,
   };
 
@@ -151,8 +151,8 @@ export default function Navbar() {
                     fontWeight: isActive ? 700 : 500,
                     letterSpacing: "0.04em",
                     color: isActive
-                      ? dark ? "#00FFB2" : "#008C6A"
-                      : dark ? "rgba(0,255,178,0.50)" : "rgba(0,140,106,0.50)",
+                      ? dark ? "#00FFB2" : "#00A876"
+                      : dark ? "rgba(189,195,199,0.70)" : "rgba(44,62,80,0.55)",
                     textDecoration: "none",
                     background: "transparent",
                     transition: "background 0.2s ease, color 0.2s ease",
@@ -197,9 +197,9 @@ export default function Navbar() {
                 alignItems: "center", gap: "0.42rem",
                 padding: "0.55rem 1.25rem",
                 borderRadius: 12,
-                background: dark ? "rgba(0,255,178,0.08)" : "rgba(0,140,106,0.06)",
-                border: `1px solid ${dark ? "rgba(0,255,178,0.25)" : "rgba(0,140,106,0.18)"}`,
-                color: dark ? "#00FFB2" : "#008C6A",
+                background: dark ? "rgba(0,255,178,0.08)" : "rgba(44,62,80,0.06)",
+                border: `1px solid ${dark ? "rgba(0,255,178,0.25)" : "rgba(44,62,80,0.18)"}`,
+                color: dark ? "#00FFB2" : "#2C3E50",
                 fontFamily: "var(--font-fira)", fontSize: "0.76rem", fontWeight: 700,
                 letterSpacing: "0.1em", textDecoration: "none",
               }}
@@ -286,8 +286,8 @@ export default function Navbar() {
                 position: "fixed", top: 0, right: 0, bottom: 0,
                 width: "min(260px, 85vw)", zIndex: 999,
                 background: dark
-                  ? "rgba(11,8,18,0.97)"
-                  : "rgba(250,250,248,0.97)",
+                  ? "rgba(28,43,57,0.98)"
+                  : "rgba(236,240,241,0.98)",
                 backdropFilter: "blur(24px)",
                 borderLeft: `1px solid ${dark
                   ? "rgba(0,255,178,0.14)"
@@ -326,8 +326,8 @@ export default function Navbar() {
                       fontFamily: "var(--font-space)", fontWeight: 700,
                       fontSize: "0.88rem", letterSpacing: "0.03em",
                       color: isActive
-                        ? dark ? "#00FFB2" : "#008C6A"
-                        : dark ? "rgba(0,255,178,0.45)" : "rgba(0,140,106,0.45)",
+                        ? dark ? "#00FFB2" : "#00A876"
+                        : dark ? "rgba(189,195,199,0.65)" : "rgba(44,62,80,0.55)",
                       textDecoration: "none",
                       transition: "background 0.2s, border-color 0.2s, color 0.2s",
                     }}
@@ -356,11 +356,11 @@ export default function Navbar() {
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "0.45rem",
                   padding: "0.7rem",
                   borderRadius: 10,
-                  background: dark ? "rgba(0,255,178,0.09)" : "rgba(0,140,106,0.07)",
-                  border: `1px solid ${dark ? "rgba(0,255,178,0.28)" : "rgba(0,140,106,0.18)"}`,
+                  background: dark ? "rgba(0,255,178,0.09)" : "rgba(44,62,80,0.07)",
+                  border: `1px solid ${dark ? "rgba(0,255,178,0.28)" : "rgba(44,62,80,0.18)"}`,
                   fontFamily: "var(--font-fira)", fontWeight: 700,
                   fontSize: "0.7rem", letterSpacing: "0.1em",
-                  color: dark ? "#00FFB2" : "#008C6A",
+                  color: dark ? "#00FFB2" : "#2C3E50",
                   textDecoration: "none",
                 }}
               >

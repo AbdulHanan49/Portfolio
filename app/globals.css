@@ -2,44 +2,47 @@
 
 /* ============================================
    DESIGN TOKENS
-   Violet + Amber palette
+   Modern Professional: #2C3E50 / #34495E family
+   Green (#00FFB2) accent on dark slate
    ============================================ */
 :root {
-  --bg-primary: #F4F7FA;
-  --bg-secondary: #E8EFF6;
-  --bg-tertiary: #D8E4EE;
-  --text-primary: #0A1828;
-  --text-secondary: #2C4560;
-  --text-muted: #5A7896;
-  --accent: #008C6A;
-  --accent-light: #00A87E;
-  --accent-dark: #006650;
-  --accent-secondary: #0090BB;
-  --accent-glow: rgba(0, 140, 106, 0.10);
-  --accent-glow-strong: rgba(0, 140, 106, 0.26);
-  --accent-mix-10: rgba(0, 140, 106, 0.10);
-  --accent-mix-18: rgba(0, 140, 106, 0.18);
-  --accent-mix-25: rgba(0, 140, 106, 0.25);
-  --accent-mix-45: rgba(0, 140, 106, 0.45);
-  --btn-outline-hover-bg: #DFF2EA;
-  --border: #C4D2E2;
-  --card-bg: #ffffff;
-  --card-border: #D2E0EE;
-  --nav-bg: rgba(244, 247, 250, 0.90);
-  --code-bg: #07050F;
+  /* Light mode — "Clouds" base, Wet Asphalt text */
+  --bg-primary: #ECF0F1;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #BDC3C7;
+  --text-primary: #2C3E50;
+  --text-secondary: #34495E;
+  --text-muted: #7F8C8D;
+  --accent: #00A876;
+  --accent-light: #00CC8E;
+  --accent-dark: #007A55;
+  --accent-secondary: #0EA5E9;
+  --accent-glow: rgba(0, 168, 118, 0.12);
+  --accent-glow-strong: rgba(0, 168, 118, 0.28);
+  --accent-mix-10: rgba(0, 168, 118, 0.10);
+  --accent-mix-18: rgba(0, 168, 118, 0.18);
+  --accent-mix-25: rgba(0, 168, 118, 0.25);
+  --accent-mix-45: rgba(0, 168, 118, 0.45);
+  --btn-outline-hover-bg: #D5F0E8;
+  --border: #BDC3C7;
+  --card-bg: #FFFFFF;
+  --card-border: #BDC3C7;
+  --nav-bg: rgba(236, 240, 241, 0.94);
+  --code-bg: #2C3E50;
   --code-text: #00FFB2;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+  --shadow-sm: 0 2px 8px rgba(44, 62, 80, 0.08);
+  --shadow-md: 0 8px 24px rgba(44, 62, 80, 0.10);
+  --shadow-lg: 0 16px 48px rgba(44, 62, 80, 0.12);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #080D12;
-  --bg-secondary: #0C1218;
-  --bg-tertiary: #121B24;
-  --text-primary: #E2EBF4;
-  --text-secondary: #7A9AB8;
-  --text-muted: #4A6880;
+  /* Dark mode — Wet Asphalt base, Clouds text */
+  --bg-primary: #1C2B39;
+  --bg-secondary: #243344;
+  --bg-tertiary: #2C3E50;
+  --text-primary: #ECF0F1;
+  --text-secondary: #BDC3C7;
+  --text-muted: #7F8C8D;
   --accent: #00FFB2;
   --accent-light: #33FFC0;
   --accent-dark: #00CC8E;
@@ -50,16 +53,16 @@
   --accent-mix-18: rgba(0, 255, 178, 0.18);
   --accent-mix-25: rgba(0, 255, 178, 0.25);
   --accent-mix-45: rgba(0, 255, 178, 0.45);
-  --btn-outline-hover-bg: #0D2018;
-  --border: #1A2C3A;
-  --card-bg: #0C1218;
-  --card-border: #1C2E40;
-  --nav-bg: rgba(8, 13, 18, 0.92);
-  --code-bg: #060A0E;
+  --btn-outline-hover-bg: #243344;
+  --border: #34495E;
+  --card-bg: #243344;
+  --card-border: #34495E;
+  --nav-bg: rgba(28, 43, 57, 0.96);
+  --code-bg: #1C2B39;
   --code-text: #00FFB2;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.40);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.50);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.65);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.70);
 }
 
 @theme inline {
@@ -277,9 +280,9 @@ body::after {
 
 [data-theme="dark"] .hero-section {
   background:
-    radial-gradient(ellipse 75% 65% at 68% 32%, rgba(0, 40, 32, 0.60) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 60% at 4% 82%, rgba(0, 80, 60, 0.30) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(8, 13, 18, 0.40) 0%, transparent 70%);
+    radial-gradient(ellipse 65% 55% at 70% 25%, rgba(0, 255, 178, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 5% 90%, rgba(0, 204, 142, 0.04) 0%, transparent 55%),
+    var(--bg-primary);
 }
 
 /* Mouse-driven spotlight */
@@ -1361,11 +1364,11 @@ body::after {
 .footer-wrapper {
   position: relative;
   z-index: 1;
-  --footer-bg: #006650;
+  --footer-bg: #2C3E50;
 }
 
 [data-theme="dark"] .footer-wrapper {
-  --footer-bg: #00CC8E;
+  --footer-bg: #243344;
 }
 
 /* Bubbles container */
@@ -2716,9 +2719,9 @@ body::after {
   background: var(--accent-glow);
 }
 
-/* Dark mode — green/cyan board */
+/* Dark mode — slate board */
 [data-theme="dark"] .game-panel {
-  background: linear-gradient(160deg, #091510 0%, #080D12 60%, #0A1218 100%);
+  background: linear-gradient(160deg, #243344 0%, #1C2B39 60%, #243344 100%);
   border-color: rgba(0,255,178,0.30);
   box-shadow:
     0 0 0 1px rgba(0,255,178,0.10),
@@ -2772,12 +2775,12 @@ body::after {
 }
 
 [data-theme="light"] .ttt-cell {
-  background: linear-gradient(135deg, rgba(0,140,106,0.07) 0%, rgba(244,247,250,0.9) 100%);
+  background: linear-gradient(135deg, rgba(0,140,106,0.07) 0%, rgba(236,240,241,0.9) 100%);
   border-color: rgba(0,140,106,0.18);
 }
 
 [data-theme="light"] .mem-card {
-  background: linear-gradient(135deg, rgba(0,140,106,0.10) 0%, rgba(244,247,250,0.9) 100%);
+  background: linear-gradient(135deg, rgba(0,140,106,0.10) 0%, rgba(236,240,241,0.9) 100%);
   border-color: rgba(0,140,106,0.18);
 }
 

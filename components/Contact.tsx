@@ -72,7 +72,7 @@ export default function Contact() {
       <div
         className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,50,40,0.35) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(44,62,80,0.80) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb2 9s ease-in-out 2.5s infinite",
         }}

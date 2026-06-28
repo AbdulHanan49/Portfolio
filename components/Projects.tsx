@@ -27,8 +27,8 @@ const projects: Project[] = [
       "Lead engineer in a cross-functional team of 4 on a live AI video editing SaaS. Enabled billing in 17+ currency markets via Stripe, achieved zero-downtime deployments on Azure CI/CD, and shipped AI auto-subtitles (Azure Speech SDK) and Google Gemini features. Stack: React 18 / TypeScript frontend, FastAPI / PostgreSQL backend, Remotion 4 video rendering engine, Docker.",
     tags: ["React 18", "TypeScript", "FastAPI", "PostgreSQL", "Remotion", "Stripe", "Azure", "Docker"],
     liveUrl: "https://mix-clip.com/en?c=eur",
-    gradient: "linear-gradient(135deg,#562abd 0%,#210C6E 60%,#0E0636 100%)",
-    glow: "rgba(120,86,255,0.5)",
+    gradient: "linear-gradient(135deg,#00CC8E 0%,#006650 55%,#002A20 100%)",
+    glow: "rgba(0,255,178,0.45)",
   },
   {
     number: "02",
@@ -410,7 +410,7 @@ export default function Projects() {
       <div aria-hidden="true" style={{
         position: "absolute", pointerEvents: "none",
         width: 700, height: 700, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(120,86,255,0.11) 0%, rgba(120,86,255,0.04) 40%, transparent 65%)",
+        background: "radial-gradient(circle, rgba(0,255,178,0.08) 0%, rgba(0,255,178,0.03) 40%, transparent 65%)",
         transform: `translate(${mouse.x - 350}px, ${mouse.y - 350}px)`,
         transition: "transform 0.12s ease-out",
         top: 0, left: 0,

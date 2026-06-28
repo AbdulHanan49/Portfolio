@@ -122,7 +122,7 @@ export default function Experience() {
       <div aria-hidden="true" style={{
         position: "absolute", top: "10%", left: "-8%",
         width: 480, height: 480, borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(0,50,40,0.40) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(44,62,80,0.80) 0%, transparent 70%)",
         filter: "blur(70px)",
       }} />
 

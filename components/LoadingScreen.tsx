@@ -34,7 +34,7 @@ export default function LoadingScreen() {
         alignItems: "center",
         justifyContent: "center",
         gap: "1.5rem",
-        background: "radial-gradient(ellipse 80% 60% at 50% 50%, #071428 0%, #030810 100%)",
+        background: "radial-gradient(ellipse 80% 60% at 50% 50%, #243344 0%, #1C2B39 100%)",
         animation: "loadingFade 1s ease forwards",
         pointerEvents: "auto",
       }}

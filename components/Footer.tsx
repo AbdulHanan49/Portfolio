@@ -135,7 +135,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     aria-label={link.label}
                     className="footer-social-icon"
-                    whileHover={{ scale: 1.15, y: -3, boxShadow: "0 6px 20px rgba(120,86,255,0.35)" }}
+                    whileHover={{ scale: 1.15, y: -3, boxShadow: "0 6px 20px rgba(0,255,178,0.28)" }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}

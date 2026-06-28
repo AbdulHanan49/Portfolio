@@ -98,7 +98,7 @@ export default function About() {
         style={{
           position: "absolute", top: "4%", left: "-10%",
           width: 520, height: 520, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,50,40,0.38) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(44,62,80,0.80) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(55px)",
           animation: "aboutOrb1 9s ease-in-out infinite",
         }}
@@ -349,7 +349,7 @@ export default function About() {
                 whileHover={{ y: -4, boxShadow: "0 18px 48px rgba(0,255,178,0.15), 0 0 0 1px rgba(0,255,178,0.22)" }}
                 transition={{ duration: 0.25 }}
                 style={{
-                  background: "linear-gradient(135deg, rgba(0,255,178,0.08) 0%, rgba(0,80,60,0.06) 100%)",
+                  background: "linear-gradient(135deg, rgba(0,255,178,0.08) 0%, rgba(44,62,80,0.06) 100%)",
                   border: "1px solid rgba(0,255,178,0.20)",
                   borderRadius: 16, padding: "1.5rem",
                   position: "relative", overflow: "hidden",

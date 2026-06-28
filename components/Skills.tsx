@@ -39,16 +39,16 @@ interface Skill {
 }
 
 const levelMeta: Record<string, { color: string; width: string }> = {
-  Expert:       { color: "#7856FF", width: "92%" },
-  Advanced:     { color: "#3178c6", width: "72%" },
-  Intermediate: { color: "#00FFB2", width: "48%" },
+  Expert:       { color: "#00FFB2", width: "92%" },
+  Advanced:     { color: "#22D3EE", width: "72%" },
+  Intermediate: { color: "#F59E0B", width: "48%" },
 };
 
 const columns: { title: string; accent: string; number: string; skills: Skill[] }[] = [
   {
     title: "Frontend",
     number: "01",
-    accent: "#7856FF",
+    accent: "#00FFB2",
     skills: [
       { name: "React 18",     icon: SI.React,      color: "#61dafb", level: "Expert",       experience: "1+ yr",  description: "Production SaaS with 70+ custom hooks, TanStack Query v5, Zustand + Zundo, React Hook Form, i18next, PWA.",  tools: ["TanStack Query","Zustand","React Hook Form","i18next"] },
       { name: "TypeScript",   icon: SI.TypeScript, color: "#3178c6", level: "Expert",       experience: "1+ yr",  description: "Type-safe production code with generics, utility types, Pydantic-style validation, strict config.",           tools: ["Generics","Type Guards","Utility Types","Zod"] },
@@ -379,7 +379,7 @@ export default function Skills() {
       {/* Background dot-grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(120,86,255,0.07) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(0,255,178,0.05) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
