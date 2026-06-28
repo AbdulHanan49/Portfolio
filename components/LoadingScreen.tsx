@@ -1,24 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
-// Negative delays so bars start mid-cycle immediately (no dead wait on first frame)
 const DELAYS = [1.4, 1.2, 1.0, 0.8, 0.6, 0.4, 0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4];
 
 export default function LoadingScreen() {
-  const [done,    setDone]    = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [show, setShow] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Only show on client — prevents SSR HTML from triggering the CSS animation
-    // twice (once on initial paint, once when React hydrates and restarts it).
-    setMounted(true);
-    const timer = setTimeout(() => setDone(true), 1000);
+  useLayoutEffect(() => {
+    // Show only on the first visit of the browser session.
+    // sessionStorage is cleared when the tab closes, so returning visitors
+    // see it once per session rather than on every page load.
+    if (sessionStorage.getItem("visited")) return;
+    sessionStorage.setItem("visited", "1");
+    setShow(true);
+    const timer = setTimeout(() => setShow(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  if (!mounted || done) return null;
+  if (!show) return null;
 
   return (
     <div
@@ -46,7 +47,7 @@ export default function LoadingScreen() {
               width: 8,
               height: 80,
               borderRadius: 5,
-              background: "#48CAE4",
+              background: "#00FFB2",
               transformOrigin: "bottom center",
               willChange: "transform",
               animation: `equalize 1.2s -${delay}s infinite ease-in-out`,
@@ -60,7 +61,7 @@ export default function LoadingScreen() {
         fontFamily: "var(--font-fira), monospace",
         fontSize: "0.68rem",
         letterSpacing: "0.26em",
-        color: "rgba(144, 224, 239, 0.50)",
+        color: "rgba(0, 255, 178, 0.50)",
         textTransform: "uppercase",
       }}>
         Loading

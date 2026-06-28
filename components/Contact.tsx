@@ -53,7 +53,7 @@ export default function Contact() {
       {/* Background dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(86,42,189,0.07) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(0,255,178,0.05) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
@@ -63,7 +63,7 @@ export default function Contact() {
       <div
         className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(86,42,189,0.35) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(0,255,178,0.12) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb1 7s ease-in-out infinite",
         }}
@@ -72,7 +72,7 @@ export default function Contact() {
       <div
         className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(33,12,110,0.50) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(0,50,40,0.35) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb2 9s ease-in-out 2.5s infinite",
         }}

@@ -87,7 +87,7 @@ export default function About() {
       {/* Dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(86,42,189,0.07) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(0,255,178,0.05) 1px, transparent 1px)",
         backgroundSize: "38px 38px",
         mask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
@@ -98,7 +98,7 @@ export default function About() {
         style={{
           position: "absolute", top: "4%", left: "-10%",
           width: 520, height: 520, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(33,12,110,0.45) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(0,50,40,0.38) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(55px)",
           animation: "aboutOrb1 9s ease-in-out infinite",
         }}
@@ -201,8 +201,8 @@ export default function About() {
                     key={label}
                     whileHover={{
                       scale: 1.06, y: -3,
-                      boxShadow: "0 6px 20px rgba(120,86,255,0.32)",
-                      borderColor: "rgba(120,86,255,0.45)",
+                      boxShadow: "0 6px 20px rgba(0,255,178,0.22)",
+                      borderColor: "rgba(0,255,178,0.40)",
                       color: "var(--accent)",
                     }}
                     whileTap={{ scale: 0.97 }}
@@ -230,7 +230,7 @@ export default function About() {
             {/* Stats card */}
             <ScrollReveal delay={0.15}>
               <motion.div
-                whileHover={{ y: -4, boxShadow: "0 16px 48px rgba(120,86,255,0.15)" }}
+                whileHover={{ y: -4, boxShadow: "0 16px 48px rgba(0,255,178,0.10)" }}
                 transition={{ duration: 0.25 }}
                 style={{
                   background: "var(--card-bg)", border: "1px solid var(--card-border)",
@@ -243,7 +243,7 @@ export default function About() {
               >
                 <div style={{
                   position: "absolute", inset: 0,
-                  background: "radial-gradient(ellipse 70% 90% at 50% 110%, rgba(120,86,255,0.1), transparent)",
+                  background: "radial-gradient(ellipse 70% 90% at 50% 110%, rgba(0,255,178,0.07), transparent)",
                   pointerEvents: "none",
                 }} />
                 <StatCounter target={14} label="Months Exp."      suffix="+" />
@@ -260,7 +260,7 @@ export default function About() {
               {/* Current role */}
               <ScrollReveal delay={0.2}>
                 <motion.div
-                  whileHover={{ y: -5, boxShadow: "0 14px 40px rgba(120,86,255,0.18)" }}
+                  whileHover={{ y: -5, boxShadow: "0 14px 40px rgba(0,255,178,0.12)" }}
                   transition={{ duration: 0.25 }}
                   style={{
                     background: "var(--card-bg)", border: "1px solid var(--card-border)",
@@ -346,11 +346,11 @@ export default function About() {
             {/* Philosophy quote card */}
             <ScrollReveal delay={0.3}>
               <motion.div
-                whileHover={{ y: -4, boxShadow: "0 18px 48px rgba(86,42,189,0.28), 0 0 0 1px rgba(120,86,255,0.25)" }}
+                whileHover={{ y: -4, boxShadow: "0 18px 48px rgba(0,255,178,0.15), 0 0 0 1px rgba(0,255,178,0.22)" }}
                 transition={{ duration: 0.25 }}
                 style={{
-                  background: "linear-gradient(135deg, rgba(86,42,189,0.14) 0%, rgba(33,12,110,0.08) 100%)",
-                  border: "1px solid rgba(120,86,255,0.25)",
+                  background: "linear-gradient(135deg, rgba(0,255,178,0.08) 0%, rgba(0,80,60,0.06) 100%)",
+                  border: "1px solid rgba(0,255,178,0.20)",
                   borderRadius: 16, padding: "1.5rem",
                   position: "relative", overflow: "hidden",
                   cursor: "default",

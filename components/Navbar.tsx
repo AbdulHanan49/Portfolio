@@ -62,20 +62,20 @@ export default function Navbar() {
     ? scrolled ? "rgba(11,8,18,0.88)"     : "rgba(11,8,18,0.62)"
     : scrolled ? "rgba(250,250,248,0.92)" : "rgba(250,250,248,0.74)";
   const pillBorder = dark
-    ? scrolled ? "rgba(120,86,255,0.28)"  : "rgba(120,86,255,0.14)"
-    : scrolled ? "rgba(120,86,255,0.22)"  : "rgba(120,86,255,0.12)";
+    ? scrolled ? "rgba(0,255,178,0.22)"   : "rgba(0,255,178,0.12)"
+    : scrolled ? "rgba(0,140,106,0.18)"   : "rgba(0,140,106,0.10)";
   const pillShadow = scrolled
     ? dark
-      ? "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(155,121,255,0.05)"
-      : "0 8px 28px rgba(0,0,0,0.10), inset 0 1px 0 rgba(120,86,255,0.06)"
+      ? "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(0,255,178,0.04)"
+      : "0 8px 28px rgba(0,0,0,0.10), inset 0 1px 0 rgba(0,140,106,0.05)"
     : "none";
 
   const iconBtn = {
     width: 44, height: 44, borderRadius: 12,
     display: "flex" as const, alignItems: "center" as const, justifyContent: "center" as const,
-    background: dark ? "rgba(120,86,255,0.09)" : "rgba(120,86,255,0.07)",
-    border: `1px solid ${dark ? "rgba(120,86,255,0.22)" : "rgba(120,86,255,0.18)"}`,
-    color: dark ? "rgba(155,121,255,0.82)" : "#562abd",
+    background: dark ? "rgba(0,255,178,0.07)" : "rgba(0,140,106,0.06)",
+    border: `1px solid ${dark ? "rgba(0,255,178,0.18)" : "rgba(0,140,106,0.15)"}`,
+    color: dark ? "#00FFB2" : "#008C6A",
     cursor: "pointer" as const,
   };
 
@@ -136,7 +136,7 @@ export default function Navbar() {
                   onMouseEnter={(e) => {
                     if (!isActive)
                       (e.currentTarget as HTMLElement).style.background =
-                        dark ? "rgba(120,86,255,0.10)" : "rgba(120,86,255,0.07)";
+                        dark ? "rgba(0,255,178,0.08)" : "rgba(0,140,106,0.06)";
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive)
@@ -151,8 +151,8 @@ export default function Navbar() {
                     fontWeight: isActive ? 700 : 500,
                     letterSpacing: "0.04em",
                     color: isActive
-                      ? dark ? "#DDD6FE" : "#562abd"
-                      : dark ? "rgba(155,121,255,0.5)" : "rgba(86,42,189,0.5)",
+                      ? dark ? "#00FFB2" : "#008C6A"
+                      : dark ? "rgba(0,255,178,0.50)" : "rgba(0,140,106,0.50)",
                     textDecoration: "none",
                     background: "transparent",
                     transition: "background 0.2s ease, color 0.2s ease",
@@ -167,11 +167,11 @@ export default function Navbar() {
                       style={{
                         position: "absolute", inset: 0, borderRadius: 999,
                         background: dark
-                          ? "rgba(120,86,255,0.22)"
-                          : "rgba(120,86,255,0.11)",
+                          ? "rgba(0,255,178,0.12)"
+                          : "rgba(0,140,106,0.09)",
                         border: `1px solid ${dark
-                          ? "rgba(155,121,255,0.28)"
-                          : "rgba(120,86,255,0.22)"}`,
+                          ? "rgba(0,255,178,0.22)"
+                          : "rgba(0,140,106,0.18)"}`,
                         zIndex: -1,
                       }}
                       transition={{ type: "spring", stiffness: 380, damping: 36 }}
@@ -197,9 +197,9 @@ export default function Navbar() {
                 alignItems: "center", gap: "0.42rem",
                 padding: "0.55rem 1.25rem",
                 borderRadius: 12,
-                background: dark ? "rgba(120,86,255,0.12)" : "rgba(120,86,255,0.08)",
-                border: `1px solid ${dark ? "rgba(120,86,255,0.30)" : "rgba(120,86,255,0.20)"}`,
-                color: dark ? "#C4B5FD" : "#562abd",
+                background: dark ? "rgba(0,255,178,0.08)" : "rgba(0,140,106,0.06)",
+                border: `1px solid ${dark ? "rgba(0,255,178,0.25)" : "rgba(0,140,106,0.18)"}`,
+                color: dark ? "#00FFB2" : "#008C6A",
                 fontFamily: "var(--font-fira)", fontSize: "0.76rem", fontWeight: 700,
                 letterSpacing: "0.1em", textDecoration: "none",
               }}
@@ -290,8 +290,8 @@ export default function Navbar() {
                   : "rgba(250,250,248,0.97)",
                 backdropFilter: "blur(24px)",
                 borderLeft: `1px solid ${dark
-                  ? "rgba(120,86,255,0.18)"
-                  : "rgba(120,86,255,0.13)"}`,
+                  ? "rgba(0,255,178,0.14)"
+                  : "rgba(0,140,106,0.12)"}`,
                 display: "flex", flexDirection: "column",
                 padding: "5.5rem 1.25rem 2rem",
                 gap: "0.3rem",
@@ -300,7 +300,7 @@ export default function Navbar() {
               {/* Top accent line */}
               <div style={{
                 position: "absolute", top: 0, left: 0, right: 0, height: 2,
-                background: "linear-gradient(to right, transparent, rgba(120,86,255,0.7), transparent)",
+                background: "linear-gradient(to right, transparent, rgba(0,255,178,0.55), transparent)",
               }} />
 
               {NAV_ITEMS.map(({ label, href }, i) => {
@@ -318,16 +318,16 @@ export default function Navbar() {
                       padding: "0.72rem 0.85rem",
                       borderRadius: 10,
                       background: isActive
-                        ? dark ? "rgba(120,86,255,0.14)" : "rgba(120,86,255,0.08)"
+                        ? dark ? "rgba(0,255,178,0.10)" : "rgba(0,140,106,0.07)"
                         : "transparent",
                       border: `1px solid ${isActive
-                        ? dark ? "rgba(120,86,255,0.28)" : "rgba(120,86,255,0.18)"
+                        ? dark ? "rgba(0,255,178,0.22)" : "rgba(0,140,106,0.16)"
                         : "transparent"}`,
                       fontFamily: "var(--font-space)", fontWeight: 700,
                       fontSize: "0.88rem", letterSpacing: "0.03em",
                       color: isActive
-                        ? dark ? "#C4B5FD" : "#562abd"
-                        : dark ? "rgba(155,121,255,0.48)" : "rgba(86,42,189,0.48)",
+                        ? dark ? "#00FFB2" : "#008C6A"
+                        : dark ? "rgba(0,255,178,0.45)" : "rgba(0,140,106,0.45)",
                       textDecoration: "none",
                       transition: "background 0.2s, border-color 0.2s, color 0.2s",
                     }}
@@ -336,8 +336,8 @@ export default function Navbar() {
                     {isActive && (
                       <span style={{
                         width: 5, height: 5, borderRadius: "50%",
-                        background: "#562abd",
-                        boxShadow: "0 0 8px rgba(120,86,255,0.85)",
+                        background: "#00FFB2",
+                        boxShadow: "0 0 8px rgba(0,255,178,0.85)",
                       }} />
                     )}
                   </motion.a>
@@ -356,11 +356,11 @@ export default function Navbar() {
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "0.45rem",
                   padding: "0.7rem",
                   borderRadius: 10,
-                  background: dark ? "rgba(120,86,255,0.16)" : "rgba(120,86,255,0.09)",
-                  border: `1px solid ${dark ? "rgba(120,86,255,0.35)" : "rgba(120,86,255,0.22)"}`,
+                  background: dark ? "rgba(0,255,178,0.09)" : "rgba(0,140,106,0.07)",
+                  border: `1px solid ${dark ? "rgba(0,255,178,0.28)" : "rgba(0,140,106,0.18)"}`,
                   fontFamily: "var(--font-fira)", fontWeight: 700,
                   fontSize: "0.7rem", letterSpacing: "0.1em",
-                  color: dark ? "#C4B5FD" : "#562abd",
+                  color: dark ? "#00FFB2" : "#008C6A",
                   textDecoration: "none",
                 }}
               >

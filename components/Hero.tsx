@@ -24,9 +24,9 @@ function ProfileCard() {
   const [hovered, setHovered] = useState(false);
 
   const INFO_ROWS = [
-    { label: "Company",   value: "KCube Solutions",   accent: "#9B79FF" },
+    { label: "Company",   value: "KCube Solutions",   accent: "#22D3EE" },
     { label: "Location",  value: "Lahore · Remote",   accent: "#00FFB2" },
-    { label: "Education", value: "FAST NUCES · BSSE", accent: "#9B79FF" },
+    { label: "Education", value: "FAST NUCES · BSSE", accent: "#22D3EE" },
     { label: "Graduated", value: "2025",               accent: "#00FFB2" },
   ];
 
@@ -43,8 +43,8 @@ function ProfileCard() {
         cursor: "default", position: "relative",
         borderRadius: 24, overflow: "hidden",
         boxShadow: hovered
-          ? "0 32px 80px rgba(86,42,189,0.6), 0 0 0 1.5px rgba(120,86,255,0.75), 0 0 60px rgba(120,86,255,0.2)"
-          : "0 16px 48px rgba(86,42,189,0.28), 0 0 0 1px rgba(120,86,255,0.22)",
+          ? "0 32px 80px rgba(0,255,178,0.28), 0 0 0 1.5px rgba(0,255,178,0.65), 0 0 60px rgba(0,255,178,0.14)"
+          : "0 16px 48px rgba(0,204,142,0.18), 0 0 0 1px rgba(0,255,178,0.22)",
         transition: "box-shadow 0.45s ease",
         animation: "heroFadeUp 0.9s 0.3s both",
       }}
@@ -52,7 +52,7 @@ function ProfileCard() {
       {/* Top accent bar */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 3, zIndex: 10,
-        background: "linear-gradient(to right, #562abd, #9B79FF, #00FFB2)",
+        background: "linear-gradient(to right, #00CC8E, #00FFB2, #22D3EE)",
       }} />
 
       {/* Photo — blurs and dims on hover */}
@@ -119,7 +119,7 @@ function ProfileCard() {
       {/* Corner brackets */}
       {[
         { top: 12, left: 12, borderTop: true, borderLeft: true, color: "rgba(0,255,178,0.75)" },
-        { bottom: 12, right: 12, borderBottom: true, borderRight: true, color: "rgba(120,86,255,0.75)" },
+        { bottom: 12, right: 12, borderBottom: true, borderRight: true, color: "rgba(34,211,238,0.75)" },
       ].map((c, i) => (
         <div key={i} style={{
           position: "absolute", zIndex: 12, width: 18, height: 18,
@@ -142,7 +142,7 @@ function ProfileCard() {
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0,
         height: 60, zIndex: 11, pointerEvents: "none",
-        background: "linear-gradient(to bottom, transparent 0%, rgba(120,86,255,0.22) 45%, rgba(0,255,178,0.12) 55%, transparent 100%)",
+        background: "linear-gradient(to bottom, transparent 0%, rgba(0,255,178,0.18) 45%, rgba(34,211,238,0.12) 55%, transparent 100%)",
         opacity: hovered ? 1 : 0,
         animation: hovered ? "cardScan 1.6s linear 0.5s infinite" : "none",
         transition: "opacity 0.15s ease",
@@ -168,7 +168,7 @@ function ProfileCard() {
         {/* Eyebrow */}
         <p style={{
           fontFamily: "var(--font-fira)", fontSize: "0.5rem", fontWeight: 700,
-          color: "rgba(120,86,255,0.8)", letterSpacing: "0.32em",
+          color: "var(--accent)", letterSpacing: "0.32em",
           textTransform: "uppercase", margin: "0 0 0.9rem",
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(8px)",
@@ -181,7 +181,7 @@ function ProfileCard() {
             <div key={label} style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
               padding: "0.58rem 0",
-              borderBottom: i < arr.length - 1 ? "1px solid rgba(120,86,255,0.12)" : "none",
+              borderBottom: i < arr.length - 1 ? "1px solid rgba(0,255,178,0.10)" : "none",
               opacity: hovered ? 1 : 0,
               transform: hovered ? "translateY(0)" : "translateY(16px)",
               transition: `opacity 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s, transform 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s`,
@@ -202,7 +202,7 @@ function ProfileCard() {
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
           marginTop: "0.8rem", paddingTop: "0.7rem",
-          borderTop: "1px solid rgba(120,86,255,0.18)",
+          borderTop: "1px solid rgba(0,255,178,0.12)",
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(10px)",
           transition: `opacity 0.32s ease ${hovered ? "0.44s" : "0s"}, transform 0.32s ease ${hovered ? "0.44s" : "0s"}`,
@@ -236,7 +236,7 @@ export default function Hero() {
       const rect = spotlightRef.current.parentElement?.getBoundingClientRect();
       if (!rect) return;
       spotlightRef.current.style.background =
-        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(120,86,255,0.08), transparent 40%)`;
+        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(0,255,178,0.06), transparent 40%)`;
     };
     window.addEventListener("mousemove", handler, { passive: true });
     return () => window.removeEventListener("mousemove", handler);
@@ -282,7 +282,7 @@ export default function Hero() {
               </span>
               <div style={{
                 flex: 1, height: "1px",
-                background: "linear-gradient(to right, rgba(120,86,255,0.55), transparent)",
+                background: "linear-gradient(to right, rgba(0,255,178,0.50), transparent)",
                 transformOrigin: "left",
                 animation: "heroLineGrow 0.8s 0.35s both ease",
               }} />
@@ -291,7 +291,7 @@ export default function Hero() {
               fontFamily: "var(--font-space)", fontWeight: 900,
               fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
               lineHeight: 0.88, letterSpacing: "-0.04em", textTransform: "uppercase",
-              background: "linear-gradient(135deg, #C4B5FD 0%, #7856FF 45%, #00FFB2 100%)",
+              background: "linear-gradient(135deg, #00FFB2 0%, #22D3EE 45%, #33FFC0 100%)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               margin: 0,
             }}>
@@ -386,8 +386,8 @@ export default function Hero() {
             style={{
               display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
               width: "min(300px, calc(100vw - 4rem))", borderRadius: 14,
-              background: "rgba(120,86,255,0.06)",
-              border: "1px solid rgba(120,86,255,0.18)",
+              background: "rgba(0,255,178,0.05)",
+              border: "1px solid rgba(0,255,178,0.14)",
               overflow: "hidden",
               animation: "heroFadeUp 0.5s 0.85s both",
             }}
@@ -398,7 +398,7 @@ export default function Hero() {
                 style={{
                   padding: "0.85rem 0",
                   textAlign: "center",
-                  borderRight: i < STATS.length - 1 ? "1px solid rgba(120,86,255,0.14)" : "none",
+                  borderRight: i < STATS.length - 1 ? "1px solid rgba(0,255,178,0.12)" : "none",
                 }}
               >
                 <div style={{
