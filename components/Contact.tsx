@@ -4,7 +4,7 @@ import { useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import { FiSend, FiCheck, FiAlertCircle } from "react-icons/fi";
+import { FiSend, FiCheck, FiAlertCircle, FiMail, FiMapPin, FiGithub, FiLinkedin, FiZap } from "react-icons/fi";
 
 const EMAILJS_SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? "";
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
@@ -53,7 +53,7 @@ export default function Contact() {
       {/* Background dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(63,78,79,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(36,52,71,0.18) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
@@ -63,7 +63,7 @@ export default function Contact() {
       <div
         className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(63,78,79,0.60) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(36,52,71,0.60) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb1 7s ease-in-out infinite",
         }}
@@ -72,7 +72,7 @@ export default function Contact() {
       <div
         className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(27,38,49,0.80) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(15,23,42,0.80) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb2 9s ease-in-out 2.5s infinite",
         }}
@@ -81,7 +81,7 @@ export default function Contact() {
       <div
         className="absolute top-1/2 right-0 w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(27,38,49,0.45) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(15,23,42,0.45) 0%, transparent 70%)",
           filter: "blur(70px)",
           animation: "contactOrb3 11s ease-in-out 5s infinite",
         }}
@@ -122,13 +122,106 @@ export default function Contact() {
             <div className="contact-form-inner">
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
-                {/* Left â€” CTA column */}
-                <div className="lg:col-span-2 flex flex-col justify-center">
-                  <h4 className="contact-form-heading">Send me a message</h4>
-                  <p className="contact-form-text">
-                    Fill out the form and I&apos;ll get back to you within 24 hours.
-                  </p>
+                {/* Left — contact info column */}
+                <div className=”lg:col-span-2 flex flex-col justify-center gap-6”>
+                  <div>
+                    <h4 className=”contact-form-heading” style={{ marginBottom: “0.4rem” }}>
+                      Let&apos;s work together
+                    </h4>
+                    <p className=”contact-form-text”>
+                      Open to freelance projects and full-time opportunities. I&apos;ll reply within 24 hours.
+                    </p>
+                  </div>
 
+                  {/* Contact details */}
+                  <div style={{ display: “flex”, flexDirection: “column”, gap: “0.875rem” }}>
+                    {/* Availability badge */}
+                    <div style={{
+                      display: “inline-flex”, alignItems: “center”, gap: “0.5rem”,
+                      padding: “0.35rem 0.75rem”, borderRadius: “999px”,
+                      background: “rgba(20,184,166,0.10)”, border: “1px solid rgba(20,184,166,0.25)”,
+                      width: “fit-content”,
+                    }}>
+                      <FiZap size={12} style={{ color: “#14B8A6” }} />
+                      <span style={{ fontFamily: “var(--font-fira)”, fontSize: “0.7rem”, fontWeight: 600, color: “#14B8A6”, letterSpacing: “0.06em” }}>
+                        Available for new projects
+                      </span>
+                    </div>
+
+                    {/* Email */}
+                    <a href=”mailto:hananaslam90@gmail.com” style={{
+                      display: “flex”, alignItems: “center”, gap: “0.75rem”,
+                      color: “var(--text-secondary)”, textDecoration: “none”,
+                      fontFamily: “var(--font-sora)”, fontSize: “0.875rem”,
+                      transition: “color 0.2s”,
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.color = “var(--accent)”)}
+                    onMouseLeave={e => (e.currentTarget.style.color = “var(--text-secondary)”)}>
+                      <span style={{
+                        width: “34px”, height: “34px”, borderRadius: “8px”, flexShrink: 0,
+                        display: “flex”, alignItems: “center”, justifyContent: “center”,
+                        background: “var(--accent-mix-10)”, border: “1px solid var(--border)”,
+                        color: “var(--accent)”,
+                      }}>
+                        <FiMail size={15} />
+                      </span>
+                      hananaslam90@gmail.com
+                    </a>
+
+                    {/* Location */}
+                    <div style={{
+                      display: “flex”, alignItems: “center”, gap: “0.75rem”,
+                      color: “var(--text-secondary)”,
+                      fontFamily: “var(--font-sora)”, fontSize: “0.875rem”,
+                    }}>
+                      <span style={{
+                        width: “34px”, height: “34px”, borderRadius: “8px”, flexShrink: 0,
+                        display: “flex”, alignItems: “center”, justifyContent: “center”,
+                        background: “var(--accent-mix-10)”, border: “1px solid var(--border)”,
+                        color: “var(--accent)”,
+                      }}>
+                        <FiMapPin size={15} />
+                      </span>
+                      Lahore, Pakistan · Open to Remote
+                    </div>
+
+                    {/* Social links */}
+                    <div style={{ display: “flex”, gap: “0.625rem”, marginTop: “0.25rem” }}>
+                      {[
+                        { href: “https://github.com/AbdulHanan49”, icon: <FiGithub size={16} />, label: “GitHub” },
+                        { href: “https://linkedin.com/in/hanan-aslam-dev”, icon: <FiLinkedin size={16} />, label: “LinkedIn” },
+                      ].map(({ href, icon, label }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target=”_blank”
+                          rel=”noopener noreferrer”
+                          aria-label={label}
+                          style={{
+                            width: “38px”, height: “38px”, borderRadius: “8px”,
+                            display: “flex”, alignItems: “center”, justifyContent: “center”,
+                            background: “var(--accent-mix-10)”, border: “1px solid var(--border)”,
+                            color: “var(--text-muted)”, textDecoration: “none”,
+                            transition: “color 0.2s, border-color 0.2s, background 0.2s”,
+                          }}
+                          onMouseEnter={e => {
+                            const el = e.currentTarget as HTMLAnchorElement;
+                            el.style.color = “var(--accent)”;
+                            el.style.borderColor = “var(--accent)”;
+                            el.style.background = “var(--accent-mix-18)”;
+                          }}
+                          onMouseLeave={e => {
+                            const el = e.currentTarget as HTMLAnchorElement;
+                            el.style.color = “var(--text-muted)”;
+                            el.style.borderColor = “var(--border)”;
+                            el.style.background = “var(--accent-mix-10)”;
+                          }}
+                        >
+                          {icon}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Right â€” Form */}
@@ -270,4 +363,5 @@ export default function Contact() {
     </section>
   );
 }
+
 

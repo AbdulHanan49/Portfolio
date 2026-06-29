@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
 
@@ -47,7 +47,7 @@ export default function LoadingScreen() {
               width: 8,
               height: 80,
               borderRadius: 5,
-              background: "#00FFB2",
+              background: "#22D3EE",
               transformOrigin: "bottom center",
               willChange: "transform",
               animation: `equalize 1.2s -${delay}s infinite ease-in-out`,
@@ -61,7 +61,7 @@ export default function LoadingScreen() {
         fontFamily: "var(--font-fira), monospace",
         fontSize: "0.68rem",
         letterSpacing: "0.26em",
-        color: "rgba(0, 255, 178, 0.50)",
+        color: "rgba(34, 211, 238, 0.50)",
         textTransform: "uppercase",
       }}>
         Loading
@@ -69,3 +69,4 @@ export default function LoadingScreen() {
     </div>
   );
 }
+

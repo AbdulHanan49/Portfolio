@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useRef, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
@@ -22,20 +22,20 @@ const projects: Project[] = [
   {
     number: "01",
     title: "MixClip",
-    subtitle: "AI Video SaaS · KCube Solutions",
+    subtitle: "AI Video SaaS Â· KCube Solutions",
     description:
       "Lead engineer in a cross-functional team of 4 on a live AI video editing SaaS. Enabled billing in 17+ currency markets via Stripe, achieved zero-downtime deployments on Azure CI/CD, and shipped AI auto-subtitles (Azure Speech SDK) and Google Gemini features. Stack: React 18 / TypeScript frontend, FastAPI / PostgreSQL backend, Remotion 4 video rendering engine, Docker.",
     tags: ["React 18", "TypeScript", "FastAPI", "PostgreSQL", "Remotion", "Stripe", "Azure", "Docker"],
     liveUrl: "https://mix-clip.com/en?c=eur",
-    gradient: "linear-gradient(135deg,#00CC8E 0%,#006650 55%,#002A20 100%)",
-    glow: "rgba(0,255,178,0.45)",
+    gradient: "linear-gradient(135deg,#14B8A6 0%,#006650 55%,#002A20 100%)",
+    glow: "rgba(34,211,238,0.45)",
   },
   {
     number: "02",
     title: "Job Wallet",
-    subtitle: "AI Job Tracking SaaS · Visnext Software Solutions",
+    subtitle: "AI Job Tracking SaaS Â· Visnext Software Solutions",
     description:
-      "Modernised a struggling legacy UI into a production-grade SaaS — full frontend rebuilt in Vue 3 / Quasar with Pinia and Tailwind. Delivered 10+ Django REST APIs, JWT + RBAC auth, Celery / Redis async queue cutting manual follow-up effort for users, and Stripe freemium billing with dual-channel notifications (email + in-app).",
+      "Modernised a struggling legacy UI into a production-grade SaaS â€” full frontend rebuilt in Vue 3 / Quasar with Pinia and Tailwind. Delivered 10+ Django REST APIs, JWT + RBAC auth, Celery / Redis async queue cutting manual follow-up effort for users, and Stripe freemium billing with dual-channel notifications (email + in-app).",
     tags: ["Vue 3", "Quasar", "Django REST", "Python", "MySQL", "Celery", "Redis", "Stripe"],
     liveUrl: "https://jobwallet.co",
     gradient: "linear-gradient(135deg,#059669 0%,#065F46 60%,#022C22 100%)",
@@ -44,9 +44,9 @@ const projects: Project[] = [
   {
     number: "03",
     title: "Screen Sizzle",
-    subtitle: "Movie Seat Booking System · MERN",
+    subtitle: "Movie Seat Booking System Â· MERN",
     description:
-      "Solved the hardest problem in booking systems — concurrent double-booking. Implemented atomic MongoDB update patterns and real-time seat locking so multiple users racing for the same seat never both succeed. Full-stack MERN with Stripe checkout and Nodemailer confirmation emails.",
+      "Solved the hardest problem in booking systems â€” concurrent double-booking. Implemented atomic MongoDB update patterns and real-time seat locking so multiple users racing for the same seat never both succeed. Full-stack MERN with Stripe checkout and Nodemailer confirmation emails.",
     tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Stripe", "Nodemailer", "MERN"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/Screen-Sizzle",
@@ -56,7 +56,7 @@ const projects: Project[] = [
   {
     number: "04",
     title: "SmartLib",
-    subtitle: "Library Management System · ASP.NET",
+    subtitle: "Library Management System Â· ASP.NET",
     description:
       "Replaced manual paper-based library operations with a full digital workflow. Role-based access separates librarian and patron views, automated fine calculation eliminates manual overdue tracking, and a full issuance / return ledger gives librarians complete audit history.",
     tags: ["ASP.NET", "SQL Server", "HTML", "CSS", "JavaScript"],
@@ -68,9 +68,9 @@ const projects: Project[] = [
   {
     number: "05",
     title: "TourVista",
-    subtitle: "Android Tour Booking App · Kotlin",
+    subtitle: "Android Tour Booking App Â· Kotlin",
     description:
-      "End-to-end Android booking app covering the full traveller journey — search, participant selection, scheduling, and operator confirmation — all synced in real-time via Firestore. Firebase Auth handles secure login; MVVM architecture keeps the codebase testable and maintainable as features grow.",
+      "End-to-end Android booking app covering the full traveller journey â€” search, participant selection, scheduling, and operator confirmation â€” all synced in real-time via Firestore. Firebase Auth handles secure login; MVVM architecture keeps the codebase testable and maintainable as features grow.",
     tags: ["Kotlin", "Jetpack Compose", "Firebase Auth", "Firestore", "MVVM", "Android"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/TourVista",
@@ -80,9 +80,9 @@ const projects: Project[] = [
   {
     number: "06",
     title: "Brain Tumor Detection",
-    subtitle: "Medical Imaging Pipeline · Python / OpenCV",
+    subtitle: "Medical Imaging Pipeline Â· Python / OpenCV",
     description:
-      "Built a reproducible MRI preprocessing pipeline capable of ingesting mixed tumor / non-tumor datasets and outputting labelled sample grids for visual QA. Standardised input to 224×224 RGB, enabling drop-in compatibility with standard CNN classifiers — the bottleneck most ML projects skip.",
+      "Built a reproducible MRI preprocessing pipeline capable of ingesting mixed tumor / non-tumor datasets and outputting labelled sample grids for visual QA. Standardised input to 224Ã—224 RGB, enabling drop-in compatibility with standard CNN classifiers â€” the bottleneck most ML projects skip.",
     tags: ["Python", "OpenCV", "Matplotlib", "NumPy", "Jupyter", "Data Science"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/Brain-Tumor-Detection",
@@ -97,7 +97,7 @@ const GALLERY_ROWS = [
   [5, 0, 1, 2, 3, 4],
 ];
 
-/* ── Single gallery thumbnail ── */
+/* â”€â”€ Single gallery thumbnail â”€â”€ */
 function GalleryCard({ project, delay }: { project: Project; delay: number }) {
   return (
     <motion.div
@@ -151,7 +151,7 @@ function GalleryCard({ project, delay }: { project: Project; delay: number }) {
   );
 }
 
-/* ── Project preview mockups ── */
+/* â”€â”€ Project preview mockups â”€â”€ */
 function ScreenshotPreview({ src, alt }: { src: string; alt: string }) {
   return (
     <div style={{ width:"100%", height:"100%", overflow:"hidden", position:"relative" }}>
@@ -189,7 +189,7 @@ function TourVistaPreview() {
           <div key={i} style={{ margin:"4px 5px", padding:"4px 5px", background:i===0?"rgba(8,145,178,0.15)":"rgba(255,255,255,0.05)", border:`1px solid ${i===0?"rgba(8,145,178,0.4)":"rgba(255,255,255,0.07)"}`, borderRadius:5 }}>
             <div style={{ fontFamily:"monospace", fontSize:5.5, color:"rgba(255,255,255,0.8)", marginBottom:2, lineHeight:1.3 }}>{t.name}</div>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-              <span style={{ fontSize:6, letterSpacing:1, color:"#FBBF24" }}>{"★".repeat(t.stars)}</span>
+              <span style={{ fontSize:6, letterSpacing:1, color:"#FBBF24" }}>{"â˜…".repeat(t.stars)}</span>
               <span style={{ fontFamily:"monospace", fontSize:5, color:"rgba(8,145,178,0.9)" }}>{t.price}</span>
             </div>
           </div>
@@ -225,7 +225,7 @@ const PROJECT_PREVIEWS: Record<string, ReactNode> = {
   "06": <BrainTumorPreview />,
 };
 
-/* ── Detailed project card ── */
+/* â”€â”€ Detailed project card â”€â”€ */
 function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -274,7 +274,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Visual preview mockup */}
         <div style={{ height: 148, position: "relative", overflow: "hidden", borderBottom: "1px solid var(--border)" }}>
-          {/* Image — blurs on hover */}
+          {/* Image â€” blurs on hover */}
           <div style={{
             position: "absolute", inset: 0,
             filter: hovered ? "blur(3px) brightness(0.6)" : "blur(0px) brightness(1)",
@@ -284,7 +284,7 @@ function ProjectCard({ project }: { project: Project }) {
             {PROJECT_PREVIEWS[project.number]}
           </div>
 
-          {/* Dark overlay + CTA — fades in on hover */}
+          {/* Dark overlay + CTA â€” fades in on hover */}
           <div style={{
             position: "absolute", inset: 0,
             background: "rgba(0,0,0,0.55)",
@@ -302,7 +302,7 @@ function ProjectCard({ project }: { project: Project }) {
               padding: "0.45rem 1.1rem", borderRadius: 999,
               boxShadow: `0 0 20px ${project.glow}`,
             }}>
-              {project.liveUrl !== "#" ? "View Live ↗" : "Preview"}
+              {project.liveUrl !== "#" ? "View Live â†—" : "Preview"}
             </span>
           </div>
 
@@ -416,7 +416,7 @@ export default function Projects() {
         top: 0, left: 0,
       }} />
 
-      {/* ═══ DIAGONAL PERSPECTIVE GALLERY ═══ */}
+      {/* â•â•â• DIAGONAL PERSPECTIVE GALLERY â•â•â• */}
       <div style={{ height: "clamp(300px, 48vh, 480px)", position: "relative", overflow: "hidden" }}>
         <div className="proj-gallery-perspective" style={{
           position: "absolute",
@@ -450,7 +450,7 @@ export default function Projects() {
           background: "linear-gradient(to left, var(--bg-secondary), transparent)", pointerEvents: "none" }} />
       </div>
 
-      {/* ═══ SECTION CONTENT ═══ */}
+      {/* â•â•â• SECTION CONTENT â•â•â• */}
       <div className="max-w-[1100px] mx-auto px-6 pb-10">
 
         {/* Section header */}
@@ -461,7 +461,7 @@ export default function Projects() {
               color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.28em",
               marginBottom: "0.75rem",
             }}>
-              03 — Projects
+              03 â€” Projects
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
@@ -491,3 +491,4 @@ export default function Projects() {
     </section>
   );
 }
+

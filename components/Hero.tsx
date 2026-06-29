@@ -25,9 +25,9 @@ function ProfileCard() {
 
   const INFO_ROWS = [
     { label: "Company",   value: "KCube Solutions",   accent: "#22D3EE" },
-    { label: "Location",  value: "Lahore Â· Remote",   accent: "#00FFB2" },
+    { label: "Location",  value: "Lahore Â· Remote",   accent: "#22D3EE" },
     { label: "Education", value: "FAST NUCES Â· BSSE", accent: "#22D3EE" },
-    { label: "Graduated", value: "2025",               accent: "#00FFB2" },
+    { label: "Graduated", value: "2025",               accent: "#22D3EE" },
   ];
 
   const ease = "cubic-bezier(0.16,1,0.3,1)";
@@ -43,8 +43,8 @@ function ProfileCard() {
         cursor: "default", position: "relative",
         borderRadius: 24, overflow: "hidden",
         boxShadow: hovered
-          ? "0 32px 80px rgba(27,38,49,0.55), 0 0 0 1.5px rgba(0,255,178,0.55)"
-          : "0 16px 48px rgba(27,38,49,0.35), 0 0 0 1px rgba(63,78,79,0.40)",
+          ? "0 32px 80px rgba(15,23,42,0.55), 0 0 0 1.5px rgba(34,211,238,0.55)"
+          : "0 16px 48px rgba(15,23,42,0.35), 0 0 0 1px rgba(36,52,71,0.40)",
         transition: "box-shadow 0.45s ease",
         animation: "heroFadeUp 0.9s 0.3s both",
       }}
@@ -52,7 +52,7 @@ function ProfileCard() {
       {/* Top accent bar */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 3, zIndex: 10,
-        background: "linear-gradient(to right, #00CC8E, #00FFB2, #22D3EE)",
+        background: "linear-gradient(to right, #14B8A6, #22D3EE, #22D3EE)",
       }} />
 
       {/* Photo â€” blurs and dims on hover */}
@@ -118,7 +118,7 @@ function ProfileCard() {
 
       {/* Corner brackets */}
       {[
-        { top: 12, left: 12, borderTop: true, borderLeft: true, color: "rgba(0,255,178,0.75)" },
+        { top: 12, left: 12, borderTop: true, borderLeft: true, color: "rgba(34,211,238,0.75)" },
         { bottom: 12, right: 12, borderBottom: true, borderRight: true, color: "rgba(34,211,238,0.75)" },
       ].map((c, i) => (
         <div key={i} style={{
@@ -142,7 +142,7 @@ function ProfileCard() {
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0,
         height: 60, zIndex: 11, pointerEvents: "none",
-        background: "linear-gradient(to bottom, transparent 0%, rgba(0,255,178,0.18) 45%, rgba(34,211,238,0.12) 55%, transparent 100%)",
+        background: "linear-gradient(to bottom, transparent 0%, rgba(34,211,238,0.18) 45%, rgba(34,211,238,0.12) 55%, transparent 100%)",
         opacity: hovered ? 1 : 0,
         animation: hovered ? "cardScan 1.6s linear 0.5s infinite" : "none",
         transition: "opacity 0.15s ease",
@@ -181,7 +181,7 @@ function ProfileCard() {
             <div key={label} style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
               padding: "0.58rem 0",
-              borderBottom: i < arr.length - 1 ? "1px solid rgba(63,78,79,0.40)" : "none",
+              borderBottom: i < arr.length - 1 ? "1px solid rgba(36,52,71,0.40)" : "none",
               opacity: hovered ? 1 : 0,
               transform: hovered ? "translateY(0)" : "translateY(16px)",
               transition: `opacity 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s, transform 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s`,
@@ -202,7 +202,7 @@ function ProfileCard() {
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
           marginTop: "0.8rem", paddingTop: "0.7rem",
-          borderTop: "1px solid rgba(63,78,79,0.40)",
+          borderTop: "1px solid rgba(36,52,71,0.40)",
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(10px)",
           transition: `opacity 0.32s ease ${hovered ? "0.44s" : "0s"}, transform 0.32s ease ${hovered ? "0.44s" : "0s"}`,
@@ -236,7 +236,7 @@ export default function Hero() {
       const rect = spotlightRef.current.parentElement?.getBoundingClientRect();
       if (!rect) return;
       spotlightRef.current.style.background =
-        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(63,78,79,0.12), transparent 40%)`;
+        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(36,52,71,0.12), transparent 40%)`;
     };
     window.addEventListener("mousemove", handler, { passive: true });
     return () => window.removeEventListener("mousemove", handler);
@@ -282,7 +282,7 @@ export default function Hero() {
               </span>
               <div style={{
                 flex: 1, height: "1px",
-                background: "linear-gradient(to right, rgba(63,78,79,0.60), transparent)",
+                background: "linear-gradient(to right, rgba(36,52,71,0.60), transparent)",
                 transformOrigin: "left",
                 animation: "heroLineGrow 0.8s 0.35s both ease",
               }} />
@@ -291,7 +291,7 @@ export default function Hero() {
               fontFamily: "var(--font-space)", fontWeight: 900,
               fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
               lineHeight: 0.88, letterSpacing: "-0.04em", textTransform: "uppercase",
-              background: "linear-gradient(135deg, #00FFB2 0%, #22D3EE 45%, #33FFC0 100%)",
+              background: "linear-gradient(135deg, #22D3EE 0%, #22D3EE 45%, #67E8F9 100%)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               margin: 0,
             }}>
@@ -436,4 +436,6 @@ export default function Hero() {
     </section>
   );
 }
+
+
 

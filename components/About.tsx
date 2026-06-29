@@ -87,7 +87,7 @@ export default function About() {
       {/* Dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(63,78,79,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(36,52,71,0.18) 1px, transparent 1px)",
         backgroundSize: "38px 38px",
         mask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
@@ -98,7 +98,7 @@ export default function About() {
         style={{
           position: "absolute", top: "4%", left: "-10%",
           width: 520, height: 520, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(27,38,49,0.80) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(15,23,42,0.80) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(55px)",
           animation: "aboutOrb1 9s ease-in-out infinite",
         }}
@@ -108,7 +108,7 @@ export default function About() {
         style={{
           position: "absolute", bottom: "10%", right: "-6%",
           width: 400, height: 400, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(63,78,79,0.55) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(36,52,71,0.55) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(60px)",
           animation: "aboutOrb2 12s ease-in-out 3s infinite",
         }}
@@ -392,4 +392,5 @@ export default function About() {
     </section>
   );
 }
+
 

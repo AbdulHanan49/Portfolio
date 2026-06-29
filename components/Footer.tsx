@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -114,11 +114,11 @@ export default function Footer() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <span className="text-2xl font-light" style={{ color: "#00FFB2" }}>
+                <span className="text-2xl font-light" style={{ color: "#22D3EE" }}>
                   &lt;
                 </span>
                 <span className="font-bold text-white">AH</span>
-                <span className="text-2xl font-light" style={{ color: "#00FFB2" }}>
+                <span className="text-2xl font-light" style={{ color: "#22D3EE" }}>
                   /&gt;
                 </span>
               </motion.a>
@@ -135,7 +135,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     aria-label={link.label}
                     className="footer-social-icon"
-                    whileHover={{ scale: 1.15, y: -3, boxShadow: "0 6px 20px rgba(0,255,178,0.28)" }}
+                    whileHover={{ scale: 1.15, y: -3, boxShadow: "0 6px 20px rgba(34,211,238,0.28)" }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -196,7 +196,7 @@ export default function Footer() {
             >
               &copy; {new Date().getFullYear()} Abdul Hanan. Built with{" "}
               <span style={{ display: "inline-flex", animation: "heartBeat 1.2s ease-in-out infinite" }}>
-                <FiHeart size={10} style={{ color: "#00FFB2" }} />
+                <FiHeart size={10} style={{ color: "#22D3EE" }} />
               </span>
             </p>
             <p
@@ -211,3 +211,4 @@ export default function Footer() {
     </footer>
   );
 }
+

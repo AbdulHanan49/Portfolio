@@ -77,8 +77,8 @@ const items: ExpItem[] = [
 
 const ACCENT     = "#22D3EE";
 const ACCENT_LOW = "rgba(34,211,238,0.20)";
-const MINT       = "#00FFB2";
-const MINT_LOW   = "rgba(0,255,178,0.22)";
+const MINT       = "#22D3EE";
+const MINT_LOW   = "rgba(34,211,238,0.22)";
 
 export default function Experience() {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -113,7 +113,7 @@ export default function Experience() {
       {/* Background dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(63,78,79,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(36,52,71,0.18) 1px, transparent 1px)",
         backgroundSize: "44px 44px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
@@ -122,19 +122,19 @@ export default function Experience() {
       <div aria-hidden="true" style={{
         position: "absolute", top: "10%", left: "-8%",
         width: 480, height: 480, borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(27,38,49,0.80) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(15,23,42,0.80) 0%, transparent 70%)",
         filter: "blur(70px)",
       }} />
 
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 55% 70% at 92% 50%, rgba(63,78,79,0.30) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse 55% 70% at 92% 50%, rgba(36,52,71,0.30) 0%, transparent 65%)",
       }} />
 
       <div aria-hidden="true" style={{
         position: "absolute", bottom: "0%", right: "15%",
         width: 350, height: 350, borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(27,38,49,0.50) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(15,23,42,0.50) 0%, transparent 70%)",
         filter: "blur(60px)",
       }} />
 
@@ -169,7 +169,7 @@ export default function Experience() {
           {/* Track */}
           <div style={{
             position: "absolute", left: 0, top: 0, bottom: 0,
-            width: 1, background: "rgba(0,255,178,0.12)",
+            width: 1, background: "rgba(34,211,238,0.12)",
           }} />
 
           {/* Scroll-driven fill */}
@@ -178,8 +178,8 @@ export default function Experience() {
             style={{
               position: "absolute", left: "-0.5px", top: 0,
               width: 2, height: "0%",
-              background: "linear-gradient(to bottom, #00FFB2 0%, #00CC8E 60%, rgba(0,255,178,0.4) 100%)",
-              boxShadow: "0 0 8px 2px rgba(0,255,178,0.75), 0 0 20px 4px rgba(0,255,178,0.35)",
+              background: "linear-gradient(to bottom, #22D3EE 0%, #14B8A6 60%, rgba(34,211,238,0.4) 100%)",
+              boxShadow: "0 0 8px 2px rgba(34,211,238,0.75), 0 0 20px 4px rgba(34,211,238,0.35)",
               borderRadius: 2,
               transition: "height 0.08s linear",
             }}
@@ -194,10 +194,10 @@ export default function Experience() {
               width: 10, height: 10, borderRadius: "50%",
               background: "#fff",
               boxShadow: [
-                "0 0 0 2px rgba(0,255,178,0.9)",
-                "0 0 10px 4px rgba(0,255,178,0.9)",
-                "0 0 24px 8px rgba(0,255,178,0.5)",
-                "0 0 48px 16px rgba(0,255,178,0.2)",
+                "0 0 0 2px rgba(34,211,238,0.9)",
+                "0 0 10px 4px rgba(34,211,238,0.9)",
+                "0 0 24px 8px rgba(34,211,238,0.5)",
+                "0 0 48px 16px rgba(34,211,238,0.2)",
               ].join(", "),
               opacity: 0,
               transition: "opacity 0.25s ease",
@@ -209,15 +209,15 @@ export default function Experience() {
             const isEdu      = item.type === "Education";
             const dotColor   = isEdu ? MINT       : ACCENT;
             const dotGlow    = isEdu ? MINT_LOW   : ACCENT_LOW;
-            const accentHex  = isEdu ? "#00FFB2"  : "#22D3EE";
-            const badgeBg    = isEdu ? "rgba(0,255,178,0.10)"  : "rgba(34,211,238,0.10)";
-            const badgeBdr   = isEdu ? "rgba(0,255,178,0.35)"  : "rgba(34,211,238,0.30)";
+            const accentHex  = isEdu ? "#22D3EE"  : "#22D3EE";
+            const badgeBg    = isEdu ? "rgba(34,211,238,0.10)"  : "rgba(34,211,238,0.10)";
+            const badgeBdr   = isEdu ? "rgba(34,211,238,0.35)"  : "rgba(34,211,238,0.30)";
             const badgeColor = isEdu ? MINT       : ACCENT;
             const barGrad    = isEdu
-              ? "linear-gradient(90deg,#00FFB2,rgba(0,255,178,0))"
+              ? "linear-gradient(90deg,#22D3EE,rgba(34,211,238,0))"
               : "linear-gradient(90deg,#22D3EE,rgba(34,211,238,0))";
-            const metricColor = isEdu ? "#00FFB2" : "#22D3EE";
-            const productColor = isEdu ? "#00FFB2" : "#22D3EE";
+            const metricColor = isEdu ? "#22D3EE" : "#22D3EE";
+            const productColor = isEdu ? "#22D3EE" : "#22D3EE";
 
             return (
               <ScrollReveal key={idx} delay={idx * 0.1}>
@@ -242,7 +242,7 @@ export default function Experience() {
                   <motion.div
                     whileHover={{
                       y: -4,
-                      boxShadow: `0 18px 52px ${dotGlow}, 0 0 0 1px ${isEdu ? "rgba(0,255,178,0.30)" : "rgba(34,211,238,0.25)"}`,
+                      boxShadow: `0 18px 52px ${dotGlow}, 0 0 0 1px ${isEdu ? "rgba(34,211,238,0.30)" : "rgba(34,211,238,0.25)"}`,
                     }}
                     transition={{ duration: 0.22 }}
                     style={{
@@ -251,7 +251,7 @@ export default function Experience() {
                       padding: "clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.75rem)",
                       background: "var(--card-bg)",
                       border: isEdu
-                        ? "1px solid rgba(0,255,178,0.18)"
+                        ? "1px solid rgba(34,211,238,0.18)"
                         : "1px solid rgba(34,211,238,0.20)",
                     }}
                   >
@@ -447,4 +447,6 @@ export default function Experience() {
     </section>
   );
 }
+
+
 

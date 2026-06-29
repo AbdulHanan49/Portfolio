@@ -59,23 +59,23 @@ export default function Navbar() {
 
   /* Theme-aware pill colours */
   const pillBg = dark
-    ? scrolled ? "rgba(27,38,49,0.96)"    : "rgba(27,38,49,0.80)"
+    ? scrolled ? "rgba(15,23,42,0.96)"    : "rgba(15,23,42,0.80)"
     : scrolled ? "rgba(236,240,241,0.96)" : "rgba(236,240,241,0.80)";
   const pillBorder = dark
-    ? scrolled ? "rgba(0,255,178,0.22)"   : "rgba(0,255,178,0.12)"
-    : scrolled ? "rgba(27,38,49,0.18)"    : "rgba(27,38,49,0.10)";
+    ? scrolled ? "rgba(34,211,238,0.22)"   : "rgba(34,211,238,0.12)"
+    : scrolled ? "rgba(15,23,42,0.18)"    : "rgba(15,23,42,0.10)";
   const pillShadow = scrolled
     ? dark
-      ? "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(0,255,178,0.04)"
-      : "0 8px 28px rgba(0,0,0,0.10), inset 0 1px 0 rgba(0,140,106,0.05)"
+      ? "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(34,211,238,0.04)"
+      : "0 8px 28px rgba(0,0,0,0.10), inset 0 1px 0 rgba(8,145,178,0.05)"
     : "none";
 
   const iconBtn = {
     width: 44, height: 44, borderRadius: 12,
     display: "flex" as const, alignItems: "center" as const, justifyContent: "center" as const,
-    background: dark ? "rgba(0,255,178,0.07)" : "rgba(27,38,49,0.07)",
-    border: `1px solid ${dark ? "rgba(0,255,178,0.18)" : "rgba(27,38,49,0.15)"}`,
-    color: dark ? "#00FFB2" : "#3F4E4F",
+    background: dark ? "rgba(34,211,238,0.07)" : "rgba(15,23,42,0.07)",
+    border: `1px solid ${dark ? "rgba(34,211,238,0.18)" : "rgba(15,23,42,0.15)"}`,
+    color: dark ? "#22D3EE" : "#243447",
     cursor: "pointer" as const,
   };
 
@@ -136,7 +136,7 @@ export default function Navbar() {
                   onMouseEnter={(e) => {
                     if (!isActive)
                       (e.currentTarget as HTMLElement).style.background =
-                        dark ? "rgba(0,255,178,0.08)" : "rgba(0,140,106,0.06)";
+                        dark ? "rgba(34,211,238,0.08)" : "rgba(8,145,178,0.06)";
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive)
@@ -151,8 +151,8 @@ export default function Navbar() {
                     fontWeight: isActive ? 700 : 500,
                     letterSpacing: "0.04em",
                     color: isActive
-                      ? dark ? "#00FFB2" : "#00A876"
-                      : dark ? "rgba(189,195,199,0.70)" : "rgba(27,38,49,0.55)",
+                      ? dark ? "#22D3EE" : "#0891B2"
+                      : dark ? "rgba(189,195,199,0.70)" : "rgba(15,23,42,0.55)",
                     textDecoration: "none",
                     background: "transparent",
                     transition: "background 0.2s ease, color 0.2s ease",
@@ -167,11 +167,11 @@ export default function Navbar() {
                       style={{
                         position: "absolute", inset: 0, borderRadius: 999,
                         background: dark
-                          ? "rgba(0,255,178,0.12)"
-                          : "rgba(0,140,106,0.09)",
+                          ? "rgba(34,211,238,0.12)"
+                          : "rgba(8,145,178,0.09)",
                         border: `1px solid ${dark
-                          ? "rgba(0,255,178,0.22)"
-                          : "rgba(0,140,106,0.18)"}`,
+                          ? "rgba(34,211,238,0.22)"
+                          : "rgba(8,145,178,0.18)"}`,
                         zIndex: -1,
                       }}
                       transition={{ type: "spring", stiffness: 380, damping: 36 }}
@@ -197,9 +197,9 @@ export default function Navbar() {
                 alignItems: "center", gap: "0.42rem",
                 padding: "0.55rem 1.25rem",
                 borderRadius: 12,
-                background: dark ? "rgba(0,255,178,0.08)" : "rgba(27,38,49,0.06)",
-                border: `1px solid ${dark ? "rgba(0,255,178,0.25)" : "rgba(27,38,49,0.18)"}`,
-                color: dark ? "#00FFB2" : "#3F4E4F",
+                background: dark ? "rgba(34,211,238,0.08)" : "rgba(15,23,42,0.06)",
+                border: `1px solid ${dark ? "rgba(34,211,238,0.25)" : "rgba(15,23,42,0.18)"}`,
+                color: dark ? "#22D3EE" : "#243447",
                 fontFamily: "var(--font-fira)", fontSize: "0.76rem", fontWeight: 700,
                 letterSpacing: "0.1em", textDecoration: "none",
               }}
@@ -286,12 +286,12 @@ export default function Navbar() {
                 position: "fixed", top: 0, right: 0, bottom: 0,
                 width: "min(260px, 85vw)", zIndex: 999,
                 background: dark
-                  ? "rgba(27,38,49,0.98)"
+                  ? "rgba(15,23,42,0.98)"
                   : "rgba(236,240,241,0.98)",
                 backdropFilter: "blur(24px)",
                 borderLeft: `1px solid ${dark
-                  ? "rgba(0,255,178,0.14)"
-                  : "rgba(0,140,106,0.12)"}`,
+                  ? "rgba(34,211,238,0.14)"
+                  : "rgba(8,145,178,0.12)"}`,
                 display: "flex", flexDirection: "column",
                 padding: "5.5rem 1.25rem 2rem",
                 gap: "0.3rem",
@@ -300,7 +300,7 @@ export default function Navbar() {
               {/* Top accent line */}
               <div style={{
                 position: "absolute", top: 0, left: 0, right: 0, height: 2,
-                background: "linear-gradient(to right, transparent, rgba(0,255,178,0.55), transparent)",
+                background: "linear-gradient(to right, transparent, rgba(34,211,238,0.55), transparent)",
               }} />
 
               {NAV_ITEMS.map(({ label, href }, i) => {
@@ -318,16 +318,16 @@ export default function Navbar() {
                       padding: "0.72rem 0.85rem",
                       borderRadius: 10,
                       background: isActive
-                        ? dark ? "rgba(0,255,178,0.10)" : "rgba(0,140,106,0.07)"
+                        ? dark ? "rgba(34,211,238,0.10)" : "rgba(8,145,178,0.07)"
                         : "transparent",
                       border: `1px solid ${isActive
-                        ? dark ? "rgba(0,255,178,0.22)" : "rgba(0,140,106,0.16)"
+                        ? dark ? "rgba(34,211,238,0.22)" : "rgba(8,145,178,0.16)"
                         : "transparent"}`,
                       fontFamily: "var(--font-space)", fontWeight: 700,
                       fontSize: "0.88rem", letterSpacing: "0.03em",
                       color: isActive
-                        ? dark ? "#00FFB2" : "#00A876"
-                        : dark ? "rgba(189,195,199,0.65)" : "rgba(27,38,49,0.55)",
+                        ? dark ? "#22D3EE" : "#0891B2"
+                        : dark ? "rgba(189,195,199,0.65)" : "rgba(15,23,42,0.55)",
                       textDecoration: "none",
                       transition: "background 0.2s, border-color 0.2s, color 0.2s",
                     }}
@@ -336,8 +336,8 @@ export default function Navbar() {
                     {isActive && (
                       <span style={{
                         width: 5, height: 5, borderRadius: "50%",
-                        background: "#00FFB2",
-                        boxShadow: "0 0 8px rgba(0,255,178,0.85)",
+                        background: "#22D3EE",
+                        boxShadow: "0 0 8px rgba(34,211,238,0.85)",
                       }} />
                     )}
                   </motion.a>
@@ -356,11 +356,11 @@ export default function Navbar() {
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "0.45rem",
                   padding: "0.7rem",
                   borderRadius: 10,
-                  background: dark ? "rgba(0,255,178,0.09)" : "rgba(27,38,49,0.07)",
-                  border: `1px solid ${dark ? "rgba(0,255,178,0.28)" : "rgba(27,38,49,0.18)"}`,
+                  background: dark ? "rgba(34,211,238,0.09)" : "rgba(15,23,42,0.07)",
+                  border: `1px solid ${dark ? "rgba(34,211,238,0.28)" : "rgba(15,23,42,0.18)"}`,
                   fontFamily: "var(--font-fira)", fontWeight: 700,
                   fontSize: "0.7rem", letterSpacing: "0.1em",
-                  color: dark ? "#00FFB2" : "#3F4E4F",
+                  color: dark ? "#22D3EE" : "#243447",
                   textDecoration: "none",
                 }}
               >
@@ -374,4 +374,6 @@ export default function Navbar() {
     </>
   );
 }
+
+
 
