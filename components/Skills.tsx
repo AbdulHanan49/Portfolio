@@ -379,7 +379,7 @@ export default function Skills() {
       {/* Background dot-grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(0,255,178,0.05) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(52,73,94,0.18) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",

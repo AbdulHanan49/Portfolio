@@ -43,8 +43,8 @@ function ProfileCard() {
         cursor: "default", position: "relative",
         borderRadius: 24, overflow: "hidden",
         boxShadow: hovered
-          ? "0 32px 80px rgba(0,255,178,0.28), 0 0 0 1.5px rgba(0,255,178,0.65), 0 0 60px rgba(0,255,178,0.14)"
-          : "0 16px 48px rgba(0,204,142,0.18), 0 0 0 1px rgba(0,255,178,0.22)",
+          ? "0 32px 80px rgba(44,62,80,0.55), 0 0 0 1.5px rgba(0,255,178,0.55)"
+          : "0 16px 48px rgba(44,62,80,0.35), 0 0 0 1px rgba(52,73,94,0.40)",
         transition: "box-shadow 0.45s ease",
         animation: "heroFadeUp 0.9s 0.3s both",
       }}
@@ -181,7 +181,7 @@ function ProfileCard() {
             <div key={label} style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
               padding: "0.58rem 0",
-              borderBottom: i < arr.length - 1 ? "1px solid rgba(0,255,178,0.10)" : "none",
+              borderBottom: i < arr.length - 1 ? "1px solid rgba(52,73,94,0.40)" : "none",
               opacity: hovered ? 1 : 0,
               transform: hovered ? "translateY(0)" : "translateY(16px)",
               transition: `opacity 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s, transform 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s`,
@@ -202,7 +202,7 @@ function ProfileCard() {
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
           marginTop: "0.8rem", paddingTop: "0.7rem",
-          borderTop: "1px solid rgba(0,255,178,0.12)",
+          borderTop: "1px solid rgba(52,73,94,0.40)",
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(10px)",
           transition: `opacity 0.32s ease ${hovered ? "0.44s" : "0s"}, transform 0.32s ease ${hovered ? "0.44s" : "0s"}`,
@@ -236,7 +236,7 @@ export default function Hero() {
       const rect = spotlightRef.current.parentElement?.getBoundingClientRect();
       if (!rect) return;
       spotlightRef.current.style.background =
-        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(0,255,178,0.06), transparent 40%)`;
+        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(52,73,94,0.12), transparent 40%)`;
     };
     window.addEventListener("mousemove", handler, { passive: true });
     return () => window.removeEventListener("mousemove", handler);
@@ -282,7 +282,7 @@ export default function Hero() {
               </span>
               <div style={{
                 flex: 1, height: "1px",
-                background: "linear-gradient(to right, rgba(0,255,178,0.50), transparent)",
+                background: "linear-gradient(to right, rgba(52,73,94,0.60), transparent)",
                 transformOrigin: "left",
                 animation: "heroLineGrow 0.8s 0.35s both ease",
               }} />
@@ -386,8 +386,8 @@ export default function Hero() {
             style={{
               display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
               width: "min(300px, calc(100vw - 4rem))", borderRadius: 14,
-              background: "rgba(0,255,178,0.05)",
-              border: "1px solid rgba(0,255,178,0.14)",
+              background: "var(--accent-mix-10)",
+              border: "1px solid var(--border)",
               overflow: "hidden",
               animation: "heroFadeUp 0.5s 0.85s both",
             }}
@@ -398,7 +398,7 @@ export default function Hero() {
                 style={{
                   padding: "0.85rem 0",
                   textAlign: "center",
-                  borderRight: i < STATS.length - 1 ? "1px solid rgba(0,255,178,0.12)" : "none",
+                  borderRight: i < STATS.length - 1 ? "1px solid var(--border)" : "none",
                 }}
               >
                 <div style={{

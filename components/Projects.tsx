@@ -410,7 +410,7 @@ export default function Projects() {
       <div aria-hidden="true" style={{
         position: "absolute", pointerEvents: "none",
         width: 700, height: 700, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(0,255,178,0.08) 0%, rgba(0,255,178,0.03) 40%, transparent 65%)",
+        background: "radial-gradient(circle, rgba(52,73,94,0.25) 0%, rgba(52,73,94,0.10) 40%, transparent 65%)",
         transform: `translate(${mouse.x - 350}px, ${mouse.y - 350}px)`,
         transition: "transform 0.12s ease-out",
         top: 0, left: 0,

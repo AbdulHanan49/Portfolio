@@ -53,7 +53,7 @@ export default function Contact() {
       {/* Background dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(0,255,178,0.05) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(52,73,94,0.18) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
@@ -63,7 +63,7 @@ export default function Contact() {
       <div
         className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,255,178,0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(52,73,94,0.60) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb1 7s ease-in-out infinite",
         }}
@@ -81,7 +81,7 @@ export default function Contact() {
       <div
         className="absolute top-1/2 right-0 w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,255,178,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(44,62,80,0.45) 0%, transparent 70%)",
           filter: "blur(70px)",
           animation: "contactOrb3 11s ease-in-out 5s infinite",
         }}
@@ -202,7 +202,7 @@ export default function Contact() {
                     <motion.button
                       type="submit"
                       disabled={sending}
-                      whileHover={!sending ? { scale: 1.03, y: -2, boxShadow: "0 12px 36px rgba(86,42,189,0.5), 0 0 0 1px rgba(120,86,255,0.4)" } : {}}
+                      whileHover={!sending ? { scale: 1.03, y: -2 } : {}}
                       whileTap={!sending ? { scale: 0.97 } : {}}
                       transition={{ type: "spring", stiffness: 400, damping: 18 }}
                       className="btn-primary w-full sm:w-auto"
@@ -210,9 +210,7 @@ export default function Contact() {
                         position: "relative", overflow: "hidden",
                         background: error
                           ? "linear-gradient(135deg, #7f1d1d, #991b1b)"
-                          : "linear-gradient(135deg, #562abd, #210C6E)",
-                        color: "#F0EEFF",
-                        boxShadow: "0 4px 20px rgba(86,42,189,0.28)",
+                          : undefined,
                         opacity: sending ? 0.75 : 1,
                         cursor: sending ? "not-allowed" : "pointer",
                       }}

@@ -113,7 +113,7 @@ export default function Experience() {
       {/* Background dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(0,255,178,0.05) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(52,73,94,0.18) 1px, transparent 1px)",
         backgroundSize: "44px 44px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
@@ -128,13 +128,13 @@ export default function Experience() {
 
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 55% 70% at 92% 50%, rgba(0,255,178,0.08) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse 55% 70% at 92% 50%, rgba(52,73,94,0.30) 0%, transparent 65%)",
       }} />
 
       <div aria-hidden="true" style={{
         position: "absolute", bottom: "0%", right: "15%",
         width: 350, height: 350, borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(0,255,178,0.07) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(44,62,80,0.50) 0%, transparent 70%)",
         filter: "blur(60px)",
       }} />
 
