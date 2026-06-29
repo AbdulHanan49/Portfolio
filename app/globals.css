@@ -2,65 +2,65 @@
 
 /* ============================================
    DESIGN TOKENS
-   Modern Professional: #2C3E50 / #34495E family
-   Green (#00FFB2) accent on dark slate
+   Cool Blues: #1B2631 / #3F4E4F family
+   Green (#00FFB2) as accent, sky blue (#A5C8D6) as secondary
    ============================================ */
 :root {
-  /* Light mode — "Clouds" base, Wet Asphalt text */
-  --bg-primary: #ECF0F1;
+  /* Light mode — off-white cool base, deep navy text */
+  --bg-primary: #F0F4F8;
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #BDC3C7;
-  --text-primary: #2C3E50;
-  --text-secondary: #34495E;
-  --text-muted: #7F8C8D;
+  --bg-tertiary: #D9E4E0;
+  --text-primary: #1B2631;
+  --text-secondary: #3F4E4F;
+  --text-muted: #6B8A94;
   --accent: #00A876;
   --accent-light: #00CC8E;
   --accent-dark: #007A55;
-  --accent-secondary: #0EA5E9;
+  --accent-secondary: #5B9BB5;
   --accent-glow: rgba(0, 168, 118, 0.10);
   --accent-glow-strong: rgba(0, 168, 118, 0.22);
-  /* Slate tints — used for card borders/tags, NOT green everywhere */
-  --accent-mix-10: rgba(52, 73, 94, 0.08);
-  --accent-mix-18: rgba(52, 73, 94, 0.14);
-  --accent-mix-25: rgba(52, 73, 94, 0.22);
-  --accent-mix-45: rgba(52, 73, 94, 0.40);
-  --btn-outline-hover-bg: #D5F0E8;
-  --border: #BDC3C7;
+  /* Cool blue-teal tints for borders/cards */
+  --accent-mix-10: rgba(63, 78, 79, 0.07);
+  --accent-mix-18: rgba(63, 78, 79, 0.13);
+  --accent-mix-25: rgba(63, 78, 79, 0.20);
+  --accent-mix-45: rgba(63, 78, 79, 0.38);
+  --btn-outline-hover-bg: #D9E4E0;
+  --border: #C4D8DC;
   --card-bg: #FFFFFF;
-  --card-border: #BDC3C7;
-  --nav-bg: rgba(236, 240, 241, 0.94);
-  --code-bg: #2C3E50;
+  --card-border: #D9E4E0;
+  --nav-bg: rgba(240, 244, 248, 0.94);
+  --code-bg: #1B2631;
   --code-text: #00FFB2;
-  --shadow-sm: 0 2px 8px rgba(44, 62, 80, 0.08);
-  --shadow-md: 0 8px 24px rgba(44, 62, 80, 0.10);
-  --shadow-lg: 0 16px 48px rgba(44, 62, 80, 0.12);
+  --shadow-sm: 0 2px 8px rgba(27, 38, 49, 0.08);
+  --shadow-md: 0 8px 24px rgba(27, 38, 49, 0.10);
+  --shadow-lg: 0 16px 48px rgba(27, 38, 49, 0.12);
 }
 
 [data-theme="dark"] {
-  /* Dark mode — Wet Asphalt base, Clouds text */
-  --bg-primary: #1C2B39;
-  --bg-secondary: #243344;
-  --bg-tertiary: #2C3E50;
-  --text-primary: #ECF0F1;
-  --text-secondary: #BDC3C7;
-  --text-muted: #7F8C8D;
+  /* Dark mode — deep navy, sky-blue text, teal-charcoal cards */
+  --bg-primary: #1B2631;
+  --bg-secondary: #263238;
+  --bg-tertiary: #3F4E4F;
+  --text-primary: #F0F4F8;
+  --text-secondary: #A5C8D6;
+  --text-muted: #6B8A94;
   --accent: #00FFB2;
   --accent-light: #33FFC0;
   --accent-dark: #00CC8E;
-  --accent-secondary: #22D3EE;
+  --accent-secondary: #A5C8D6;
   --accent-glow: rgba(0, 255, 178, 0.08);
   --accent-glow-strong: rgba(0, 255, 178, 0.20);
-  /* Silver tints for dark mode cards/borders — not green */
-  --accent-mix-10: rgba(189, 195, 199, 0.07);
-  --accent-mix-18: rgba(189, 195, 199, 0.12);
-  --accent-mix-25: rgba(189, 195, 199, 0.18);
-  --accent-mix-45: rgba(189, 195, 199, 0.32);
-  --btn-outline-hover-bg: #2C3E50;
-  --border: #34495E;
-  --card-bg: #243344;
-  --card-border: #34495E;
-  --nav-bg: rgba(28, 43, 57, 0.96);
-  --code-bg: #1C2B39;
+  /* Sky blue tints for dark mode cards/borders */
+  --accent-mix-10: rgba(165, 200, 214, 0.07);
+  --accent-mix-18: rgba(165, 200, 214, 0.12);
+  --accent-mix-25: rgba(165, 200, 214, 0.18);
+  --accent-mix-45: rgba(165, 200, 214, 0.32);
+  --btn-outline-hover-bg: #3F4E4F;
+  --border: #3F4E4F;
+  --card-bg: #263238;
+  --card-border: #3F4E4F;
+  --nav-bg: rgba(27, 38, 49, 0.96);
+  --code-bg: #1B2631;
   --code-text: #00FFB2;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.40);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.55);
@@ -327,7 +327,7 @@ body::after {
 .hero-orb-1 {
   width: 500px;
   height: 500px;
-  background: #34495E;
+  background: #3F4E4F;
   top: -10%;
   right: -5%;
   animation-delay: 0s;
@@ -336,7 +336,7 @@ body::after {
 .hero-orb-2 {
   width: 400px;
   height: 400px;
-  background: #2C3E50;
+  background: #1B2631;
   bottom: -10%;
   left: -5%;
   animation-delay: -7s;
@@ -345,7 +345,7 @@ body::after {
 .hero-orb-3 {
   width: 300px;
   height: 300px;
-  background: #34495E;
+  background: #3F4E4F;
   top: 40%;
   left: 30%;
   animation-delay: -14s;
@@ -1359,11 +1359,11 @@ body::after {
 .footer-wrapper {
   position: relative;
   z-index: 1;
-  --footer-bg: #2C3E50;
+  --footer-bg: #1B2631;
 }
 
 [data-theme="dark"] .footer-wrapper {
-  --footer-bg: #243344;
+  --footer-bg: #14202B;
 }
 
 /* Bubbles container */
@@ -2716,7 +2716,7 @@ body::after {
 
 /* Dark mode — slate board */
 [data-theme="dark"] .game-panel {
-  background: linear-gradient(160deg, #243344 0%, #1C2B39 60%, #243344 100%);
+  background: linear-gradient(160deg, #263238 0%, #1B2631 60%, #263238 100%);
   border-color: rgba(0,255,178,0.30);
   box-shadow:
     0 0 0 1px rgba(0,255,178,0.10),

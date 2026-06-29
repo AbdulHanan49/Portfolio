@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiArrowRight } from "react-icons/fi";
@@ -17,16 +17,16 @@ const STATS = [
   { value: "3",   label: "SaaS Built"   },
 ];
 
-/* ─────────────────────────────────────────
-   PROFILE CARD — pure CSS transitions
-───────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   PROFILE CARD â€” pure CSS transitions
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ProfileCard() {
   const [hovered, setHovered] = useState(false);
 
   const INFO_ROWS = [
     { label: "Company",   value: "KCube Solutions",   accent: "#22D3EE" },
-    { label: "Location",  value: "Lahore · Remote",   accent: "#00FFB2" },
-    { label: "Education", value: "FAST NUCES · BSSE", accent: "#22D3EE" },
+    { label: "Location",  value: "Lahore Â· Remote",   accent: "#00FFB2" },
+    { label: "Education", value: "FAST NUCES Â· BSSE", accent: "#22D3EE" },
     { label: "Graduated", value: "2025",               accent: "#00FFB2" },
   ];
 
@@ -43,8 +43,8 @@ function ProfileCard() {
         cursor: "default", position: "relative",
         borderRadius: 24, overflow: "hidden",
         boxShadow: hovered
-          ? "0 32px 80px rgba(44,62,80,0.55), 0 0 0 1.5px rgba(0,255,178,0.55)"
-          : "0 16px 48px rgba(44,62,80,0.35), 0 0 0 1px rgba(52,73,94,0.40)",
+          ? "0 32px 80px rgba(27,38,49,0.55), 0 0 0 1.5px rgba(0,255,178,0.55)"
+          : "0 16px 48px rgba(27,38,49,0.35), 0 0 0 1px rgba(63,78,79,0.40)",
         transition: "box-shadow 0.45s ease",
         animation: "heroFadeUp 0.9s 0.3s both",
       }}
@@ -55,7 +55,7 @@ function ProfileCard() {
         background: "linear-gradient(to right, #00CC8E, #00FFB2, #22D3EE)",
       }} />
 
-      {/* Photo — blurs and dims on hover */}
+      {/* Photo â€” blurs and dims on hover */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 1,
         transformOrigin: "center top",
@@ -101,7 +101,7 @@ function ProfileCard() {
         }}>Full-Stack Engineer</p>
       </div>
 
-      {/* Employed badge — CSS float animation */}
+      {/* Employed badge â€” CSS float animation */}
       <div style={{
         position: "absolute", top: 16, right: 14, zIndex: 12,
         display: "inline-flex", alignItems: "center", gap: "0.35rem",
@@ -138,7 +138,7 @@ function ProfileCard() {
         }} />
       ))}
 
-      {/* Scan line — CSS animation on hover */}
+      {/* Scan line â€” CSS animation on hover */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0,
         height: 60, zIndex: 11, pointerEvents: "none",
@@ -175,13 +175,13 @@ function ProfileCard() {
           transition: `opacity 0.3s ease ${hovered ? "0.08s" : "0s"}, transform 0.3s ease ${hovered ? "0.08s" : "0s"}`,
         }}>About me</p>
 
-        {/* Info rows — staggered */}
+        {/* Info rows â€” staggered */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           {INFO_ROWS.map(({ label, value, accent }, i, arr) => (
             <div key={label} style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
               padding: "0.58rem 0",
-              borderBottom: i < arr.length - 1 ? "1px solid rgba(52,73,94,0.40)" : "none",
+              borderBottom: i < arr.length - 1 ? "1px solid rgba(63,78,79,0.40)" : "none",
               opacity: hovered ? 1 : 0,
               transform: hovered ? "translateY(0)" : "translateY(16px)",
               transition: `opacity 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s, transform 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s`,
@@ -202,7 +202,7 @@ function ProfileCard() {
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
           marginTop: "0.8rem", paddingTop: "0.7rem",
-          borderTop: "1px solid rgba(52,73,94,0.40)",
+          borderTop: "1px solid rgba(63,78,79,0.40)",
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(10px)",
           transition: `opacity 0.32s ease ${hovered ? "0.44s" : "0s"}, transform 0.32s ease ${hovered ? "0.44s" : "0s"}`,
@@ -224,9 +224,9 @@ function ProfileCard() {
   );
 }
 
-/* ─────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    HERO
-───────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function Hero() {
   const spotlightRef = useRef<HTMLDivElement>(null);
 
@@ -236,7 +236,7 @@ export default function Hero() {
       const rect = spotlightRef.current.parentElement?.getBoundingClientRect();
       if (!rect) return;
       spotlightRef.current.style.background =
-        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(52,73,94,0.12), transparent 40%)`;
+        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(63,78,79,0.12), transparent 40%)`;
     };
     window.addEventListener("mousemove", handler, { passive: true });
     return () => window.removeEventListener("mousemove", handler);
@@ -258,7 +258,7 @@ export default function Hero() {
         style={{ minHeight: "100vh", maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5rem, 10vw, 7rem)", paddingBottom: "3rem" }}
       >
 
-        {/* LEFT — Name block */}
+        {/* LEFT â€” Name block */}
         <div className="flex flex-col items-start text-left flex-1 min-w-0 w-full">
 
           {/* Overline */}
@@ -282,7 +282,7 @@ export default function Hero() {
               </span>
               <div style={{
                 flex: 1, height: "1px",
-                background: "linear-gradient(to right, rgba(52,73,94,0.60), transparent)",
+                background: "linear-gradient(to right, rgba(63,78,79,0.60), transparent)",
                 transformOrigin: "left",
                 animation: "heroLineGrow 0.8s 0.35s both ease",
               }} />
@@ -327,7 +327,7 @@ export default function Hero() {
               fontSize: "clamp(0.82rem, 1.2vw, 0.9rem)",
               color: "var(--text-muted)", lineHeight: 1.85,
             }}>
-              Building full-stack products with React, FastAPI &amp; TypeScript —
+              Building full-stack products with React, FastAPI &amp; TypeScript â€”
               from first commit to production.
             </p>
           </div>
@@ -375,7 +375,7 @@ export default function Hero() {
 
         </div>
 
-        {/* RIGHT — Card + Stats */}
+        {/* RIGHT â€” Card + Stats */}
         <div className="flex flex-col items-center gap-6 flex-shrink-0">
 
           <ProfileCard />
@@ -436,3 +436,4 @@ export default function Hero() {
     </section>
   );
 }
+

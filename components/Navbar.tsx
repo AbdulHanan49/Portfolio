@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,11 +59,11 @@ export default function Navbar() {
 
   /* Theme-aware pill colours */
   const pillBg = dark
-    ? scrolled ? "rgba(28,43,57,0.96)"    : "rgba(28,43,57,0.80)"
+    ? scrolled ? "rgba(27,38,49,0.96)"    : "rgba(27,38,49,0.80)"
     : scrolled ? "rgba(236,240,241,0.96)" : "rgba(236,240,241,0.80)";
   const pillBorder = dark
     ? scrolled ? "rgba(0,255,178,0.22)"   : "rgba(0,255,178,0.12)"
-    : scrolled ? "rgba(44,62,80,0.18)"    : "rgba(44,62,80,0.10)";
+    : scrolled ? "rgba(27,38,49,0.18)"    : "rgba(27,38,49,0.10)";
   const pillShadow = scrolled
     ? dark
       ? "0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(0,255,178,0.04)"
@@ -73,15 +73,15 @@ export default function Navbar() {
   const iconBtn = {
     width: 44, height: 44, borderRadius: 12,
     display: "flex" as const, alignItems: "center" as const, justifyContent: "center" as const,
-    background: dark ? "rgba(0,255,178,0.07)" : "rgba(44,62,80,0.07)",
-    border: `1px solid ${dark ? "rgba(0,255,178,0.18)" : "rgba(44,62,80,0.15)"}`,
-    color: dark ? "#00FFB2" : "#2C3E50",
+    background: dark ? "rgba(0,255,178,0.07)" : "rgba(27,38,49,0.07)",
+    border: `1px solid ${dark ? "rgba(0,255,178,0.18)" : "rgba(27,38,49,0.15)"}`,
+    color: dark ? "#00FFB2" : "#3F4E4F",
     cursor: "pointer" as const,
   };
 
   return (
     <>
-      {/* ════════════ HEADER ════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â• */}
       <header style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
         padding: scrolled ? "0.85rem 1.5rem" : "1.25rem 1.5rem",
@@ -93,7 +93,7 @@ export default function Navbar() {
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}>
 
-          {/* ── Logo ── */}
+          {/* â”€â”€ Logo â”€â”€ */}
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); go("#home"); }}
@@ -110,7 +110,7 @@ export default function Navbar() {
             <span className="logo-bracket" style={{ fontSize: "1.7rem" }}>/&gt;</span>
           </a>
 
-          {/* ── Desktop floating pill ── */}
+          {/* â”€â”€ Desktop floating pill â”€â”€ */}
           <nav
             className="hidden lg:flex"
             style={{
@@ -152,7 +152,7 @@ export default function Navbar() {
                     letterSpacing: "0.04em",
                     color: isActive
                       ? dark ? "#00FFB2" : "#00A876"
-                      : dark ? "rgba(189,195,199,0.70)" : "rgba(44,62,80,0.55)",
+                      : dark ? "rgba(189,195,199,0.70)" : "rgba(27,38,49,0.55)",
                     textDecoration: "none",
                     background: "transparent",
                     transition: "background 0.2s ease, color 0.2s ease",
@@ -160,7 +160,7 @@ export default function Navbar() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {/* Shared-layout active pill — slides between items */}
+                  {/* Shared-layout active pill â€” slides between items */}
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
@@ -183,10 +183,10 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* ── Controls ── */}
+          {/* â”€â”€ Controls â”€â”€ */}
           <div style={{ pointerEvents: "auto", display: "flex", alignItems: "center", gap: "0.45rem" }}>
 
-            {/* Resume — desktop only; mobile users get it inside the drawer */}
+            {/* Resume â€” desktop only; mobile users get it inside the drawer */}
             <motion.a
               href="/resume.pdf"
               download="Hanan's Resume.pdf"
@@ -197,9 +197,9 @@ export default function Navbar() {
                 alignItems: "center", gap: "0.42rem",
                 padding: "0.55rem 1.25rem",
                 borderRadius: 12,
-                background: dark ? "rgba(0,255,178,0.08)" : "rgba(44,62,80,0.06)",
-                border: `1px solid ${dark ? "rgba(0,255,178,0.25)" : "rgba(44,62,80,0.18)"}`,
-                color: dark ? "#00FFB2" : "#2C3E50",
+                background: dark ? "rgba(0,255,178,0.08)" : "rgba(27,38,49,0.06)",
+                border: `1px solid ${dark ? "rgba(0,255,178,0.25)" : "rgba(27,38,49,0.18)"}`,
+                color: dark ? "#00FFB2" : "#3F4E4F",
                 fontFamily: "var(--font-fira)", fontSize: "0.76rem", fontWeight: 700,
                 letterSpacing: "0.1em", textDecoration: "none",
               }}
@@ -230,7 +230,7 @@ export default function Navbar() {
               </AnimatePresence>
             </motion.button>
 
-            {/* Hamburger — inline display must not be set so md:hidden can work */}
+            {/* Hamburger â€” inline display must not be set so md:hidden can work */}
             <motion.button
               onClick={() => setMenuOpen(v => !v)}
               className="flex lg:hidden"
@@ -256,7 +256,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ════════════ MOBILE DRAWER ════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â• MOBILE DRAWER â•â•â•â•â•â•â•â•â•â•â•â• */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -286,7 +286,7 @@ export default function Navbar() {
                 position: "fixed", top: 0, right: 0, bottom: 0,
                 width: "min(260px, 85vw)", zIndex: 999,
                 background: dark
-                  ? "rgba(28,43,57,0.98)"
+                  ? "rgba(27,38,49,0.98)"
                   : "rgba(236,240,241,0.98)",
                 backdropFilter: "blur(24px)",
                 borderLeft: `1px solid ${dark
@@ -327,7 +327,7 @@ export default function Navbar() {
                       fontSize: "0.88rem", letterSpacing: "0.03em",
                       color: isActive
                         ? dark ? "#00FFB2" : "#00A876"
-                        : dark ? "rgba(189,195,199,0.65)" : "rgba(44,62,80,0.55)",
+                        : dark ? "rgba(189,195,199,0.65)" : "rgba(27,38,49,0.55)",
                       textDecoration: "none",
                       transition: "background 0.2s, border-color 0.2s, color 0.2s",
                     }}
@@ -356,11 +356,11 @@ export default function Navbar() {
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "0.45rem",
                   padding: "0.7rem",
                   borderRadius: 10,
-                  background: dark ? "rgba(0,255,178,0.09)" : "rgba(44,62,80,0.07)",
-                  border: `1px solid ${dark ? "rgba(0,255,178,0.28)" : "rgba(44,62,80,0.18)"}`,
+                  background: dark ? "rgba(0,255,178,0.09)" : "rgba(27,38,49,0.07)",
+                  border: `1px solid ${dark ? "rgba(0,255,178,0.28)" : "rgba(27,38,49,0.18)"}`,
                   fontFamily: "var(--font-fira)", fontWeight: 700,
                   fontSize: "0.7rem", letterSpacing: "0.1em",
-                  color: dark ? "#00FFB2" : "#2C3E50",
+                  color: dark ? "#00FFB2" : "#3F4E4F",
                   textDecoration: "none",
                 }}
               >
@@ -374,3 +374,4 @@ export default function Navbar() {
     </>
   );
 }
+

@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { FiMapPin, FiBook, FiBriefcase, FiMoon } from "react-icons/fi";
 
-/* ── Animated counter ── */
+/* â”€â”€ Animated counter â”€â”€ */
 function StatCounter({
   target, label, suffix = "+",
 }: {
@@ -30,7 +30,7 @@ function StatCounter({
             setCount(Math.floor((1 - Math.pow(1 - p, 3)) * target));
             if (p < 1) requestAnimationFrame(step);
           };
-          requestAnimationFrame(step); // first frame sets count from target → small value
+          requestAnimationFrame(step); // first frame sets count from target â†’ small value
         }
       },
       { threshold: 0.5 }
@@ -71,7 +71,7 @@ function StatCounter({
 }
 
 const TRAITS = [
-  { icon: FiMapPin,    label: "Pakistan 🇵🇰"    },
+  { icon: FiMapPin,    label: "Pakistan ðŸ‡µðŸ‡°"    },
   { icon: FiBook,      label: "FAST-NUCES '25"  },
   { icon: FiBriefcase, label: "Open to Remote"  },
   { icon: FiMoon,      label: "Night Owl Coder" },
@@ -83,11 +83,11 @@ export default function About() {
       id="about"
       style={{ background: "var(--bg-secondary)", padding: "5rem 0", position: "relative", overflow: "hidden" }}
     >
-      {/* ── Ambient floating orbs ── */}
+      {/* â”€â”€ Ambient floating orbs â”€â”€ */}
       {/* Dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(52,73,94,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(63,78,79,0.18) 1px, transparent 1px)",
         backgroundSize: "38px 38px",
         mask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
@@ -98,7 +98,7 @@ export default function About() {
         style={{
           position: "absolute", top: "4%", left: "-10%",
           width: 520, height: 520, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(44,62,80,0.80) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(27,38,49,0.80) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(55px)",
           animation: "aboutOrb1 9s ease-in-out infinite",
         }}
@@ -108,7 +108,7 @@ export default function About() {
         style={{
           position: "absolute", bottom: "10%", right: "-6%",
           width: 400, height: 400, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(52,73,94,0.55) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(63,78,79,0.55) 0%, transparent 70%)",
           pointerEvents: "none", filter: "blur(60px)",
           animation: "aboutOrb2 12s ease-in-out 3s infinite",
         }}
@@ -116,21 +116,21 @@ export default function About() {
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem", position: "relative", zIndex: 1 }}>
 
-        {/* ── Section eyebrow ── */}
+        {/* â”€â”€ Section eyebrow â”€â”€ */}
         <ScrollReveal>
           <p style={{
             fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
             color: "var(--accent)", textTransform: "uppercase",
             letterSpacing: "0.28em", marginBottom: "3rem",
           }}>
-            01 — About
+            01 â€” About
           </p>
         </ScrollReveal>
 
-        {/* ── Main 2-col grid ── */}
+        {/* â”€â”€ Main 2-col grid â”€â”€ */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
-          {/* ════ LEFT — Bio ════ */}
+          {/* â•â•â•â• LEFT â€” Bio â•â•â•â• */}
           <ScrollReveal delay={0.1}>
             <div style={{ position: "relative" }}>
 
@@ -146,7 +146,7 @@ export default function About() {
                 AH
               </div>
 
-              {/* ── Welcome intro — reference style ── */}
+              {/* â”€â”€ Welcome intro â€” reference style â”€â”€ */}
               <h3
                 style={{
                   fontFamily: "var(--font-serif, Georgia, serif)", fontWeight: 800,
@@ -174,7 +174,7 @@ export default function About() {
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Full-Stack Software Engineer</span>
                 {" "}from{" "}
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Lahore, Pakistan</span>
-                {" "}currently building MixClip — a production AI video editing SaaS — at{" "}
+                {" "}currently building MixClip â€” a production AI video editing SaaS â€” at{" "}
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>KCube Solutions</span>
                 {" "}using{" "}
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>React 18</span>
@@ -185,7 +185,7 @@ export default function About() {
                 {" "}as lead engineer in a cross-functional team of 4.
                 Previously at{" "}
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Visnext Software Solutions</span>
-                {", "}building Job Wallet — an AI-powered job tracking SaaS — using{" "}
+                {", "}building Job Wallet â€” an AI-powered job tracking SaaS â€” using{" "}
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Vue 3</span>
                 ,{" "}
                 <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Django REST Framework</span>
@@ -194,7 +194,7 @@ export default function About() {
                 .
               </p>
 
-              {/* Trait pills — staggered entrance + hover */}
+              {/* Trait pills â€” staggered entrance + hover */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
                 {TRAITS.map(({ icon: Icon, label }, i) => (
                   <motion.span
@@ -224,7 +224,7 @@ export default function About() {
             </div>
           </ScrollReveal>
 
-          {/* ════ RIGHT — Bento grid ════ */}
+          {/* â•â•â•â• RIGHT â€” Bento grid â•â•â•â• */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
             {/* Stats card */}
@@ -297,7 +297,7 @@ export default function About() {
                     fontFamily: "var(--font-sora)", fontSize: "0.75rem",
                     color: "var(--text-muted)", lineHeight: 1.6,
                   }}>
-                    Full-Stack Software Engineer<br />Oct 2025 – Present
+                    Full-Stack Software Engineer<br />Oct 2025 â€“ Present
                   </p>
                 </motion.div>
               </ScrollReveal>
@@ -380,7 +380,7 @@ export default function About() {
                   }}>
                     after
                   </span>
-                  {" "}it ships — performance, reliability, and the next
+                  {" "}it ships â€” performance, reliability, and the next
                   engineer who has to read it.&rdquo;
                 </p>
               </motion.div>
@@ -392,3 +392,4 @@ export default function About() {
     </section>
   );
 }
+

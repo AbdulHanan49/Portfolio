@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
@@ -53,17 +53,17 @@ export default function Contact() {
       {/* Background dot grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(52,73,94,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(63,78,79,0.18) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
-      {/* Ambient orbs — CSS animated */}
+      {/* Ambient orbs â€” CSS animated */}
       <div
         className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(52,73,94,0.60) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(63,78,79,0.60) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb1 7s ease-in-out infinite",
         }}
@@ -72,7 +72,7 @@ export default function Contact() {
       <div
         className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(44,62,80,0.80) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(27,38,49,0.80) 0%, transparent 70%)",
           filter: "blur(80px)",
           animation: "contactOrb2 9s ease-in-out 2.5s infinite",
         }}
@@ -81,7 +81,7 @@ export default function Contact() {
       <div
         className="absolute top-1/2 right-0 w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(44,62,80,0.45) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(27,38,49,0.45) 0%, transparent 70%)",
           filter: "blur(70px)",
           animation: "contactOrb3 11s ease-in-out 5s infinite",
         }}
@@ -98,7 +98,7 @@ export default function Contact() {
               color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.28em",
               marginBottom: "0.75rem",
             }}>
-              05 — Contact
+              05 â€” Contact
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
@@ -122,7 +122,7 @@ export default function Contact() {
             <div className="contact-form-inner">
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
-                {/* Left — CTA column */}
+                {/* Left â€” CTA column */}
                 <div className="lg:col-span-2 flex flex-col justify-center">
                   <h4 className="contact-form-heading">Send me a message</h4>
                   <p className="contact-form-text">
@@ -131,7 +131,7 @@ export default function Contact() {
 
                 </div>
 
-                {/* Right — Form */}
+                {/* Right â€” Form */}
                 <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-4">
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -234,7 +234,7 @@ export default function Contact() {
                             exit={{ opacity: 0, y: -10 }}
                             style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
                           >
-                            <FiAlertCircle size={16} /> Failed — try email
+                            <FiAlertCircle size={16} /> Failed â€” try email
                           </motion.span>
                         ) : sending ? (
                           <motion.span
@@ -244,7 +244,7 @@ export default function Contact() {
                             exit={{ opacity: 0, y: -10 }}
                             style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
                           >
-                            Sending…
+                            Sendingâ€¦
                           </motion.span>
                         ) : (
                           <motion.span
@@ -270,3 +270,4 @@ export default function Contact() {
     </section>
   );
 }
+
