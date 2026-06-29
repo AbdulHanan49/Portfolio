@@ -59,7 +59,7 @@ export default function Contact() {
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
-      {/* Ambient orbs â€” CSS animated */}
+      {/* Ambient orbs â€" CSS animated */}
       <div
         className="absolute bottom-0 right-0 w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
@@ -98,7 +98,7 @@ export default function Contact() {
               color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.28em",
               marginBottom: "0.75rem",
             }}>
-              05 â€” Contact
+              05 â€" Contact
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
@@ -123,45 +123,45 @@ export default function Contact() {
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
                 {/* Left — contact info column */}
-                <div className=”lg:col-span-2 flex flex-col justify-center gap-6”>
+                <div className="lg:col-span-2 flex flex-col justify-center gap-6">
                   <div>
-                    <h4 className=”contact-form-heading” style={{ marginBottom: “0.4rem” }}>
+                    <h4 className="contact-form-heading" style={{ marginBottom: "0.4rem" }}>
                       Let&apos;s work together
                     </h4>
-                    <p className=”contact-form-text”>
+                    <p className="contact-form-text">
                       Open to freelance projects and full-time opportunities. I&apos;ll reply within 24 hours.
                     </p>
                   </div>
 
                   {/* Contact details */}
-                  <div style={{ display: “flex”, flexDirection: “column”, gap: “0.875rem” }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                     {/* Availability badge */}
                     <div style={{
-                      display: “inline-flex”, alignItems: “center”, gap: “0.5rem”,
-                      padding: “0.35rem 0.75rem”, borderRadius: “999px”,
-                      background: “rgba(20,184,166,0.10)”, border: “1px solid rgba(20,184,166,0.25)”,
-                      width: “fit-content”,
+                      display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                      padding: "0.35rem 0.75rem", borderRadius: "999px",
+                      background: "rgba(20,184,166,0.10)", border: "1px solid rgba(20,184,166,0.25)",
+                      width: "fit-content",
                     }}>
-                      <FiZap size={12} style={{ color: “#14B8A6” }} />
-                      <span style={{ fontFamily: “var(--font-fira)”, fontSize: “0.7rem”, fontWeight: 600, color: “#14B8A6”, letterSpacing: “0.06em” }}>
+                      <FiZap size={12} style={{ color: "#14B8A6" }} />
+                      <span style={{ fontFamily: "var(--font-fira)", fontSize: "0.7rem", fontWeight: 600, color: "#14B8A6", letterSpacing: "0.06em" }}>
                         Available for new projects
                       </span>
                     </div>
 
                     {/* Email */}
-                    <a href=”mailto:hananaslam90@gmail.com” style={{
-                      display: “flex”, alignItems: “center”, gap: “0.75rem”,
-                      color: “var(--text-secondary)”, textDecoration: “none”,
-                      fontFamily: “var(--font-sora)”, fontSize: “0.875rem”,
-                      transition: “color 0.2s”,
+                    <a href="mailto:hananaslam90@gmail.com" style={{
+                      display: "flex", alignItems: "center", gap: "0.75rem",
+                      color: "var(--text-secondary)", textDecoration: "none",
+                      fontFamily: "var(--font-sora)", fontSize: "0.875rem",
+                      transition: "color 0.2s",
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.color = “var(--accent)”)}
-                    onMouseLeave={e => (e.currentTarget.style.color = “var(--text-secondary)”)}>
+                    onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "var(--text-secondary)")}>
                       <span style={{
-                        width: “34px”, height: “34px”, borderRadius: “8px”, flexShrink: 0,
-                        display: “flex”, alignItems: “center”, justifyContent: “center”,
-                        background: “var(--accent-mix-10)”, border: “1px solid var(--border)”,
-                        color: “var(--accent)”,
+                        width: "34px", height: "34px", borderRadius: "8px", flexShrink: 0,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        background: "var(--accent-mix-10)", border: "1px solid var(--border)",
+                        color: "var(--accent)",
                       }}>
                         <FiMail size={15} />
                       </span>
@@ -170,15 +170,15 @@ export default function Contact() {
 
                     {/* Location */}
                     <div style={{
-                      display: “flex”, alignItems: “center”, gap: “0.75rem”,
-                      color: “var(--text-secondary)”,
-                      fontFamily: “var(--font-sora)”, fontSize: “0.875rem”,
+                      display: "flex", alignItems: "center", gap: "0.75rem",
+                      color: "var(--text-secondary)",
+                      fontFamily: "var(--font-sora)", fontSize: "0.875rem",
                     }}>
                       <span style={{
-                        width: “34px”, height: “34px”, borderRadius: “8px”, flexShrink: 0,
-                        display: “flex”, alignItems: “center”, justifyContent: “center”,
-                        background: “var(--accent-mix-10)”, border: “1px solid var(--border)”,
-                        color: “var(--accent)”,
+                        width: "34px", height: "34px", borderRadius: "8px", flexShrink: 0,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        background: "var(--accent-mix-10)", border: "1px solid var(--border)",
+                        color: "var(--accent)",
                       }}>
                         <FiMapPin size={15} />
                       </span>
@@ -186,35 +186,35 @@ export default function Contact() {
                     </div>
 
                     {/* Social links */}
-                    <div style={{ display: “flex”, gap: “0.625rem”, marginTop: “0.25rem” }}>
+                    <div style={{ display: "flex", gap: "0.625rem", marginTop: "0.25rem" }}>
                       {[
-                        { href: “https://github.com/AbdulHanan49”, icon: <FiGithub size={16} />, label: “GitHub” },
-                        { href: “https://linkedin.com/in/hanan-aslam-dev”, icon: <FiLinkedin size={16} />, label: “LinkedIn” },
+                        { href: "https://github.com/AbdulHanan49", icon: <FiGithub size={16} />, label: "GitHub" },
+                        { href: "https://linkedin.com/in/hanan-aslam-dev", icon: <FiLinkedin size={16} />, label: "LinkedIn" },
                       ].map(({ href, icon, label }) => (
                         <a
                           key={label}
                           href={href}
-                          target=”_blank”
-                          rel=”noopener noreferrer”
+                          target="_blank"
+                          rel="noopener noreferrer"
                           aria-label={label}
                           style={{
-                            width: “38px”, height: “38px”, borderRadius: “8px”,
-                            display: “flex”, alignItems: “center”, justifyContent: “center”,
-                            background: “var(--accent-mix-10)”, border: “1px solid var(--border)”,
-                            color: “var(--text-muted)”, textDecoration: “none”,
-                            transition: “color 0.2s, border-color 0.2s, background 0.2s”,
+                            width: "38px", height: "38px", borderRadius: "8px",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            background: "var(--accent-mix-10)", border: "1px solid var(--border)",
+                            color: "var(--text-muted)", textDecoration: "none",
+                            transition: "color 0.2s, border-color 0.2s, background 0.2s",
                           }}
                           onMouseEnter={e => {
                             const el = e.currentTarget as HTMLAnchorElement;
-                            el.style.color = “var(--accent)”;
-                            el.style.borderColor = “var(--accent)”;
-                            el.style.background = “var(--accent-mix-18)”;
+                            el.style.color = "var(--accent)";
+                            el.style.borderColor = "var(--accent)";
+                            el.style.background = "var(--accent-mix-18)";
                           }}
                           onMouseLeave={e => {
                             const el = e.currentTarget as HTMLAnchorElement;
-                            el.style.color = “var(--text-muted)”;
-                            el.style.borderColor = “var(--border)”;
-                            el.style.background = “var(--accent-mix-10)”;
+                            el.style.color = "var(--text-muted)";
+                            el.style.borderColor = "var(--border)";
+                            el.style.background = "var(--accent-mix-10)";
                           }}
                         >
                           {icon}
@@ -224,7 +224,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Right â€” Form */}
+                {/* Right â€" Form */}
                 <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-4">
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -327,7 +327,7 @@ export default function Contact() {
                             exit={{ opacity: 0, y: -10 }}
                             style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
                           >
-                            <FiAlertCircle size={16} /> Failed â€” try email
+                            <FiAlertCircle size={16} /> Failed â€" try email
                           </motion.span>
                         ) : sending ? (
                           <motion.span
