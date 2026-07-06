@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiArrowRight } from "react-icons/fi";
 import Image from "next/image";
+import { useTheme } from "./ThemeProvider";
 
 const SOCIALS = [
   { Icon: FiGithub,   href: "https://github.com/AbdulHanan49",         label: "GitHub"   },
@@ -11,23 +12,22 @@ const SOCIALS = [
 ];
 
 const STATS = [
-  { value: "2",   label: "Companies"    },
-  { value: "14+", label: "Months Exp"   },
+  { value: "3",   label: "SaaS Shipped" },
+  { value: "2+",  label: "Years Active" },
   { value: "30+", label: "Technologies" },
-  { value: "3",   label: "SaaS Built"   },
+  { value: "2",   label: "Companies"    },
 ];
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   PROFILE CARD â€” pure CSS transitions
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────────────────────────────────────
+   PROFILE CARD — pure CSS transitions
+───────────────────────────────────────── */
 function ProfileCard() {
   const [hovered, setHovered] = useState(false);
 
   const INFO_ROWS = [
-    { label: "Company",   value: "KCube Solutions",   accent: "#22D3EE" },
-    { label: "Location",  value: "Lahore Â· Remote",   accent: "#22D3EE" },
-    { label: "Education", value: "FAST NUCES Â· BSSE", accent: "#22D3EE" },
-    { label: "Graduated", value: "2025",               accent: "#22D3EE" },
+    { label: "Company",  value: "KCube Solutions", accent: "#ccd6f6" },
+    { label: "Location", value: "Lahore · Remote", accent: "#ccd6f6" },
+    { label: "Degree",   value: "BSSE · FAST-NUCES '25", accent: "#ccd6f6" },
   ];
 
   const ease = "cubic-bezier(0.16,1,0.3,1)";
@@ -38,13 +38,13 @@ function ProfileCard() {
       onMouseLeave={() => setHovered(false)}
       onClick={() => setHovered(v => !v)}
       style={{
-        width: "min(300px, calc(100vw - 4rem))",
-        height: "min(380px, calc(min(100vw - 4rem, 300px) * 1.27))",
+        width: "min(340px, calc(100vw - 4rem))",
+        height: "min(430px, calc(min(100vw - 4rem, 340px) * 1.27))",
         cursor: "default", position: "relative",
         borderRadius: 24, overflow: "hidden",
         boxShadow: hovered
-          ? "0 32px 80px rgba(15,23,42,0.55), 0 0 0 1.5px rgba(34,211,238,0.55)"
-          : "0 16px 48px rgba(15,23,42,0.35), 0 0 0 1px rgba(36,52,71,0.40)",
+          ? "0 32px 80px rgba(10,25,47,0.55), 0 0 0 1.5px rgba(100, 255, 218,0.25)"
+          : "0 16px 48px rgba(10,25,47,0.35), 0 0 0 1px rgba(36,52,71,0.40)",
         transition: "box-shadow 0.45s ease",
         animation: "heroFadeUp 0.9s 0.3s both",
       }}
@@ -52,10 +52,10 @@ function ProfileCard() {
       {/* Top accent bar */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 3, zIndex: 10,
-        background: "linear-gradient(to right, #14B8A6, #22D3EE, #22D3EE)",
+        background: "linear-gradient(to right, var(--text-primary), var(--accent), var(--accent))",
       }} />
 
-      {/* Photo â€” blurs and dims on hover */}
+      {/* Photo — blurs and dims on hover */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 1,
         transformOrigin: "center top",
@@ -96,20 +96,20 @@ function ProfileCard() {
         }}>Abdul Hanan</p>
         <p style={{
           fontFamily: "var(--font-fira)", fontSize: "0.6rem", fontWeight: 600,
-          color: "rgba(196,181,253,0.7)", letterSpacing: "0.07em",
+          color: "rgba(136,146,176,0.7)", letterSpacing: "0.07em",
           textTransform: "uppercase", margin: "0.3rem 0 0",
         }}>Full-Stack Engineer</p>
       </div>
 
-      {/* Employed badge â€” CSS float animation */}
+      {/* Employed badge — CSS float animation */}
       <div style={{
         position: "absolute", top: 16, right: 14, zIndex: 12,
         display: "inline-flex", alignItems: "center", gap: "0.35rem",
         padding: "0.28rem 0.72rem", borderRadius: 999,
         background: "rgba(8,4,28,0.65)",
         border: "1px solid rgba(245,158,11,0.5)",
-        fontFamily: "var(--font-fira)", fontSize: "0.58rem", fontWeight: 700,
-        color: "#F59E0B", letterSpacing: "0.06em",
+        fontFamily: "var(--font-fira)", fontSize: "0.68rem", fontWeight: 700,
+        color: "#F59E0B", letterSpacing: "0.05em",
         animation: "badgeFloat 2.5s ease-in-out infinite",
       }}>
         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#F59E0B", flexShrink: 0 }} />
@@ -118,8 +118,8 @@ function ProfileCard() {
 
       {/* Corner brackets */}
       {[
-        { top: 12, left: 12, borderTop: true, borderLeft: true, color: "rgba(34,211,238,0.75)" },
-        { bottom: 12, right: 12, borderBottom: true, borderRight: true, color: "rgba(34,211,238,0.75)" },
+        { top: 12, left: 12, borderTop: true, borderLeft: true, color: "rgba(100, 255, 218,0.40)" },
+        { bottom: 12, right: 12, borderBottom: true, borderRight: true, color: "rgba(100, 255, 218,0.40)" },
       ].map((c, i) => (
         <div key={i} style={{
           position: "absolute", zIndex: 12, width: 18, height: 18,
@@ -138,11 +138,11 @@ function ProfileCard() {
         }} />
       ))}
 
-      {/* Scan line â€” CSS animation on hover */}
+      {/* Scan line — CSS animation on hover */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0,
         height: 60, zIndex: 11, pointerEvents: "none",
-        background: "linear-gradient(to bottom, transparent 0%, rgba(34,211,238,0.18) 45%, rgba(34,211,238,0.12) 55%, transparent 100%)",
+        background: "linear-gradient(to bottom, transparent 0%, rgba(100, 255, 218,0.18) 45%, rgba(100, 255, 218,0.07) 55%, transparent 100%)",
         opacity: hovered ? 1 : 0,
         animation: hovered ? "cardScan 1.6s linear 0.5s infinite" : "none",
         transition: "opacity 0.15s ease",
@@ -167,15 +167,15 @@ function ProfileCard() {
 
         {/* Eyebrow */}
         <p style={{
-          fontFamily: "var(--font-fira)", fontSize: "0.5rem", fontWeight: 700,
-          color: "var(--accent)", letterSpacing: "0.32em",
+          fontFamily: "var(--font-fira)", fontSize: "0.62rem", fontWeight: 700,
+          color: "var(--accent)", letterSpacing: "0.28em",
           textTransform: "uppercase", margin: "0 0 0.9rem",
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(8px)",
           transition: `opacity 0.3s ease ${hovered ? "0.08s" : "0s"}, transform 0.3s ease ${hovered ? "0.08s" : "0s"}`,
         }}>About me</p>
 
-        {/* Info rows â€” staggered */}
+        {/* Info rows — staggered */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           {INFO_ROWS.map(({ label, value, accent }, i, arr) => (
             <div key={label} style={{
@@ -187,11 +187,11 @@ function ProfileCard() {
               transition: `opacity 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s, transform 0.38s ${ease} ${hovered ? 0.14 + i * 0.07 : 0}s`,
             }}>
               <span style={{
-                fontFamily: "var(--font-fira)", fontSize: "0.54rem", fontWeight: 600,
-                color: "rgba(196,181,253,0.45)", letterSpacing: "0.08em", textTransform: "uppercase",
+                fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 600,
+                color: "rgba(136,146,176,0.55)", letterSpacing: "0.06em", textTransform: "uppercase",
               }}>{label}</span>
               <span style={{
-                fontFamily: "var(--font-sora)", fontSize: "0.7rem", fontWeight: 700,
+                fontFamily: "var(--font-sora)", fontSize: "0.78rem", fontWeight: 700,
                 color: accent,
               }}>{value}</span>
             </div>
@@ -208,12 +208,12 @@ function ProfileCard() {
           transition: `opacity 0.32s ease ${hovered ? "0.44s" : "0s"}, transform 0.32s ease ${hovered ? "0.44s" : "0s"}`,
         }}>
           <span style={{
-            fontFamily: "var(--font-fira)", fontSize: "0.54rem", fontWeight: 600,
-            color: "rgba(196,181,253,0.45)", letterSpacing: "0.08em", textTransform: "uppercase",
+            fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 600,
+            color: "rgba(136,146,176,0.55)", letterSpacing: "0.06em", textTransform: "uppercase",
           }}>Status</span>
           <span style={{
             display: "inline-flex", alignItems: "center", gap: "0.32rem",
-            fontFamily: "var(--font-fira)", fontSize: "0.62rem", fontWeight: 700, color: "#F59E0B",
+            fontFamily: "var(--font-fira)", fontSize: "0.72rem", fontWeight: 700, color: "#F59E0B",
           }}>
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#F59E0B", flexShrink: 0 }} />
             Currently Employed
@@ -224,13 +224,20 @@ function ProfileCard() {
   );
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ─────────────────────────────────────────
    HERO
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+───────────────────────────────────────── */
 export default function Hero() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const nameGradient = isDark
+    ? "linear-gradient(135deg, #e6f1ff 0%, #ccd6f6 65%, #64ffda 100%)"
+    : "linear-gradient(135deg, #0d2b5e 0%, #1e56c4 55%, #4A90E2 100%)";
+
   const spotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(hover: none)").matches) return;
     const handler = (e: MouseEvent) => {
       if (!spotlightRef.current) return;
       const rect = spotlightRef.current.parentElement?.getBoundingClientRect();
@@ -255,10 +262,10 @@ export default function Hero() {
       {/* Two-column layout */}
       <div
         className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 px-5 sm:px-8 lg:px-16"
-        style={{ minHeight: "100vh", maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5rem, 10vw, 7rem)", paddingBottom: "3rem" }}
+        style={{ minHeight: "100svh", maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5rem, 10vw, 7rem)", paddingBottom: "3rem" }}
       >
 
-        {/* LEFT â€” Name block */}
+        {/* LEFT — Name block */}
         <div className="flex flex-col items-start text-left flex-1 min-w-0 w-full">
 
           {/* Overline */}
@@ -268,34 +275,31 @@ export default function Hero() {
             marginBottom: "0.75rem",
             animation: "heroFadeIn 0.6s 0s both",
           }}>
-            Full-Stack Engineer
+            Hi, my name is
           </p>
 
           {/* Name block */}
           <div style={{ animation: "heroFadeUp 1s 0.1s both", marginBottom: "1.25rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "0.2rem" }}>
+            <h1 style={{ margin: 0, lineHeight: 0.9, letterSpacing: "-0.03em", textTransform: "uppercase" }}>
               <span style={{
-                fontFamily: "var(--font-fira)", fontSize: "0.82rem", fontWeight: 700,
-                color: "var(--accent)", letterSpacing: "0.38em", textTransform: "uppercase",
+                display: "block",
+                fontFamily: "var(--font-space)", fontWeight: 900,
+                fontSize: "clamp(1.6rem, 5vw, 3.2rem)",
+                color: "var(--text-secondary)", letterSpacing: "-0.02em",
+                marginBottom: "0.1em",
               }}>
-                ABDUL
+                Abdul
               </span>
-              <div style={{
-                flex: 1, height: "1px",
-                background: "linear-gradient(to right, rgba(36,52,71,0.60), transparent)",
-                transformOrigin: "left",
-                animation: "heroLineGrow 0.8s 0.35s both ease",
-              }} />
-            </div>
-            <h1 style={{
-              fontFamily: "var(--font-space)", fontWeight: 900,
-              fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
-              lineHeight: 0.88, letterSpacing: "-0.04em", textTransform: "uppercase",
-              background: "linear-gradient(135deg, #22D3EE 0%, #22D3EE 45%, #67E8F9 100%)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-              margin: 0,
-            }}>
-              HANAN
+              <span style={{
+                display: "block",
+                fontFamily: "var(--font-space)", fontWeight: 900,
+                fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
+                lineHeight: 0.88, letterSpacing: "-0.04em",
+                backgroundImage: nameGradient,
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              }}>
+                Hanan
+              </span>
             </h1>
           </div>
 
@@ -307,7 +311,7 @@ export default function Hero() {
             <span style={{
               fontFamily: "var(--font-fira)",
               fontSize: "clamp(0.82rem, 1.6vw, 1rem)",
-              color: "var(--text-secondary)", letterSpacing: "0.06em",
+              color: "var(--accent)", letterSpacing: "0.06em",
             }}>
               Full-Stack Software Engineer
             </span>
@@ -316,19 +320,12 @@ export default function Hero() {
           {/* Description */}
           <div style={{ animation: "heroFadeUp 0.5s 0.55s both", maxWidth: "440px", marginBottom: "2rem" }}>
             <p style={{
-              fontFamily: "var(--font-sora)", fontWeight: 600,
-              fontSize: "clamp(0.95rem, 1.4vw, 1.05rem)",
-              color: "var(--text-primary)", lineHeight: 1.55, marginBottom: "0.5rem",
-            }}>
-              Building production&#8209;grade SaaS from idea to deployment.
-            </p>
-            <p style={{
               fontFamily: "var(--font-sora)",
-              fontSize: "clamp(0.82rem, 1.2vw, 0.9rem)",
-              color: "var(--text-muted)", lineHeight: 1.85,
+              fontSize: "clamp(0.85rem, 1.3vw, 0.95rem)",
+              color: "var(--text-secondary)", lineHeight: 1.85,
             }}>
-              Building full-stack products with React, FastAPI &amp; TypeScript â€”
-              from first commit to production.
+              Building full-stack products with React, FastAPI &amp; TypeScript —
+              from first commit to production. 2 years active, 3 SaaS shipped.
             </p>
           </div>
 
@@ -375,7 +372,7 @@ export default function Hero() {
 
         </div>
 
-        {/* RIGHT â€” Card + Stats */}
+        {/* RIGHT — Card + Stats */}
         <div className="flex flex-col items-center gap-6 flex-shrink-0">
 
           <ProfileCard />
@@ -385,7 +382,7 @@ export default function Hero() {
             className="stats-grid"
             style={{
               display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
-              width: "min(300px, calc(100vw - 4rem))", borderRadius: 14,
+              width: "min(340px, calc(100vw - 4rem))", borderRadius: 14,
               background: "var(--accent-mix-10)",
               border: "1px solid var(--border)",
               overflow: "hidden",
@@ -411,8 +408,8 @@ export default function Hero() {
                   {s.value}
                 </div>
                 <div style={{
-                  fontFamily: "var(--font-fira)", fontSize: "0.52rem", fontWeight: 700,
-                  color: "var(--text-muted)", letterSpacing: "0.1em", textTransform: "uppercase",
+                  fontFamily: "var(--font-fira)", fontSize: "0.62rem", fontWeight: 700,
+                  color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase",
                 }}>
                   {s.label}
                 </div>

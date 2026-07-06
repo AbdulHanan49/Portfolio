@@ -5,14 +5,13 @@ import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { FiMapPin, FiBook, FiBriefcase, FiMoon } from "react-icons/fi";
 
-/* â”€â”€ Animated counter â”€â”€ */
+/* ── Animated counter ── */
 function StatCounter({
   target, label, suffix = "+",
 }: {
   target: number; label: string; suffix?: string;
 }) {
-  const [count,   setCount]   = useState(target); // show real number immediately
-  const [started, setStarted] = useState(false);
+  const [count, setCount] = useState(target);
   const ref         = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
@@ -23,14 +22,15 @@ function StatCounter({
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true;
-          setStarted(true); // flip display to animated count (still shows target for this frame)
           const start = performance.now();
           const step  = (now: number) => {
-            const p = Math.min((now - start) / 2000, 1);
-            setCount(Math.floor((1 - Math.pow(1 - p, 3)) * target));
+            const p = Math.min((now - start) / 1800, 1);
+            const next = Math.round((1 - Math.pow(1 - p, 3)) * target);
+            setCount(Math.max(next, 1));
             if (p < 1) requestAnimationFrame(step);
+            else setCount(target);
           };
-          requestAnimationFrame(step); // first frame sets count from target â†’ small value
+          requestAnimationFrame(step);
         }
       },
       { threshold: 0.5 }
@@ -39,9 +39,7 @@ function StatCounter({
     return () => observer.disconnect();
   }, [target]);
 
-  // Before animation: show target so there's never a "0+" flash
-  // During animation: show animated count
-  const display = started ? count : target;
+  const display = count;
 
   return (
     <motion.div
@@ -71,7 +69,7 @@ function StatCounter({
 }
 
 const TRAITS = [
-  { icon: FiMapPin,    label: "Pakistan ðŸ‡µðŸ‡°"    },
+  { icon: FiMapPin,    label: "Pakistan"            },
   { icon: FiBook,      label: "FAST-NUCES '25"  },
   { icon: FiBriefcase, label: "Open to Remote"  },
   { icon: FiMoon,      label: "Night Owl Coder" },
@@ -81,56 +79,34 @@ export default function About() {
   return (
     <section
       id="about"
-      style={{ background: "var(--bg-secondary)", padding: "5rem 0", position: "relative", overflow: "hidden" }}
+      style={{ background: "var(--bg-primary)", padding: "7rem 0 6rem", position: "relative", overflow: "hidden" }}
     >
-      {/* â”€â”€ Ambient floating orbs â”€â”€ */}
-      {/* Dot grid */}
-      <div aria-hidden="true" style={{
+      {/* ── Subtle dot grid (dark mode only) ── */}
+      <div aria-hidden="true" className="dark-orb" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(36,52,71,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(100,255,218,0.07) 1px, transparent 1px)",
         backgroundSize: "38px 38px",
         mask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute", top: "4%", left: "-10%",
-          width: 520, height: 520, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(15,23,42,0.80) 0%, transparent 70%)",
-          pointerEvents: "none", filter: "blur(55px)",
-          animation: "aboutOrb1 9s ease-in-out infinite",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute", bottom: "10%", right: "-6%",
-          width: 400, height: 400, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(36,52,71,0.55) 0%, transparent 70%)",
-          pointerEvents: "none", filter: "blur(60px)",
-          animation: "aboutOrb2 12s ease-in-out 3s infinite",
-        }}
-      />
-
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem", position: "relative", zIndex: 1 }}>
 
-        {/* â”€â”€ Section eyebrow â”€â”€ */}
+        {/* ── Section eyebrow ── */}
         <ScrollReveal>
           <p style={{
             fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
             color: "var(--accent)", textTransform: "uppercase",
             letterSpacing: "0.28em", marginBottom: "3rem",
           }}>
-            01 â€” About
+            01 — About
           </p>
         </ScrollReveal>
 
-        {/* â”€â”€ Main 2-col grid â”€â”€ */}
+        {/* ── Main 2-col grid ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
-          {/* â•â•â•â• LEFT â€” Bio â•â•â•â• */}
+          {/* â•â•â•â• LEFT — Bio â•â•â•â• */}
           <ScrollReveal delay={0.1}>
             <div style={{ position: "relative" }}>
 
@@ -146,17 +122,16 @@ export default function About() {
                 AH
               </div>
 
-              {/* â”€â”€ Welcome intro â€” reference style â”€â”€ */}
+              {/* ── Welcome intro — reference style ── */}
               <h3
                 style={{
-                  fontFamily: "var(--font-serif, Georgia, serif)", fontWeight: 800,
-                  fontStyle: "italic",
+                  fontFamily: "var(--font-space)", fontWeight: 900,
                   fontSize: "clamp(2.4rem, 5vw, 3.4rem)",
                   color: "var(--text-primary)", lineHeight: 1.05,
-                  letterSpacing: "-0.01em", margin: "0 0 1.25rem",
+                  letterSpacing: "-0.03em", margin: "0 0 1.25rem",
                 }}
               >
-                Welcome,
+                About me
               </h3>
 
               <p
@@ -167,34 +142,19 @@ export default function About() {
                   marginBottom: "2.25rem", position: "relative",
                 }}
               >
-                I am{" "}
-
-                <span style={{ color: "var(--accent)", fontWeight: 600 }}>Abdul Hanan</span>
-                , a{" "}
+                I&apos;m a{" "}
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Full-Stack Software Engineer</span>
-                {" "}from{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Lahore, Pakistan</span>
-                {" "}currently building MixClip â€” a production AI video editing SaaS â€” at{" "}
-                <span style={{ color: "var(--accent)", fontWeight: 600 }}>KCube Solutions</span>
-                {" "}using{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>React 18</span>
-                ,{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>FastAPI</span>
-                {" "}and{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>TypeScript</span>
-                {" "}as lead engineer in a cross-functional team of 4.
-                Previously at{" "}
-                <span style={{ color: "var(--accent)", fontWeight: 600 }}>Visnext Software Solutions</span>
-                {", "}building Job Wallet â€” an AI-powered job tracking SaaS â€” using{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Vue 3</span>
-                ,{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Django REST Framework</span>
-                {" "}and{" "}
-                <span style={{ color: "var(--accent-secondary)", fontWeight: 500 }}>Python</span>
-                .
+                {" "}based in Lahore, Pakistan, currently building{" "}
+                <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>MixClip</span>
+                {" "}— a production AI video editing SaaS — at{" "}
+                <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>KCube Solutions</span>
+                {" "}using React 18, FastAPI &amp; TypeScript as lead engineer in a cross-functional team of 4.
+                Previously at Visnext Software Solutions building{" "}
+                <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>Job Wallet</span>
+                {" "}— an AI-powered job tracking SaaS — with Vue 3, Django REST Framework &amp; Python.
               </p>
 
-              {/* Trait pills â€” staggered entrance + hover */}
+              {/* Trait pills — staggered entrance + hover */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
                 {TRAITS.map(({ icon: Icon, label }, i) => (
                   <motion.span
@@ -224,7 +184,7 @@ export default function About() {
             </div>
           </ScrollReveal>
 
-          {/* â•â•â•â• RIGHT â€” Bento grid â•â•â•â• */}
+          {/* â•â•â•â• RIGHT — Bento grid â•â•â•â• */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
             {/* Stats card */}
@@ -246,11 +206,11 @@ export default function About() {
                   background: "transparent",
                   pointerEvents: "none",
                 }} />
-                <StatCounter target={14} label="Months Exp."      suffix="+" />
+                <StatCounter target={2}  label="Years Exp."     suffix="+" />
                 <div style={{ width: 1, height: 44, background: "var(--border)" }} />
-                <StatCounter target={3}  label="SaaS Products"   suffix="+" />
+                <StatCounter target={3}  label="SaaS Shipped"  suffix="" />
                 <div style={{ width: 1, height: 44, background: "var(--border)" }} />
-                <StatCounter target={30} label="Technologies"     suffix="+" />
+                <StatCounter target={30} label="Technologies"  suffix="+" />
               </motion.div>
             </ScrollReveal>
 
@@ -297,7 +257,7 @@ export default function About() {
                     fontFamily: "var(--font-sora)", fontSize: "0.75rem",
                     color: "var(--text-muted)", lineHeight: 1.6,
                   }}>
-                    Full-Stack Software Engineer<br />Oct 2025 â€“ Present
+                    Full-Stack Software Engineer<br />Oct 2025 — Present
                   </p>
                 </motion.div>
               </ScrollReveal>
@@ -380,7 +340,7 @@ export default function About() {
                   }}>
                     after
                   </span>
-                  {" "}it ships â€” performance, reliability, and the next
+                  {" "}it ships — performance, reliability, and the next
                   engineer who has to read it.&rdquo;
                 </p>
               </motion.div>

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Fira_Code, Sora, Playfair_Display } from "next/font/google";
+﻿import type { Metadata } from "next";
+import { Space_Grotesk, Fira_Code, Sora } from "next/font/google";
 import "./globals.css";
 
 const sora = Sora({
@@ -20,12 +20,6 @@ const firaCode = Fira_Code({
   weight: ["400", "500", "600", "700"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-  style: ["normal", "italic"],
-});
 
 export const metadata: Metadata = {
   title: "Abdul Hanan | Full-Stack Software Engineer",
@@ -120,14 +114,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${spaceGrotesk.variable} ${firaCode.variable} ${playfair.variable} h-full antialiased`}
+      className={`${sora.variable} ${spaceGrotesk.variable} ${firaCode.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
         <meta name="theme-color" content="#0E0808" />
         {/* Inline theme bootstrap — runs before React hydrates, prevents flash */}
         <script dangerouslySetInnerHTML={{
-          __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`
+          __html: `document.documentElement.setAttribute('data-theme','dark');(function(){var c=document.createElement('div');c.id='pre-react-cover';c.style.cssText='position:fixed;inset:0;background:#0a192f;z-index:99998;pointer-events:none;';document.addEventListener('DOMContentLoaded',function(){if(document.body)document.body.appendChild(c);});})();`
         }} />
         <script
           type="application/ld+json"

@@ -39,63 +39,63 @@ interface Skill {
 }
 
 const levelMeta: Record<string, { color: string; width: string }> = {
-  Expert:       { color: "#22D3EE", width: "92%" },
-  Advanced:     { color: "#22D3EE", width: "72%" },
-  Intermediate: { color: "#F59E0B", width: "48%" },
+  Expert:       { color: "var(--accent)", width: "92%" },
+  Advanced:     { color: "var(--accent)", width: "72%" },
+  Intermediate: { color: "var(--text-secondary)", width: "48%" },
 };
 
 const columns: { title: string; accent: string; number: string; skills: Skill[] }[] = [
   {
     title: "Frontend",
     number: "01",
-    accent: "#22D3EE",
+    accent: "var(--accent)",
     skills: [
       { name: "React 18",     icon: SI.React,      color: "#61dafb", level: "Expert",       experience: "1+ yr",  description: "Production SaaS with 70+ custom hooks, TanStack Query v5, Zustand + Zundo, React Hook Form, i18next, PWA.",  tools: ["TanStack Query","Zustand","React Hook Form","i18next"] },
       { name: "TypeScript",   icon: SI.TypeScript, color: "#3178c6", level: "Expert",       experience: "1+ yr",  description: "Type-safe production code with generics, utility types, Pydantic-style validation, strict config.",           tools: ["Generics","Type Guards","Utility Types","Zod"] },
-      { name: "JavaScript",   icon: SI.JavaScript, color: "#f7df1e", level: "Expert",       experience: "2+ yrs", description: "ES6+, async patterns, closures, DOM APIs â€” used daily across every project.",                               tools: ["ES6+","Promises","Web APIs","Async/Await"] },
-      { name: "Vue 3",        icon: SI.Vue,        color: "#42b883", level: "Advanced",     experience: "6 mo",   description: "Rebuilt Job Wallet frontend at Visnext â€” Vue 3 Composition API with Quasar Framework, Pinia state management, and Tailwind CSS across 10+ feature screens.", tools: ["Composition API","Quasar Framework","Pinia","Tailwind CSS"] },
+      { name: "JavaScript",   icon: SI.JavaScript, color: "#f7df1e", level: "Expert",       experience: "2+ yrs", description: "ES6+, async patterns, closures, DOM APIs — used daily across every project.",                               tools: ["ES6+","Promises","Web APIs","Async/Await"] },
+      { name: "Vue 3",        icon: SI.Vue,        color: "#42b883", level: "Advanced",     experience: "6 mo",   description: "Rebuilt Job Wallet frontend at Visnext — Vue 3 Composition API with Quasar Framework, Pinia state management, and Tailwind CSS across 10+ feature screens.", tools: ["Composition API","Quasar Framework","Pinia","Tailwind CSS"] },
       { name: "Tailwind CSS", icon: SI.Tailwind,   color: "#06b6d4", level: "Expert",       experience: "1+ yr",  description: "Utility-first styling with Tailwind CSS 4, custom design systems, animations, responsive layouts.",          tools: ["CSS 4","Custom Themes","Animations","Dark Mode"] },
     ],
   },
   {
     title: "Backend",
     number: "02",
-    accent: "#3178c6",
+    accent: "var(--accent)",
     skills: [
-      { name: "FastAPI",     icon: SI.FastAPI,    color: "#009688", level: "Expert",   experience: "1 yr",   description: "Primary backend at KCube â€” Pydantic v2, SQLModel, Alembic migrations, async endpoints, JWT + OAuth.",                                                     tools: ["Pydantic v2","SQLModel","Alembic","Async Routes"] },
-      { name: "Python",      icon: SI.Python,     color: "#3776ab", level: "Advanced", experience: "2+ yrs", description: "Primary backend language â€” FastAPI at KCube for MixClip and Django REST at Visnext for Job Wallet. OpenCV + Matplotlib for image processing projects.", tools: ["FastAPI","Django REST","OpenCV","Pydantic"] },
+      { name: "FastAPI",     icon: SI.FastAPI,    color: "#009688", level: "Expert",   experience: "1 yr",   description: "Primary backend at KCube — Pydantic v2, SQLModel, Alembic migrations, async endpoints, JWT + OAuth.",                                                     tools: ["Pydantic v2","SQLModel","Alembic","Async Routes"] },
+      { name: "Python",      icon: SI.Python,     color: "#3776ab", level: "Advanced", experience: "2+ yrs", description: "Primary backend language — FastAPI at KCube for MixClip and Django REST at Visnext for Job Wallet. OpenCV + Matplotlib for image processing projects.", tools: ["FastAPI","Django REST","OpenCV","Pydantic"] },
       { name: "Node.js",     icon: SI.NodeJS,     color: "#68a063", level: "Advanced", experience: "1+ yr",  description: "Express REST APIs at KCube and Remotion 4 video rendering engine for MixClip.",                                                                         tools: ["Remotion 4","Express","REST APIs","Video Rendering"] },
       { name: "Express.js",  icon: SI.Express,    color: "#c0c0c0", level: "Advanced", experience: "1+ yr",  description: "Middleware patterns, routing, JWT auth, structured API contracts, validation.",                                                                          tools: ["Middleware","JWT Auth","Rate Limiting","Validation"] },
-      { name: "Django REST", icon: SI.Django,     color: "#44b78b", level: "Advanced", experience: "6 mo",   description: "Built 10+ resource APIs at Visnext â€” DRF serializers, viewsets, JWT + RBAC, Django ORM N+1 optimisation, Celery + Redis async tasks.",               tools: ["Serializers","Viewsets","RBAC","Celery + Redis"] },
+      { name: "Django REST", icon: SI.Django,     color: "#44b78b", level: "Advanced", experience: "6 mo",   description: "Built 10+ resource APIs at Visnext — DRF serializers, viewsets, JWT + RBAC, Django ORM N+1 optimisation, Celery + Redis async tasks.",               tools: ["Serializers","Viewsets","RBAC","Celery + Redis"] },
     ],
   },
   {
     title: "Databases",
     number: "03",
-    accent: "#F59E0B",
+    accent: "var(--accent)",
     skills: [
       { name: "PostgreSQL", icon: SI.PostgreSQL,      color: "#4169e1", level: "Advanced",      experience: "1+ yr", description: "Relational data modelling, complex queries, Alembic migrations, SQLAlchemy 2, query optimisation at KCube.",                                                           tools: ["SQLAlchemy 2","Alembic","Migrations","Transactions"] },
-      { name: "MySQL",      icon: SI.MySQL,           color: "#4479a1", level: "Advanced",      experience: "6 mo",  description: "Production database at Visnext for Job Wallet â€” schema design, N+1 query elimination via Django ORM select_related / prefetch_related, index-level optimisation.",    tools: ["Django ORM","select_related","Indexes","Migrations"] },
-      { name: "MongoDB",    icon: SI.MongoDB,         color: "#47a248", level: "Intermediate",  experience: "1 yr",  description: "Schema design, aggregation pipelines, Mongoose ODM â€” used in MERN-stack projects including Screen Sizzle.",                                                             tools: ["Mongoose","Aggregation","Atlas","Indexing"] },
-      { name: "Redis",      icon: <FiDatabase />,     color: "#DC382D", level: "Advanced",      experience: "6 mo",  description: "Async task queue backing with Celery at Visnext â€” scheduled interview reminders, subscription lifecycle events, and webhook processing.",                               tools: ["Celery","Task Queues","Pub/Sub","Caching"] },
+      { name: "MySQL",      icon: SI.MySQL,           color: "#4479a1", level: "Advanced",      experience: "6 mo",  description: "Production database at Visnext for Job Wallet — schema design, N+1 query elimination via Django ORM select_related / prefetch_related, index-level optimisation.",    tools: ["Django ORM","select_related","Indexes","Migrations"] },
+      { name: "MongoDB",    icon: SI.MongoDB,         color: "#47a248", level: "Intermediate",  experience: "1 yr",  description: "Schema design, aggregation pipelines, Mongoose ODM — used in MERN-stack projects including Screen Sizzle.",                                                             tools: ["Mongoose","Aggregation","Atlas","Indexing"] },
+      { name: "Redis",      icon: <FiDatabase />,     color: "#DC382D", level: "Advanced",      experience: "6 mo",  description: "Async task queue backing with Celery at Visnext — scheduled interview reminders, subscription lifecycle events, and webhook processing.",                               tools: ["Celery","Task Queues","Pub/Sub","Caching"] },
     ],
   },
   {
     title: "DevOps & Tools",
     number: "04",
-    accent: "#22D3EE",
+    accent: "var(--accent)",
     skills: [
-      { name: "Docker",     icon: SI.Docker,     color: "#2496ed", level: "Advanced",    experience: "1+ yr",  description: "Multi-stage builds, Docker Compose, containerised micro-services â€” used in production Azure deployments.",         tools: ["Multi-stage","Compose","Azure ACR","Networks"] },
+      { name: "Docker",     icon: SI.Docker,     color: "#2496ed", level: "Advanced",    experience: "1+ yr",  description: "Multi-stage builds, Docker Compose, containerised micro-services — used in production Azure deployments.",         tools: ["Multi-stage","Compose","Azure ACR","Networks"] },
       { name: "GH Actions", icon: SI.GHActions, color: "#2088ff", level: "Advanced",    experience: "1 yr",   description: "Automated CI/CD: build â†’ test â†’ push to Azure Container Registry â†’ deploy to Azure Container Apps.",              tools: ["CI Pipelines","Docker Build","Release Gates","Env Secrets"] },
       { name: "Azure",      icon: <FiCloud />,  color: "#0078d4", level: "Advanced",    experience: "1 yr",   description: "Azure Container Apps, Container Registry, Blob & Queue Storage, Cognitive Services Speech SDK.",                   tools: ["Container Apps","Blob Storage","ACR","Speech SDK"] },
-      { name: "Stripe API", icon: SI.Stripe,    color: "#635bff", level: "Advanced",    experience: "1 yr",   description: "Production billing at both KCube and Visnext â€” subscriptions, 17+ currencies, webhooks, trial lifecycle.",         tools: ["Subscriptions","Webhooks","Multi-currency","Trials"] },
+      { name: "Stripe API", icon: SI.Stripe,    color: "#635bff", level: "Advanced",    experience: "1 yr",   description: "Production billing at both KCube and Visnext — subscriptions, 17+ currencies, webhooks, trial lifecycle.",         tools: ["Subscriptions","Webhooks","Multi-currency","Trials"] },
       { name: "Git",        icon: SI.Git,       color: "#f05032", level: "Expert",      experience: "3+ yrs", description: "Branching strategies, rebasing, conflict resolution, CI workflow hooks.",                                          tools: ["GitHub Actions","Git Flow","Rebasing","Hooks"] },
-      { name: "Gemini AI",  icon: SI.Gemini,   color: "#4285f4", level: "Intermediate", experience: "< 1 yr", description: "Google Gemini AI API integrated into MixClip at KCube â€” content assistance for script writing and AI-generated video metadata.", tools: ["Gemini API","Prompt Engineering","Content Gen","REST"] },
+      { name: "Gemini AI",  icon: SI.Gemini,   color: "#4285f4", level: "Intermediate", experience: "< 1 yr", description: "Google Gemini AI API integrated into MixClip at KCube — content assistance for script writing and AI-generated video metadata.", tools: ["Gemini API","Prompt Engineering","Content Gen","REST"] },
     ],
   },
 ];
 
-/* â”€â”€ Skill Row â”€â”€ */
+/* ── Skill Row ── */
 function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
   skill: Skill; delay: number; catAccent: string;
   isOpen: boolean; onOpen: () => void; onClose: () => void;
@@ -118,8 +118,8 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
           display: "flex", alignItems: "center", gap: "0.65rem",
           padding: "0.6rem 0.75rem",
           borderRadius: 10,
-          background: `color-mix(in srgb, ${skill.color} 4%, var(--card-bg))`,
-          border: `1px solid color-mix(in srgb, ${skill.color} 14%, var(--border))`,
+          background: `var(--card-bg)`,
+          border: `1px solid var(--border)`,
           cursor: "pointer", outline: "none",
           transition: "border-color .2s, background .2s",
         }}
@@ -187,8 +187,9 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
               onClick={(e) => e.stopPropagation()}
               style={{
                 position: "relative", maxWidth: 460, width: "100%",
+                maxHeight: "90dvh", overflowY: "auto",
                 padding: "2rem", borderRadius: 22,
-                background: `color-mix(in srgb, ${skill.color} 6%, var(--card-bg))`,
+                background: "var(--card-bg)",
                 border: `1.5px solid ${skill.color}40`,
                 boxShadow: `0 28px 72px rgba(0,0,0,0.6), 0 0 0 1px ${skill.color}18`,
               }}
@@ -276,7 +277,7 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
   );
 }
 
-/* â”€â”€ Column â”€â”€ */
+/* ── Column ── */
 function SkillColumn({ col, colIndex, activeSkill, onOpen, onClose }: {
   col: typeof columns[number]; colIndex: number;
   activeSkill: string | null; onOpen: (name: string) => void; onClose: () => void;
@@ -287,10 +288,9 @@ function SkillColumn({ col, colIndex, activeSkill, onOpen, onClose }: {
         position: "relative",
         borderRadius: 18,
         padding: "1.5rem",
-        background: `color-mix(in srgb, ${col.accent} 5%, var(--card-bg))`,
-        border: `1px solid color-mix(in srgb, ${col.accent} 18%, var(--border))`,
+        background: "var(--card-bg)",
+        border: "1px solid var(--border)",
         overflow: "hidden",
-        height: "100%",
       }}>
         {/* Top accent bar */}
         <div style={{
@@ -310,8 +310,8 @@ function SkillColumn({ col, colIndex, activeSkill, onOpen, onClose }: {
             fontFamily: "var(--font-fira)", fontSize: "0.58rem", fontWeight: 800,
             letterSpacing: "0.12em", textTransform: "uppercase",
             color: col.accent,
-            background: `color-mix(in srgb, ${col.accent} 14%, transparent)`,
-            border: `1px solid color-mix(in srgb, ${col.accent} 28%, transparent)`,
+            background: `${col.accent}14`,
+            border: `1px solid ${col.accent}28`,
             padding: "0.2rem 0.55rem", borderRadius: 7,
           }}>
             {col.number}
@@ -349,7 +349,7 @@ function SkillColumn({ col, colIndex, activeSkill, onOpen, onClose }: {
   );
 }
 
-/* â”€â”€ Section â”€â”€ */
+/* ── Section ── */
 export default function Skills() {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
   const close = useCallback(() => setActiveSkill(null), []);
@@ -370,7 +370,7 @@ export default function Skills() {
     <section
       id="skills"
       style={{
-        padding: "5rem 0",
+        padding: "6rem 0 7rem",
         background: "var(--bg-primary)",
         position: "relative",
         overflow: "hidden",
@@ -379,7 +379,7 @@ export default function Skills() {
       {/* Background dot-grid */}
       <div aria-hidden="true" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(52,73,94,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(100,255,218,0.07) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
         mask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
@@ -395,7 +395,7 @@ export default function Skills() {
               color: "var(--accent)", textTransform: "uppercase",
               letterSpacing: "0.28em", marginBottom: "0.6rem",
             }}>
-              04 â€” Skills
+              04 — Skills
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
@@ -411,9 +411,9 @@ export default function Skills() {
         {/* Three-column grid */}
         <div className="skills-grid-responsive" style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
           gap: "1.25rem",
-          alignItems: "stretch",
+          alignItems: "start",
         }}>
           {columns.map((col, ci) => (
             <SkillColumn

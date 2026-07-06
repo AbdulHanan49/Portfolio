@@ -1,29 +1,77 @@
-﻿"use client";
+"use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const DELAYS = [1.4, 1.2, 1.0, 0.8, 0.6, 0.4, 0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4];
 
-export default function LoadingScreen() {
-  const [show, setShow] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+// Key on window — persists across HMR module re-evaluations but resets on full page reload
+const WIN_KEY = "__portfolio_loaded";
 
-  useLayoutEffect(() => {
-    // Show only on the first visit of the browser session.
-    // sessionStorage is cleared when the tab closes, so returning visitors
-    // see it once per session rather than on every page load.
-    if (sessionStorage.getItem("visited")) return;
-    sessionStorage.setItem("visited", "1");
-    setShow(true);
-    const timer = setTimeout(() => setShow(false), 1000);
-    return () => clearTimeout(timer);
+export default function LoadingScreen() {
+  const [fading, setFading] = useState(false);
+  const [gone,   setGone]   = useState(false);
+
+  useEffect(() => {
+    // If already shown in this browser window session (HMR reload), skip immediately
+    if ((window as unknown as Record<string, unknown>)[WIN_KEY]) {
+      setGone(true);
+      return;
+    }
+
+    let minTimer: ReturnType<typeof setTimeout>;
+    let fadeTimer: ReturnType<typeof setTimeout> | undefined;
+    let rafId1: number;
+    let rafId2: number;
+
+    // Remove static HTML cover only after LoadingScreen is painted (2 frames)
+    rafId1 = requestAnimationFrame(() => {
+      rafId2 = requestAnimationFrame(() => {
+        const cover = document.getElementById("pre-react-cover");
+        if (cover) cover.remove();
+      });
+    });
+
+    let minPassed = false;
+    let pageDone  = false;
+
+    function tryFade() {
+      if (!minPassed || !pageDone) return;
+      setFading(true);
+      fadeTimer = setTimeout(() => {
+        (window as unknown as Record<string, unknown>)[WIN_KEY] = true; // mark shown
+        setGone(true);
+      }, 720);
+    }
+
+    // Minimum visible time — let the equalizer bars animate at least once
+    minTimer = setTimeout(() => {
+      minPassed = true;
+      tryFade();
+    }, 1800);
+
+    // Wait until ALL assets are loaded (fonts, images, scripts)
+    if (document.readyState === "complete") {
+      pageDone = true;
+      tryFade();
+    } else {
+      window.addEventListener("load", function onLoad() {
+        pageDone = true;
+        tryFade();
+      }, { once: true });
+    }
+
+    return () => {
+      cancelAnimationFrame(rafId1);
+      cancelAnimationFrame(rafId2);
+      clearTimeout(minTimer);
+      clearTimeout(fadeTimer);
+    };
   }, []);
 
-  if (!show) return null;
+  if (gone) return null;
 
   return (
     <div
-      ref={ref}
       id="loading-overlay"
       style={{
         position: "fixed",
@@ -34,9 +82,11 @@ export default function LoadingScreen() {
         alignItems: "center",
         justifyContent: "center",
         gap: "1.5rem",
-        background: "radial-gradient(ellipse 80% 60% at 50% 50%, #243344 0%, #1C2B39 100%)",
-        animation: "loadingFade 1s ease forwards",
-        pointerEvents: "auto",
+        background: "#0a192f",
+        opacity: fading ? 0 : 1,
+        transition: "opacity 0.72s cubic-bezier(0.4, 0, 0.2, 1)",
+        pointerEvents: fading ? "none" : "auto",
+        willChange: "opacity",
       }}
     >
       <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 80 }}>
@@ -47,7 +97,7 @@ export default function LoadingScreen() {
               width: 8,
               height: 80,
               borderRadius: 5,
-              background: "#22D3EE",
+              background: "#64ffda",
               transformOrigin: "bottom center",
               willChange: "transform",
               animation: `equalize 1.2s -${delay}s infinite ease-in-out`,
@@ -61,7 +111,7 @@ export default function LoadingScreen() {
         fontFamily: "var(--font-fira), monospace",
         fontSize: "0.68rem",
         letterSpacing: "0.26em",
-        color: "rgba(34, 211, 238, 0.50)",
+        color: "rgba(100, 255, 218, 0.50)",
         textTransform: "uppercase",
       }}>
         Loading
@@ -69,4 +119,3 @@ export default function LoadingScreen() {
     </div>
   );
 }
-

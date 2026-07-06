@@ -20,15 +20,15 @@ interface ExpItem {
 
 const items: ExpItem[] = [
   {
-    period: "Oct 2025 â€“ Present",
+    period: "Oct 2025 — Present",
     year: "NOW",
     title: "Full-Stack Software Engineer",
     company: "KCube Solutions",
     type: "Full-Time",
     description:
-      "Owning the full stack of MixClip â€” a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and Remotion 4 video rendering engine for scalable video exports.",
+      "Owning the full stack of MixClip — a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and Remotion 4 video rendering engine for scalable video exports.",
     points: [
-      "Lead engineer in a cross-functional team of 4 (PM, designer, 1 developer) â€” owned full-stack architecture end-to-end",
+      "Lead engineer in a cross-functional team of 4 (PM, designer, 1 developer) — owned full-stack architecture end-to-end",
       "Delivered Stripe subscription system with multi-currency billing (USD, EUR, GBP+)",
       "Shipped zero-downtime deployments via GitHub Actions CI/CD with Docker + Azure",
       "Integrated Google Gemini AI and Azure Cognitive Services Speech SDK for auto-subtitle generation",
@@ -39,15 +39,15 @@ const items: ExpItem[] = [
     current: true,
   },
   {
-    period: "Apr 2025 â€“ Sep 2025",
+    period: "Apr 2025 — Sep 2025",
     year: "2025",
     title: "Associate Software Engineer",
     company: "Visnext Software Solutions",
     type: "Full-Time",
     description:
-      "Rebuilt the full frontend of Job Wallet â€” an AI-powered job application tracking SaaS â€” migrating from a legacy UI to Vue 3 / Quasar Framework with Pinia and Tailwind CSS. Engineered 10+ Django REST Framework APIs across job descriptions, CV resumes, subscription plans, notifications, contacts, and files.",
+      "Rebuilt the full frontend of Job Wallet — an AI-powered job application tracking SaaS — migrating from a legacy UI to Vue 3 / Quasar Framework with Pinia and Tailwind CSS. Engineered 10+ Django REST Framework APIs across job descriptions, CV resumes, subscription plans, notifications, contacts, and files.",
     points: [
-      "Sole engineer in a 2-person team (PM + developer) â€” delivered all frontend and backend features independently under PM-assigned sprint workflow",
+      "Sole engineer in a 2-person team (PM + developer) — delivered all frontend and backend features independently under PM-assigned sprint workflow",
       "Secured all APIs with JWT + RBAC; eliminated N+1 query patterns in Django ORM / MySQL reducing backend response overhead",
       "Implemented Celery + Redis async task queue for scheduled interview reminders and subscription lifecycle events",
       "Delivered Stripe freemium billing with 2 subscription tiers (Basic $0 / Unlimited $10/mo), webhook idempotency, and dual-channel notifications",
@@ -57,7 +57,7 @@ const items: ExpItem[] = [
     tags: ["Vue 3", "Quasar", "Pinia", "Tailwind CSS", "Django REST", "Python", "MySQL", "JWT", "Celery", "Redis", "Stripe"],
   },
   {
-    period: "2020 â€“ 2025",
+    period: "2020 — 2025",
     year: "2020",
     title: "BS Software Engineering",
     company: "FAST-NUCES Lahore",
@@ -75,10 +75,8 @@ const items: ExpItem[] = [
   },
 ];
 
-const ACCENT     = "#22D3EE";
-const ACCENT_LOW = "rgba(34,211,238,0.20)";
-const MINT       = "#22D3EE";
-const MINT_LOW   = "rgba(34,211,238,0.22)";
+const ACCENT     = "var(--accent)";
+const ACCENT_LOW = "var(--accent-mix-18)";
 
 export default function Experience() {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -110,32 +108,13 @@ export default function Experience() {
       className="relative py-20 overflow-hidden"
       style={{ background: "var(--bg-primary)" }}
     >
-      {/* Background dot grid */}
-      <div aria-hidden="true" style={{
+      {/* Subtle dot grid (dark mode only) */}
+      <div aria-hidden="true" className="dark-orb" style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(circle, rgba(36,52,71,0.18) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(100,255,218,0.07) 1px, transparent 1px)",
         backgroundSize: "44px 44px",
         mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
-      }} />
-
-      <div aria-hidden="true" style={{
-        position: "absolute", top: "10%", left: "-8%",
-        width: 480, height: 480, borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(15,23,42,0.80) 0%, transparent 70%)",
-        filter: "blur(70px)",
-      }} />
-
-      <div aria-hidden="true" style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 55% 70% at 92% 50%, rgba(36,52,71,0.30) 0%, transparent 65%)",
-      }} />
-
-      <div aria-hidden="true" style={{
-        position: "absolute", bottom: "0%", right: "15%",
-        width: 350, height: 350, borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(15,23,42,0.50) 0%, transparent 70%)",
-        filter: "blur(60px)",
       }} />
 
       <div className="max-w-[1100px] mx-auto px-6 relative z-10">
@@ -148,11 +127,11 @@ export default function Experience() {
               color: "var(--accent)", textTransform: "uppercase",
               letterSpacing: "0.28em", marginBottom: "0.85rem",
             }}>
-              02 â€” Career
+              02 — Career
             </p>
             <h2 style={{
               fontFamily: "var(--font-space)", fontWeight: 900,
-              fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+              fontSize: "clamp(2rem, 4vw, 3.4rem)",
               lineHeight: 1.05, color: "var(--text-primary)", letterSpacing: "-0.02em",
             }}>
               My career<br />
@@ -161,7 +140,7 @@ export default function Experience() {
           </div>
         </ScrollReveal>
 
-        {/* â”€â”€ Timeline â”€â”€ */}
+        {/* ── Timeline ── */}
         <div
           ref={timelineRef}
           style={{ position: "relative", marginLeft: "0.25rem", paddingLeft: "clamp(1.5rem, 4vw, 2.25rem)" }}
@@ -169,7 +148,7 @@ export default function Experience() {
           {/* Track */}
           <div style={{
             position: "absolute", left: 0, top: 0, bottom: 0,
-            width: 1, background: "rgba(34,211,238,0.12)",
+            width: 1, background: "var(--accent-mix-10)",
           }} />
 
           {/* Scroll-driven fill */}
@@ -178,8 +157,8 @@ export default function Experience() {
             style={{
               position: "absolute", left: "-0.5px", top: 0,
               width: 2, height: "0%",
-              background: "linear-gradient(to bottom, #22D3EE 0%, #14B8A6 60%, rgba(34,211,238,0.4) 100%)",
-              boxShadow: "0 0 8px 2px rgba(34,211,238,0.75), 0 0 20px 4px rgba(34,211,238,0.35)",
+              background: "linear-gradient(to bottom, var(--accent) 0%, var(--accent) 60%, var(--accent-mix-45) 100%)",
+              boxShadow: "0 0 8px 2px var(--accent-mix-25), 0 0 20px 4px var(--accent-mix-18)",
               borderRadius: 2,
               transition: "height 0.08s linear",
             }}
@@ -192,13 +171,8 @@ export default function Experience() {
               position: "absolute", left: "-5px", top: "0%",
               transform: "translateY(-50%)",
               width: 10, height: 10, borderRadius: "50%",
-              background: "#fff",
-              boxShadow: [
-                "0 0 0 2px rgba(34,211,238,0.9)",
-                "0 0 10px 4px rgba(34,211,238,0.9)",
-                "0 0 24px 8px rgba(34,211,238,0.5)",
-                "0 0 48px 16px rgba(34,211,238,0.2)",
-              ].join(", "),
+              background: "var(--bg-primary)",
+              boxShadow: "0 0 0 2px var(--accent), 0 0 10px 4px var(--accent-mix-45), 0 0 24px 8px var(--accent-mix-25)",
               opacity: 0,
               transition: "opacity 0.25s ease",
               zIndex: 20,
@@ -207,17 +181,15 @@ export default function Experience() {
 
           {items.map((item, idx) => {
             const isEdu      = item.type === "Education";
-            const dotColor   = isEdu ? MINT       : ACCENT;
-            const dotGlow    = isEdu ? MINT_LOW   : ACCENT_LOW;
-            const accentHex  = isEdu ? "#22D3EE"  : "#22D3EE";
-            const badgeBg    = isEdu ? "rgba(34,211,238,0.10)"  : "rgba(34,211,238,0.10)";
-            const badgeBdr   = isEdu ? "rgba(34,211,238,0.35)"  : "rgba(34,211,238,0.30)";
-            const badgeColor = isEdu ? MINT       : ACCENT;
-            const barGrad    = isEdu
-              ? "linear-gradient(90deg,#22D3EE,rgba(34,211,238,0))"
-              : "linear-gradient(90deg,#22D3EE,rgba(34,211,238,0))";
-            const metricColor = isEdu ? "#22D3EE" : "#22D3EE";
-            const productColor = isEdu ? "#22D3EE" : "#22D3EE";
+            const dotColor   = isEdu ? "#8892b0" : ACCENT;
+            const dotGlow    = isEdu ? "rgba(136,146,176,0.12)" : ACCENT_LOW;
+            const accentHex   = "var(--accent)";
+            const badgeBg     = "var(--accent-mix-10)";
+            const badgeBdr    = "var(--accent-mix-25)";
+            const badgeColor  = "var(--accent)";
+            const barGrad     = "linear-gradient(90deg, var(--accent), transparent)";
+            const metricColor = "var(--accent)";
+            const productColor = "var(--accent)";
 
             return (
               <ScrollReveal key={idx} delay={idx * 0.1}>
@@ -242,7 +214,7 @@ export default function Experience() {
                   <motion.div
                     whileHover={{
                       y: -4,
-                      boxShadow: `0 18px 52px ${dotGlow}, 0 0 0 1px ${isEdu ? "rgba(34,211,238,0.30)" : "rgba(34,211,238,0.25)"}`,
+                      boxShadow: `0 18px 52px var(--accent-mix-18), 0 0 0 1px var(--accent-mix-45)`,
                     }}
                     transition={{ duration: 0.22 }}
                     style={{
@@ -250,9 +222,7 @@ export default function Experience() {
                       borderRadius: 18,
                       padding: "clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.75rem)",
                       background: "var(--card-bg)",
-                      border: isEdu
-                        ? "1px solid rgba(34,211,238,0.18)"
-                        : "1px solid rgba(34,211,238,0.20)",
+                      border: "1px solid var(--card-border)",
                     }}
                   >
                     {/* Left accent bar */}
@@ -267,19 +237,9 @@ export default function Experience() {
                       background: barGrad,
                     }} />
 
-                    {/* Year watermark */}
-                    <span aria-hidden="true" style={{
-                      position: "absolute", right: "1.25rem", top: "50%",
-                      transform: "translateY(-50%)",
-                      fontFamily: "var(--font-space)", fontWeight: 900,
-                      fontSize: "5.5rem", color: "var(--text-primary)",
-                      opacity: 0.03, letterSpacing: "-0.04em",
-                      pointerEvents: "none", userSelect: "none",
-                    }}>
-                      {item.year}
-                    </span>
+                    {/* Year watermark removed — was colliding with card text */}
 
-                    {/* â”€â”€ Two-column header â”€â”€ */}
+                    {/* ── Two-column header ── */}
                     <div style={{
                       display: "flex", flexWrap: "wrap",
                       justifyContent: "space-between", alignItems: "flex-start",
@@ -339,7 +299,7 @@ export default function Experience() {
                       </div>
                     </div>
 
-                    {/* â”€â”€ Product / Project subheading â”€â”€ */}
+                    {/* ── Product / Project subheading ── */}
                     {item.products && item.products.length > 0 && (
                       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", marginBottom: "0.85rem" }}>
                         {item.products.map((p) => (
@@ -368,7 +328,7 @@ export default function Experience() {
                       </div>
                     )}
 
-                    {/* â”€â”€ Metrics row â”€â”€ */}
+                    {/* ── Metrics row ── */}
                     <div style={{ display: item.metrics.length ? "flex" : "none", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1rem" }}>
                       {item.metrics.map((m) => (
                         <span
