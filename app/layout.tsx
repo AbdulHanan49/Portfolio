@@ -45,14 +45,14 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Lahore",
   ],
-  metadataBase: new URL("https://abdulhanan.com"),
+  metadataBase: new URL("https://hananaslam.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://abdulhanan.com",
+    url: "https://hananaslam.com",
     title: "Abdul Hanan | Full-Stack Software Engineer",
     description:
       "Building production SaaS with React 18, FastAPI, TypeScript, and Azure.",
