@@ -80,7 +80,6 @@
   --font-heading: var(--font-space);
   --font-body: var(--font-sora);
   --font-mono: var(--font-fira);
-  --font-display: var(--font-serif);
 }
 
 /* ============================================
@@ -274,12 +273,10 @@ body::after {
    HERO SECTION
    ============================================ */
 .hero-section {
-  min-height: 100vh;    /* fallback: iOS Safari < 15.4 ignores svh */
-  min-height: 100svh;   /* preferred: excludes iOS browser chrome */
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -394,8 +391,8 @@ body::after {
 /* === NEBULA TEXT EFFECT === */
 .nebula-name {
   font-family: var(--font-space), sans-serif;
-  font-weight: 800;
-  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 7.5rem);
   line-height: 0.9;
   letter-spacing: -0.04em;
   color: transparent;
@@ -410,8 +407,8 @@ body::after {
 
 .nebula-name-fallback {
   font-family: var(--font-space), sans-serif;
-  font-weight: 800;
-  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 7.5rem);
   line-height: 0.9;
   letter-spacing: -0.04em;
   color: transparent;
@@ -1291,7 +1288,7 @@ body::after {
 .contact-input-v2 {
   width: 100%;
   padding: 0.85rem 1rem;
-  background: var(--bg-tertiary);
+  background: var(--bg-secondary);
   border: none;
   color: var(--text-primary);
   font-family: var(--font-sora), sans-serif;
@@ -1301,7 +1298,7 @@ body::after {
 }
 
 .contact-field-ring {
-  box-shadow: 0 0 0 1px var(--border);
+  box-shadow: 0 0 0 1.5px var(--card-border);
   transition: box-shadow 0.2s;
 }
 .contact-field-ring.focused {
@@ -1309,7 +1306,7 @@ body::after {
 }
 
 .contact-input-v2:focus {
-  background: var(--bg-tertiary);
+  background: var(--bg-secondary);
 }
 
 .contact-input-v2::placeholder {
@@ -1998,10 +1995,10 @@ body::after {
   .tech-stack-section { padding: 4rem 0; }
 
   /* About section padding */
-  section#about { padding: 4rem 0; }
+  section#about { padding: 2rem 0; }
 
   /* Skills section */
-  section#skills { padding: 4rem 0; }
+  section#skills { padding: 2rem 0 2.5rem; }
 }
 
 @media (max-width: 480px) {
@@ -2029,6 +2026,26 @@ body::after {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 2rem !important;
   }
+
+  /* Footer brand column: single column at narrowest screens */
+  .footer-brand-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+
+  /* Section padding */
+  section#about     { padding: 0.75rem 0; }
+  section#experience { padding: 0.75rem 0; }
+  section#skills    { padding: 0.75rem 0 1rem; }
+  section#contact   { padding: 4rem 0 8rem; }
+  section#projects > div:last-child { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .exp-entry        { padding: 1.5rem 0; }
+
+  /* Footer content padding on mobile */
+  .footer-content > div { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+
+  /* Hero name: smaller on very narrow screens */
+  .hero-name-split  { font-size: clamp(3rem, 13vw, 4.5rem) !important; }
 }
 
 /* ============================================
@@ -2044,8 +2061,8 @@ body::after {
 
 .hero-name-split {
   font-family: var(--font-space), sans-serif;
-  font-weight: 900;
-  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 700;
+  font-size: clamp(3rem, 7vw, 6.5rem);
   line-height: 0.88;
   letter-spacing: -0.04em;
   color: transparent;
@@ -2060,8 +2077,8 @@ body::after {
   user-select: none;
 }
 
-:root .hero-name-split {
-  background-image: linear-gradient(135deg, #11172a 0%, #11172a 60%, #11172a 100%);
+[data-theme="light"] .hero-name-split {
+  background-image: linear-gradient(135deg, #0d2b5e 0%, #1e56c4 55%, #2563EB 100%);
 }
 
 .hero-typed-row {

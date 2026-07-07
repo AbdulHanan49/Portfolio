@@ -20,15 +20,15 @@ interface ExpItem {
 
 const items: ExpItem[] = [
   {
-    period: "Oct 2025 — Present",
+    period: "Oct 2025 · Present",
     year: "NOW",
     title: "Full-Stack Software Engineer",
     company: "KCube Solutions",
     type: "Full-Time",
     description:
-      "Owning the full stack of MixClip — a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and Remotion 4 video rendering engine for scalable video exports.",
+      "Owning the full stack of MixClip, a production AI-powered video editing SaaS. React 18/TypeScript frontend, FastAPI/PostgreSQL backend, and Remotion 4 video rendering engine for scalable video exports.",
     points: [
-      "Lead engineer in a cross-functional team of 4 (PM, designer, 1 developer) — owned full-stack architecture end-to-end",
+      "Lead engineer in a cross-functional team of 4 (PM, designer, 1 developer): owned full-stack architecture end-to-end",
       "Delivered Stripe subscription system with multi-currency billing (USD, EUR, GBP+)",
       "Shipped zero-downtime deployments via GitHub Actions CI/CD with Docker + Azure",
       "Integrated Google Gemini AI and Azure Cognitive Services Speech SDK for auto-subtitle generation",
@@ -39,15 +39,15 @@ const items: ExpItem[] = [
     current: true,
   },
   {
-    period: "Apr 2025 — Sep 2025",
+    period: "Apr 2025 · Sep 2025",
     year: "2025",
     title: "Associate Software Engineer",
     company: "Visnext Software Solutions",
     type: "Full-Time",
     description:
-      "Rebuilt the full frontend of Job Wallet — an AI-powered job application tracking SaaS — migrating from a legacy UI to Vue 3 / Quasar Framework with Pinia and Tailwind CSS. Engineered 10+ Django REST Framework APIs across job descriptions, CV resumes, subscription plans, notifications, contacts, and files.",
+      "Rebuilt the full frontend of Job Wallet, an AI-powered job application tracking SaaS, migrating from a legacy UI to Vue 3 / Quasar Framework with Pinia and Tailwind CSS. Engineered 10+ Django REST Framework APIs across job descriptions, CV resumes, subscription plans, notifications, contacts, and files.",
     points: [
-      "Sole engineer in a 2-person team (PM + developer) — delivered all frontend and backend features independently under PM-assigned sprint workflow",
+      "Sole engineer in a 2-person team (PM + developer): delivered all frontend and backend features independently under PM-assigned sprint workflow",
       "Secured all APIs with JWT + RBAC; eliminated N+1 query patterns in Django ORM / MySQL reducing backend response overhead",
       "Implemented Celery + Redis async task queue for scheduled interview reminders and subscription lifecycle events",
       "Delivered Stripe freemium billing with 2 subscription tiers (Basic $0 / Unlimited $10/mo), webhook idempotency, and dual-channel notifications",
@@ -57,7 +57,7 @@ const items: ExpItem[] = [
     tags: ["Vue 3", "Quasar", "Pinia", "Tailwind CSS", "Django REST", "Python", "MySQL", "JWT", "Celery", "Redis", "Stripe"],
   },
   {
-    period: "2020 — 2025",
+    period: "2020 · 2025",
     year: "2020",
     title: "BS Software Engineering",
     company: "FAST-NUCES Lahore",
@@ -105,7 +105,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-20 overflow-hidden"
+      className="relative py-6 overflow-hidden"
       style={{ background: "var(--bg-primary)" }}
     >
       {/* Subtle dot grid (dark mode only) */}
@@ -113,25 +113,25 @@ export default function Experience() {
         position: "absolute", inset: 0, pointerEvents: "none",
         backgroundImage: "radial-gradient(circle, rgba(100,255,218,0.07) 1px, transparent 1px)",
         backgroundSize: "44px 44px",
-        mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
-        WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
+        maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
+        WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
       <div className="max-w-[1100px] mx-auto px-6 relative z-10">
 
         {/* Section header */}
         <ScrollReveal>
-          <div style={{ marginBottom: "3rem" }}>
+          <div style={{ marginBottom: "1rem" }}>
             <p style={{
               fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
               color: "var(--accent)", textTransform: "uppercase",
               letterSpacing: "0.28em", marginBottom: "0.85rem",
             }}>
-              02 — Career
+              02. Career
             </p>
             <h2 style={{
-              fontFamily: "var(--font-space)", fontWeight: 900,
-              fontSize: "clamp(2rem, 4vw, 3.4rem)",
+              fontFamily: "var(--font-space)", fontWeight: 800,
+              fontSize: "clamp(1.75rem, 3vw, 2.6rem)",
               lineHeight: 1.05, color: "var(--text-primary)", letterSpacing: "-0.02em",
             }}>
               My career<br />
@@ -248,8 +248,8 @@ export default function Experience() {
                       {/* Left: title + company */}
                       <div>
                         <h3 style={{
-                          fontFamily: "var(--font-space)", fontWeight: 800,
-                          fontSize: "1.2rem", color: "var(--text-primary)",
+                          fontFamily: "var(--font-space)", fontWeight: 700,
+                          fontSize: "1.05rem", color: "var(--text-primary)",
                           marginBottom: "0.18rem", lineHeight: 1.2,
                         }}>
                           {item.title}

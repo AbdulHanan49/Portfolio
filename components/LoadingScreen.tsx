@@ -20,16 +20,6 @@ export default function LoadingScreen() {
 
     let minTimer: ReturnType<typeof setTimeout>;
     let fadeTimer: ReturnType<typeof setTimeout> | undefined;
-    let rafId1: number;
-    let rafId2: number;
-
-    // Remove static HTML cover only after LoadingScreen is painted (2 frames)
-    rafId1 = requestAnimationFrame(() => {
-      rafId2 = requestAnimationFrame(() => {
-        const cover = document.getElementById("pre-react-cover");
-        if (cover) cover.remove();
-      });
-    });
 
     let minPassed = false;
     let pageDone  = false;
@@ -61,8 +51,6 @@ export default function LoadingScreen() {
     }
 
     return () => {
-      cancelAnimationFrame(rafId1);
-      cancelAnimationFrame(rafId2);
       clearTimeout(minTimer);
       clearTimeout(fadeTimer);
     };

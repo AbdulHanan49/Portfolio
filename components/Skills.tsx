@@ -34,15 +34,9 @@ const SI = {
 
 interface Skill {
   name: string; icon: React.ReactNode; color: string;
-  level: "Expert" | "Advanced" | "Intermediate";
+  tier: "production" | "familiar";
   experience: string; description: string; tools: string[];
 }
-
-const levelMeta: Record<string, { color: string; width: string }> = {
-  Expert:       { color: "var(--accent)", width: "92%" },
-  Advanced:     { color: "var(--accent)", width: "72%" },
-  Intermediate: { color: "var(--text-secondary)", width: "48%" },
-};
 
 const columns: { title: string; accent: string; number: string; skills: Skill[] }[] = [
   {
@@ -50,11 +44,11 @@ const columns: { title: string; accent: string; number: string; skills: Skill[] 
     number: "01",
     accent: "var(--accent)",
     skills: [
-      { name: "React 18",     icon: SI.React,      color: "#61dafb", level: "Expert",       experience: "1+ yr",  description: "Production SaaS with 70+ custom hooks, TanStack Query v5, Zustand + Zundo, React Hook Form, i18next, PWA.",  tools: ["TanStack Query","Zustand","React Hook Form","i18next"] },
-      { name: "TypeScript",   icon: SI.TypeScript, color: "#3178c6", level: "Expert",       experience: "1+ yr",  description: "Type-safe production code with generics, utility types, Pydantic-style validation, strict config.",           tools: ["Generics","Type Guards","Utility Types","Zod"] },
-      { name: "JavaScript",   icon: SI.JavaScript, color: "#f7df1e", level: "Expert",       experience: "2+ yrs", description: "ES6+, async patterns, closures, DOM APIs — used daily across every project.",                               tools: ["ES6+","Promises","Web APIs","Async/Await"] },
-      { name: "Vue 3",        icon: SI.Vue,        color: "#42b883", level: "Advanced",     experience: "6 mo",   description: "Rebuilt Job Wallet frontend at Visnext — Vue 3 Composition API with Quasar Framework, Pinia state management, and Tailwind CSS across 10+ feature screens.", tools: ["Composition API","Quasar Framework","Pinia","Tailwind CSS"] },
-      { name: "Tailwind CSS", icon: SI.Tailwind,   color: "#06b6d4", level: "Expert",       experience: "1+ yr",  description: "Utility-first styling with Tailwind CSS 4, custom design systems, animations, responsive layouts.",          tools: ["CSS 4","Custom Themes","Animations","Dark Mode"] },
+      { name: "React 18",     icon: SI.React,      color: "#61dafb", tier: "production", experience: "1+ yr",  description: "Production SaaS with 70+ custom hooks, TanStack Query v5, Zustand + Zundo, React Hook Form, i18next, PWA.",  tools: ["TanStack Query","Zustand","React Hook Form","i18next"] },
+      { name: "TypeScript",   icon: SI.TypeScript, color: "#3178c6", tier: "production", experience: "1+ yr",  description: "Type-safe production code with generics, utility types, Pydantic-style validation, strict config.",           tools: ["Generics","Type Guards","Utility Types","Zod"] },
+      { name: "JavaScript",   icon: SI.JavaScript, color: "#f7df1e", tier: "production", experience: "2+ yrs", description: "ES6+, async patterns, closures, DOM APIs. Used daily across every project.",                                tools: ["ES6+","Promises","Web APIs","Async/Await"] },
+      { name: "Vue 3",        icon: SI.Vue,        color: "#42b883", tier: "production", experience: "6 mo",   description: "Rebuilt Job Wallet frontend at Visnext with Vue 3 Composition API, Quasar Framework, Pinia state management, and Tailwind CSS across 10+ feature screens.", tools: ["Composition API","Quasar Framework","Pinia","Tailwind CSS"] },
+      { name: "Tailwind CSS", icon: SI.Tailwind,   color: "#06b6d4", tier: "production", experience: "1+ yr",  description: "Utility-first styling with Tailwind CSS 4, custom design systems, animations, responsive layouts.",          tools: ["CSS 4","Custom Themes","Animations","Dark Mode"] },
     ],
   },
   {
@@ -62,11 +56,11 @@ const columns: { title: string; accent: string; number: string; skills: Skill[] 
     number: "02",
     accent: "var(--accent)",
     skills: [
-      { name: "FastAPI",     icon: SI.FastAPI,    color: "#009688", level: "Expert",   experience: "1 yr",   description: "Primary backend at KCube — Pydantic v2, SQLModel, Alembic migrations, async endpoints, JWT + OAuth.",                                                     tools: ["Pydantic v2","SQLModel","Alembic","Async Routes"] },
-      { name: "Python",      icon: SI.Python,     color: "#3776ab", level: "Advanced", experience: "2+ yrs", description: "Primary backend language — FastAPI at KCube for MixClip and Django REST at Visnext for Job Wallet. OpenCV + Matplotlib for image processing projects.", tools: ["FastAPI","Django REST","OpenCV","Pydantic"] },
-      { name: "Node.js",     icon: SI.NodeJS,     color: "#68a063", level: "Advanced", experience: "1+ yr",  description: "Express REST APIs at KCube and Remotion 4 video rendering engine for MixClip.",                                                                         tools: ["Remotion 4","Express","REST APIs","Video Rendering"] },
-      { name: "Express.js",  icon: SI.Express,    color: "#c0c0c0", level: "Advanced", experience: "1+ yr",  description: "Middleware patterns, routing, JWT auth, structured API contracts, validation.",                                                                          tools: ["Middleware","JWT Auth","Rate Limiting","Validation"] },
-      { name: "Django REST", icon: SI.Django,     color: "#44b78b", level: "Advanced", experience: "6 mo",   description: "Built 10+ resource APIs at Visnext — DRF serializers, viewsets, JWT + RBAC, Django ORM N+1 optimisation, Celery + Redis async tasks.",               tools: ["Serializers","Viewsets","RBAC","Celery + Redis"] },
+      { name: "FastAPI",     icon: SI.FastAPI,    color: "#009688", tier: "production", experience: "1 yr",   description: "Primary backend at KCube: Pydantic v2, SQLModel, Alembic migrations, async endpoints, JWT + OAuth.",                                                      tools: ["Pydantic v2","SQLModel","Alembic","Async Routes"] },
+      { name: "Python",      icon: SI.Python,     color: "#3776ab", tier: "production", experience: "2+ yrs", description: "Primary backend language. FastAPI at KCube for MixClip and Django REST at Visnext for Job Wallet. OpenCV + Matplotlib for image processing projects.", tools: ["FastAPI","Django REST","OpenCV","Pydantic"] },
+      { name: "Node.js",     icon: SI.NodeJS,     color: "#68a063", tier: "production", experience: "1+ yr",  description: "Express REST APIs at KCube and Remotion 4 video rendering engine for MixClip.",                                                                         tools: ["Remotion 4","Express","REST APIs","Video Rendering"] },
+      { name: "Express.js",  icon: SI.Express,    color: "#c0c0c0", tier: "production", experience: "1+ yr",  description: "Middleware patterns, routing, JWT auth, structured API contracts, validation.",                                                                          tools: ["Middleware","JWT Auth","Rate Limiting","Validation"] },
+      { name: "Django REST", icon: SI.Django,     color: "#44b78b", tier: "production", experience: "6 mo",   description: "Built 10+ resource APIs at Visnext: DRF serializers, viewsets, JWT + RBAC, Django ORM N+1 optimisation, Celery + Redis async tasks.",                tools: ["Serializers","Viewsets","RBAC","Celery + Redis"] },
     ],
   },
   {
@@ -74,10 +68,10 @@ const columns: { title: string; accent: string; number: string; skills: Skill[] 
     number: "03",
     accent: "var(--accent)",
     skills: [
-      { name: "PostgreSQL", icon: SI.PostgreSQL,      color: "#4169e1", level: "Advanced",      experience: "1+ yr", description: "Relational data modelling, complex queries, Alembic migrations, SQLAlchemy 2, query optimisation at KCube.",                                                           tools: ["SQLAlchemy 2","Alembic","Migrations","Transactions"] },
-      { name: "MySQL",      icon: SI.MySQL,           color: "#4479a1", level: "Advanced",      experience: "6 mo",  description: "Production database at Visnext for Job Wallet — schema design, N+1 query elimination via Django ORM select_related / prefetch_related, index-level optimisation.",    tools: ["Django ORM","select_related","Indexes","Migrations"] },
-      { name: "MongoDB",    icon: SI.MongoDB,         color: "#47a248", level: "Intermediate",  experience: "1 yr",  description: "Schema design, aggregation pipelines, Mongoose ODM — used in MERN-stack projects including Screen Sizzle.",                                                             tools: ["Mongoose","Aggregation","Atlas","Indexing"] },
-      { name: "Redis",      icon: <FiDatabase />,     color: "#DC382D", level: "Advanced",      experience: "6 mo",  description: "Async task queue backing with Celery at Visnext — scheduled interview reminders, subscription lifecycle events, and webhook processing.",                               tools: ["Celery","Task Queues","Pub/Sub","Caching"] },
+      { name: "PostgreSQL", icon: SI.PostgreSQL,      color: "#4169e1", tier: "production", experience: "1+ yr", description: "Relational data modelling, complex queries, Alembic migrations, SQLAlchemy 2, query optimisation at KCube.",                                              tools: ["SQLAlchemy 2","Alembic","Migrations","Transactions"] },
+      { name: "MySQL",      icon: SI.MySQL,           color: "#4479a1", tier: "production", experience: "6 mo",  description: "Production database at Visnext for Job Wallet: schema design, N+1 query elimination via Django ORM select_related / prefetch_related, index-level optimisation.", tools: ["Django ORM","select_related","Indexes","Migrations"] },
+      { name: "MongoDB",    icon: SI.MongoDB,         color: "#47a248", tier: "familiar",   experience: "1 yr",  description: "Schema design, aggregation pipelines, Mongoose ODM. Used in MERN-stack projects including Screen Sizzle.",                                                         tools: ["Mongoose","Aggregation","Atlas","Indexing"] },
+      { name: "Redis",      icon: <FiDatabase />,     color: "#DC382D", tier: "production", experience: "6 mo",  description: "Async task queue backing with Celery at Visnext: scheduled interview reminders, subscription lifecycle events, and webhook processing.",                          tools: ["Celery","Task Queues","Pub/Sub","Caching"] },
     ],
   },
   {
@@ -85,12 +79,12 @@ const columns: { title: string; accent: string; number: string; skills: Skill[] 
     number: "04",
     accent: "var(--accent)",
     skills: [
-      { name: "Docker",     icon: SI.Docker,     color: "#2496ed", level: "Advanced",    experience: "1+ yr",  description: "Multi-stage builds, Docker Compose, containerised micro-services — used in production Azure deployments.",         tools: ["Multi-stage","Compose","Azure ACR","Networks"] },
-      { name: "GH Actions", icon: SI.GHActions, color: "#2088ff", level: "Advanced",    experience: "1 yr",   description: "Automated CI/CD: build â†’ test â†’ push to Azure Container Registry â†’ deploy to Azure Container Apps.",              tools: ["CI Pipelines","Docker Build","Release Gates","Env Secrets"] },
-      { name: "Azure",      icon: <FiCloud />,  color: "#0078d4", level: "Advanced",    experience: "1 yr",   description: "Azure Container Apps, Container Registry, Blob & Queue Storage, Cognitive Services Speech SDK.",                   tools: ["Container Apps","Blob Storage","ACR","Speech SDK"] },
-      { name: "Stripe API", icon: SI.Stripe,    color: "#635bff", level: "Advanced",    experience: "1 yr",   description: "Production billing at both KCube and Visnext — subscriptions, 17+ currencies, webhooks, trial lifecycle.",         tools: ["Subscriptions","Webhooks","Multi-currency","Trials"] },
-      { name: "Git",        icon: SI.Git,       color: "#f05032", level: "Expert",      experience: "3+ yrs", description: "Branching strategies, rebasing, conflict resolution, CI workflow hooks.",                                          tools: ["GitHub Actions","Git Flow","Rebasing","Hooks"] },
-      { name: "Gemini AI",  icon: SI.Gemini,   color: "#4285f4", level: "Intermediate", experience: "< 1 yr", description: "Google Gemini AI API integrated into MixClip at KCube — content assistance for script writing and AI-generated video metadata.", tools: ["Gemini API","Prompt Engineering","Content Gen","REST"] },
+      { name: "Docker",     icon: SI.Docker,     color: "#2496ed", tier: "production", experience: "1+ yr",  description: "Multi-stage builds, Docker Compose, containerised micro-services. Used in production Azure deployments.",          tools: ["Multi-stage","Compose","Azure ACR","Networks"] },
+      { name: "GH Actions", icon: SI.GHActions, color: "#2088ff", tier: "production", experience: "1 yr",   description: "Automated CI/CD: build, test, push to Azure Container Registry, deploy to Azure Container Apps.",                  tools: ["CI Pipelines","Docker Build","Release Gates","Env Secrets"] },
+      { name: "Azure",      icon: <FiCloud />,  color: "#0078d4", tier: "production", experience: "1 yr",   description: "Azure Container Apps, Container Registry, Blob & Queue Storage, Cognitive Services Speech SDK.",                   tools: ["Container Apps","Blob Storage","ACR","Speech SDK"] },
+      { name: "Stripe API", icon: SI.Stripe,    color: "#635bff", tier: "production", experience: "1 yr",   description: "Production billing at both KCube and Visnext: subscriptions, 17+ currencies, webhooks, trial lifecycle.",          tools: ["Subscriptions","Webhooks","Multi-currency","Trials"] },
+      { name: "Git",        icon: SI.Git,       color: "#f05032", tier: "production", experience: "3+ yrs", description: "Branching strategies, rebasing, conflict resolution, CI workflow hooks.",                                          tools: ["GitHub Actions","Git Flow","Rebasing","Hooks"] },
+      { name: "Gemini AI",  icon: SI.Gemini,   color: "#4285f4", tier: "familiar",   experience: "< 1 yr", description: "Google Gemini AI API integrated into MixClip at KCube: content assistance for script writing and AI-generated video metadata.", tools: ["Gemini API","Prompt Engineering","Content Gen","REST"] },
     ],
   },
 ];
@@ -100,7 +94,7 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
   skill: Skill; delay: number; catAccent: string;
   isOpen: boolean; onOpen: () => void; onClose: () => void;
 }) {
-  const meta = levelMeta[skill.level];
+  const isProd = skill.tier === "production";
 
   return (
     <>
@@ -118,8 +112,8 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
           display: "flex", alignItems: "center", gap: "0.65rem",
           padding: "0.6rem 0.75rem",
           borderRadius: 10,
-          background: `var(--card-bg)`,
-          border: `1px solid var(--border)`,
+          background: "var(--bg-tertiary)",
+          border: "1px solid var(--border)",
           cursor: "pointer", outline: "none",
           transition: "border-color .2s, background .2s",
         }}
@@ -134,9 +128,9 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
           {skill.icon}
         </div>
 
-        {/* Name + bar */}
+        {/* Name + tier badge */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.28rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{
               fontFamily: "var(--font-space)", fontSize: "0.8rem", fontWeight: 700,
               color: "var(--text-primary)", lineHeight: 1,
@@ -144,25 +138,15 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
               {skill.name}
             </span>
             <span style={{
-              fontFamily: "var(--font-fira)", fontSize: "0.56rem", fontWeight: 700,
-              color: meta.color, background: `${meta.color}12`,
+              fontFamily: "var(--font-fira)", fontSize: "0.52rem", fontWeight: 700,
+              color: isProd ? "var(--accent)" : "var(--text-muted)",
+              background: isProd ? "var(--accent-mix-10)" : "var(--bg-primary)",
               padding: "0.1rem 0.42rem", borderRadius: 999,
-              border: `1px solid ${meta.color}28`, flexShrink: 0,
+              border: `1px solid ${isProd ? "var(--accent-mix-25)" : "var(--border)"}`,
+              flexShrink: 0,
             }}>
-              {skill.level}
+              {isProd ? "In prod" : "Familiar"}
             </span>
-          </div>
-          <div style={{ height: 3, borderRadius: 999, background: `${skill.color}14`, overflow: "hidden" }}>
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: meta.width }}
-              viewport={{ once: true }}
-              transition={{ delay: delay + 0.18, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                height: "100%", borderRadius: 999,
-                background: `linear-gradient(90deg, ${meta.color}, ${skill.color})`,
-              }}
-            />
           </div>
         </div>
       </motion.div>
@@ -222,33 +206,24 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
                   {skill.icon}
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: "var(--font-space)", fontWeight: 800, fontSize: "1.2rem", color: "var(--text-primary)", marginBottom: "0.3rem" }}>
+                  <h3 style={{ fontFamily: "var(--font-space)", fontWeight: 700, fontSize: "1.05rem", color: "var(--text-primary)", marginBottom: "0.3rem" }}>
                     {skill.name}
                   </h3>
                   <div style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}>
                     <span style={{
                       fontFamily: "var(--font-fira)", fontSize: "0.6rem", fontWeight: 800,
                       textTransform: "uppercase", letterSpacing: "0.1em",
-                      color: meta.color, background: `${meta.color}15`,
+                      color: isProd ? "var(--accent)" : "var(--text-muted)",
+                      background: isProd ? "var(--accent-mix-10)" : "var(--bg-tertiary)",
                       padding: "0.18rem 0.6rem", borderRadius: 999,
-                      border: `1px solid ${meta.color}30`,
+                      border: `1px solid ${isProd ? "var(--accent-mix-25)" : "var(--border)"}`,
                     }}>
-                      {skill.level}
+                      {isProd ? "Shipped in production" : "Working knowledge"}
                     </span>
                     <span style={{ fontFamily: "var(--font-fira)", fontSize: "0.68rem", color: "var(--text-muted)" }}>
                       {skill.experience}
                     </span>
                   </div>
-                </div>
-              </div>
-              <div style={{ marginBottom: "1.25rem" }}>
-                <div style={{ width: "100%", height: 5, borderRadius: 999, background: `${skill.color}15`, overflow: "hidden" }}>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: meta.width }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ height: "100%", borderRadius: 999, background: `linear-gradient(90deg, ${meta.color}, ${skill.color})`, boxShadow: `0 0 10px ${meta.color}80` }}
-                  />
                 </div>
               </div>
               <p style={{ fontFamily: "var(--font-sora)", fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
@@ -317,7 +292,7 @@ function SkillColumn({ col, colIndex, activeSkill, onOpen, onClose }: {
             {col.number}
           </span>
           <h3 style={{
-            fontFamily: "var(--font-space)", fontWeight: 800,
+            fontFamily: "var(--font-space)", fontWeight: 700,
             fontSize: "1rem", color: "var(--text-primary)", margin: 0,
           }}>
             {col.title}
@@ -370,7 +345,7 @@ export default function Skills() {
     <section
       id="skills"
       style={{
-        padding: "6rem 0 7rem",
+        padding: "1.25rem 0 1.5rem",
         background: "var(--bg-primary)",
         position: "relative",
         overflow: "hidden",
@@ -381,25 +356,25 @@ export default function Skills() {
         position: "absolute", inset: 0, pointerEvents: "none",
         backgroundImage: "radial-gradient(circle, rgba(100,255,218,0.07) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
-        mask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
-        WebkitMask: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
+        maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
+        WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
       }} />
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem", position: "relative", zIndex: 1 }}>
 
         {/* Section header */}
         <ScrollReveal>
-          <div style={{ marginBottom: "2.5rem" }}>
+          <div style={{ marginBottom: "1rem" }}>
             <p style={{
               fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
               color: "var(--accent)", textTransform: "uppercase",
               letterSpacing: "0.28em", marginBottom: "0.6rem",
             }}>
-              04 — Skills
+              04. Skills
             </p>
             <h2 style={{
-              fontFamily: "var(--font-space)", fontWeight: 900,
-              fontSize: "clamp(2rem, 4vw, 3.4rem)", lineHeight: 1.05,
+              fontFamily: "var(--font-space)", fontWeight: 800,
+              fontSize: "clamp(1.75rem, 3vw, 2.6rem)", lineHeight: 1.05,
               color: "var(--text-primary)", letterSpacing: "-0.02em",
             }}>
               Tech stack &amp;<br />

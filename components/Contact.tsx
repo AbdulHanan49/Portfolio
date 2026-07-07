@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="pt-20 pb-32 relative overflow-hidden"
+      className="pt-20 pb-40 relative overflow-hidden"
       style={{ background: "var(--bg-primary)" }}
     >
       {/* Subtle dot grid (dark mode only) */}
@@ -55,25 +55,25 @@ export default function Contact() {
         position: "absolute", inset: 0, pointerEvents: "none",
         backgroundImage: "radial-gradient(circle, rgba(100,255,218,0.07) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
-        mask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
-        WebkitMask: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
+        maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
+        WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
       <div className="max-w-[1200px] mx-auto px-6 relative z-10">
 
         {/* Header */}
         <ScrollReveal>
-          <div style={{ marginBottom: "1.75rem" }}>
+          <div style={{ marginBottom: "1.25rem" }}>
             <p style={{
               fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
               color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.28em",
               marginBottom: "0.75rem",
             }}>
-              05 — Contact
+              05. Contact
             </p>
             <h2 style={{
-              fontFamily: "var(--font-space)", fontWeight: 900,
-              fontSize: "clamp(2rem, 4vw, 3.4rem)", lineHeight: 1.05,
+              fontFamily: "var(--font-space)", fontWeight: 800,
+              fontSize: "clamp(1.75rem, 3vw, 2.6rem)", lineHeight: 1.05,
               color: "var(--text-primary)", letterSpacing: "-0.02em", marginBottom: "0.5rem",
             }}>
               Got a project?<br />
@@ -94,7 +94,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
                 {/* Left — contact info column */}
-                <div className="lg:col-span-2 flex flex-col justify-center gap-6">
+                <div className="lg:col-span-2 flex flex-col justify-center gap-8">
                   <div>
                     <h4 className="contact-form-heading" style={{ marginBottom: "0.4rem" }}>
                       Let&apos;s work together
@@ -298,7 +298,7 @@ export default function Contact() {
                             exit={{ opacity: 0, y: -10 }}
                             style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
                           >
-                            <FiAlertCircle size={16} /> Failed — try email
+                            <FiAlertCircle size={16} /> Failed, try email
                           </motion.span>
                         ) : sending ? (
                           <motion.span

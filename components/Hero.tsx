@@ -25,9 +25,9 @@ function ProfileCard() {
   const [hovered, setHovered] = useState(false);
 
   const INFO_ROWS = [
-    { label: "Company",  value: "KCube Solutions", accent: "#ccd6f6" },
-    { label: "Location", value: "Lahore · Remote", accent: "#ccd6f6" },
-    { label: "Degree",   value: "BSSE · FAST-NUCES '25", accent: "#ccd6f6" },
+    { label: "Company",  value: "KCube Solutions", accent: "#e8eeff" },
+    { label: "Location", value: "Lahore · Remote", accent: "#e8eeff" },
+    { label: "Degree",   value: "BSSE · FAST-NUCES '24", accent: "#e8eeff" },
   ];
 
   const ease = "cubic-bezier(0.16,1,0.3,1)";
@@ -160,7 +160,7 @@ function ProfileCard() {
         {/* Scrim behind text */}
         <div style={{
           position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none",
-          background: "linear-gradient(to top, rgba(6,3,20,0.72) 0%, rgba(10,5,32,0.45) 55%, transparent 100%)",
+          background: "linear-gradient(to top, rgba(4,2,14,0.94) 0%, rgba(6,3,20,0.78) 50%, rgba(6,3,20,0.35) 80%, transparent 100%)",
           opacity: hovered ? 1 : 0,
           transition: "opacity 0.4s ease",
         }} />
@@ -188,7 +188,7 @@ function ProfileCard() {
             }}>
               <span style={{
                 fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 600,
-                color: "rgba(136,146,176,0.55)", letterSpacing: "0.06em", textTransform: "uppercase",
+                color: "rgba(180,192,220,0.85)", letterSpacing: "0.06em", textTransform: "uppercase",
               }}>{label}</span>
               <span style={{
                 fontFamily: "var(--font-sora)", fontSize: "0.78rem", fontWeight: 700,
@@ -232,7 +232,7 @@ export default function Hero() {
   const isDark = theme === "dark";
   const nameGradient = isDark
     ? "linear-gradient(135deg, #e6f1ff 0%, #ccd6f6 65%, #64ffda 100%)"
-    : "linear-gradient(135deg, #0d2b5e 0%, #1e56c4 55%, #4A90E2 100%)";
+    : "linear-gradient(135deg, #0d2b5e 0%, #1e56c4 55%, #2563EB 100%)";
 
   const spotlightRef = useRef<HTMLDivElement>(null);
 
@@ -262,7 +262,7 @@ export default function Hero() {
       {/* Two-column layout */}
       <div
         className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 px-5 sm:px-8 lg:px-16"
-        style={{ minHeight: "100svh", maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5rem, 10vw, 7rem)", paddingBottom: "3rem" }}
+        style={{ maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5.5rem, 10vw, 7.5rem)", paddingBottom: "clamp(3rem, 5vw, 4.5rem)" }}
       >
 
         {/* LEFT — Name block */}
@@ -283,8 +283,8 @@ export default function Hero() {
             <h1 style={{ margin: 0, lineHeight: 0.9, letterSpacing: "-0.03em", textTransform: "uppercase" }}>
               <span style={{
                 display: "block",
-                fontFamily: "var(--font-space)", fontWeight: 900,
-                fontSize: "clamp(1.6rem, 5vw, 3.2rem)",
+                fontFamily: "var(--font-space)", fontWeight: 800,
+                fontSize: "clamp(1.2rem, 3.5vw, 2.2rem)",
                 color: "var(--text-secondary)", letterSpacing: "-0.02em",
                 marginBottom: "0.1em",
               }}>
@@ -292,8 +292,8 @@ export default function Hero() {
               </span>
               <span style={{
                 display: "block",
-                fontFamily: "var(--font-space)", fontWeight: 900,
-                fontSize: "clamp(3.2rem, 12vw, 8.5rem)",
+                fontFamily: "var(--font-space)", fontWeight: 800,
+                fontSize: "clamp(2.8rem, 10vw, 7rem)",
                 lineHeight: 0.88, letterSpacing: "-0.04em",
                 backgroundImage: nameGradient,
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
@@ -324,7 +324,7 @@ export default function Hero() {
               fontSize: "clamp(0.85rem, 1.3vw, 0.95rem)",
               color: "var(--text-secondary)", lineHeight: 1.85,
             }}>
-              Building full-stack products with React, FastAPI &amp; TypeScript —
+              Building full-stack products with React, FastAPI &amp; TypeScript,
               from first commit to production. 2 years active, 3 SaaS shipped.
             </p>
           </div>

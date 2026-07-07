@@ -1,8 +1,8 @@
 ﻿"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiSun, FiMoon, FiMenu, FiX, FiDownload } from "react-icons/fi";
+import { FiSun, FiMoon, FiMenu, FiX, FiDownload, FiGithub, FiLinkedin } from "react-icons/fi";
 import { useTheme } from "./ThemeProvider";
 
 const NAV_ITEMS = [
@@ -20,6 +20,7 @@ export default function Navbar() {
   const [active,    setActive]    = useState("home");
   const [menuOpen,  setMenuOpen]  = useState(false);
   const dark = theme === "dark";
+  const activeHrefRef = useRef("#home");
 
   useEffect(() => {
     // On mount: scroll to the hash if present (enables deep-linking)
@@ -38,10 +39,14 @@ export default function Navbar() {
       for (let i = NAV_ITEMS.length - 1; i >= 0; i--) {
         const el = document.querySelector(NAV_ITEMS[i].href) as HTMLElement | null;
         if (el && el.offsetTop <= pos) {
-          const id = NAV_ITEMS[i].href.slice(1);
-          setActive(id);
-          // Keep URL in sync as user scrolls
-          window.history.replaceState(null, "", NAV_ITEMS[i].href);
+          const href = NAV_ITEMS[i].href;
+          setActive(href.slice(1));
+          // Only call replaceState when the section actually changes — calling it
+          // on every scroll event exceeds iOS Safari's 100-calls/30s limit and crashes.
+          if (href !== activeHrefRef.current) {
+            activeHrefRef.current = href;
+            window.history.replaceState(null, "", href);
+          }
           break;
         }
       }
@@ -84,13 +89,32 @@ export default function Navbar() {
       {/* â•â•â•â•â•â•â•â•â•â•â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â• */}
       <header style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
-        padding: scrolled ? "0.85rem 1.5rem" : "1.25rem 1.5rem",
+        paddingTop: `calc(${scrolled ? "0.85rem" : "1.25rem"} + env(safe-area-inset-top))`,
+        paddingBottom: scrolled ? "0.85rem" : "1.25rem",
+        paddingLeft: "1.5rem", paddingRight: "1.5rem",
         transition: "padding 0.35s ease",
-        pointerEvents: "none",   /* click-through on empty space */
+        pointerEvents: "none",
       }}>
+        {/* Universal backdrop — subtle at top, frosted glass once scrolled */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: scrolled
+            ? dark ? "rgba(10,25,47,0.92)" : "rgba(244,244,244,0.92)"
+            : dark ? "rgba(10,25,47,0.55)" : "rgba(244,244,244,0.55)",
+          backdropFilter: "blur(20px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.6)",
+          borderBottom: `1px solid ${scrolled
+            ? dark ? "rgba(100,255,218,0.08)" : "rgba(0,0,0,0.07)"
+            : "transparent"}`,
+          boxShadow: scrolled
+            ? dark ? "0 4px 24px rgba(0,0,0,0.30)" : "0 4px 24px rgba(0,0,0,0.07)"
+            : "none",
+          transition: "background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
+        }} />
         <div style={{
           maxWidth: 1200, margin: "0 auto",
           display: "flex", alignItems: "center", justifyContent: "space-between",
+          position: "relative",
         }}>
 
           {/* ── Logo ── */}
@@ -277,92 +301,161 @@ export default function Navbar() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 35 }}
+              transition={{ type: "spring", stiffness: 300, damping: 32 }}
               style={{
                 position: "fixed", top: 0, right: 0, bottom: 0,
-                width: "min(260px, 85vw)", zIndex: 999,
-                background: dark
-                  ? "rgba(10,25,47,0.98)"
-                  : "rgba(236,240,241,0.98)",
-                backdropFilter: "blur(24px)",
-                borderLeft: `1px solid ${dark
-                  ? "rgba(100, 255, 218,0.14)"
-                  : "rgba(8,145,178,0.12)"}`,
+                width: "min(280px, 88vw)", zIndex: 999,
+                background: dark ? "#0d1f38" : "#f8f9fa",
+                borderLeft: `1px solid ${dark ? "rgba(100,255,218,0.10)" : "rgba(0,0,0,0.08)"}`,
                 display: "flex", flexDirection: "column",
-                padding: "5.5rem 1.25rem 2rem",
-                gap: "0.3rem",
+                overflow: "hidden",
               }}
             >
-              {/* Top accent line */}
+              {/* Identity header */}
               <div style={{
-                position: "absolute", top: 0, left: 0, right: 0, height: 2,
-                background: "linear-gradient(to right, transparent, rgba(100, 255, 218,0.25), transparent)",
-              }} />
-
-              {NAV_ITEMS.map(({ label, href }, i) => {
-                const isActive = active === href.slice(1);
-                return (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    initial={{ opacity: 0, x: 28 }}
-                    animate={{ opacity: 1, x: 0  }}
-                    transition={{ delay: i * 0.055, ease: [0.16, 1, 0.3, 1], duration: 0.3 }}
-                    onClick={(e) => { e.preventDefault(); go(href); }}
+                padding: "calc(2rem + env(safe-area-inset-top)) 1.5rem 1.5rem",
+                borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+              }}>
+                {/* Close button */}
+                <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1.5rem" }}>
+                  <motion.button
+                    onClick={() => setMenuOpen(false)}
+                    whileTap={{ scale: 0.9 }}
                     style={{
-                      display: "flex", alignItems: "center", justifyContent: "space-between",
-                      padding: "0.72rem 0.85rem",
-                      borderRadius: 10,
-                      background: isActive
-                        ? dark ? "rgba(100,255,218,0.10)" : "rgba(74,144,226,0.08)"
-                        : "transparent",
-                      border: `1px solid ${isActive
-                        ? dark ? "rgba(100,255,218,0.22)" : "rgba(74,144,226,0.25)"
-                        : "transparent"}`,
-                      fontFamily: "var(--font-space)", fontWeight: 700,
-                      fontSize: "0.88rem", letterSpacing: "0.03em",
-                      color: isActive
-                        ? dark ? "#ccd6f6" : "#2E2E2E"
-                        : dark ? "rgba(189,195,199,0.65)" : "rgba(46,46,46,0.60)",
-                      textDecoration: "none",
-                      transition: "background 0.2s, border-color 0.2s, color 0.2s",
+                      width: 36, height: 36, borderRadius: 8,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+                      border: "none", color: dark ? "#8892b0" : "#6b7280", cursor: "pointer",
                     }}
+                    aria-label="Close menu"
                   >
-                    {label}
-                    {isActive && (
-                      <span style={{
-                        width: 5, height: 5, borderRadius: "50%",
-                        background: "var(--accent)",
-                        boxShadow: "0 0 8px var(--accent-mix-45)",
-                      }} />
-                    )}
-                  </motion.a>
-                );
-              })}
+                    <FiX size={18} />
+                  </motion.button>
+                </div>
 
-              {/* Resume in drawer */}
-              <motion.a
-                href="/resume.pdf"
-                download="Hanan's Resume.pdf"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0  }}
-                transition={{ delay: NAV_ITEMS.length * 0.055 + 0.08, duration: 0.3 }}
-                style={{
-                  marginTop: "1.1rem",
-                  display: "flex", alignItems: "center", justifyContent: "center", gap: "0.45rem",
-                  padding: "0.7rem",
-                  borderRadius: 10,
-                  background: dark ? "rgba(100,255,218,0.09)"  : "rgba(46,46,46,0.07)",
-                  border: `1px solid ${dark ? "rgba(100,255,218,0.28)" : "rgba(46,46,46,0.30)"}`,
-                  fontFamily: "var(--font-fira)", fontWeight: 700,
-                  fontSize: "0.7rem", letterSpacing: "0.1em",
-                  color: dark ? "#ccd6f6" : "#2E2E2E",
-                  textDecoration: "none",
-                }}
-              >
-                <FiDownload size={12} />
-                DOWNLOAD RESUME
-              </motion.a>
+                {/* Monogram + name + role */}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
+                  <div style={{
+                    width: 44, height: 44, borderRadius: 12, flexShrink: 0,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    background: dark ? "rgba(100,255,218,0.08)" : "rgba(37,99,235,0.08)",
+                    border: `1.5px solid ${dark ? "rgba(100,255,218,0.20)" : "rgba(37,99,235,0.20)"}`,
+                    fontFamily: "var(--font-space)", fontWeight: 700, fontSize: "1rem",
+                    color: "var(--accent)",
+                  }}>
+                    AH
+                  </div>
+                  <div>
+                    <div style={{
+                      fontFamily: "var(--font-space)", fontWeight: 700, fontSize: "0.9rem",
+                      color: dark ? "#ccd6f6" : "#1e293b", lineHeight: 1.2,
+                    }}>
+                      Abdul Hanan
+                    </div>
+                    <div style={{
+                      fontFamily: "var(--font-sora)", fontSize: "0.72rem",
+                      color: dark ? "#8892b0" : "#64748b", marginTop: "0.15rem",
+                    }}>
+                      Full-Stack Engineer
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Nav links */}
+              <nav style={{ flex: 1, padding: "1rem 0.75rem", display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+                {NAV_ITEMS.map(({ label, href }, i) => {
+                  const isActive = active === href.slice(1);
+                  return (
+                    <motion.a
+                      key={href}
+                      href={href}
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.045, ease: [0.16, 1, 0.3, 1], duration: 0.28 }}
+                      onClick={(e) => { e.preventDefault(); go(href); }}
+                      style={{
+                        display: "flex", alignItems: "center", justifyContent: "space-between",
+                        padding: "0.78rem 0.85rem",
+                        borderRadius: 10,
+                        background: isActive
+                          ? dark ? "rgba(100,255,218,0.08)" : "rgba(37,99,235,0.07)"
+                          : "transparent",
+                        fontFamily: "var(--font-space)", fontWeight: isActive ? 700 : 500,
+                        fontSize: "0.95rem",
+                        color: isActive
+                          ? dark ? "#ccd6f6" : "#1e293b"
+                          : dark ? "rgba(136,146,176,0.80)" : "rgba(71,85,105,0.80)",
+                        textDecoration: "none",
+                        transition: "background 0.18s, color 0.18s",
+                        letterSpacing: "0.01em",
+                      }}
+                    >
+                      {label}
+                      {isActive && (
+                        <span style={{
+                          width: 6, height: 6, borderRadius: "50%",
+                          background: "var(--accent)",
+                        }} />
+                      )}
+                    </motion.a>
+                  );
+                })}
+              </nav>
+
+              {/* Footer — resume + socials */}
+              <div style={{
+                padding: "1rem 1.5rem 2rem",
+                borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+                display: "flex", flexDirection: "column", gap: "0.875rem",
+              }}>
+                <motion.a
+                  href="/resume.pdf"
+                  download="Hanan's Resume.pdf"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: NAV_ITEMS.length * 0.045 + 0.06, duration: 0.28 }}
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
+                    padding: "0.72rem",
+                    borderRadius: 10,
+                    background: dark ? "rgba(100,255,218,0.10)" : "rgba(37,99,235,0.09)",
+                    border: `1px solid ${dark ? "rgba(100,255,218,0.22)" : "rgba(37,99,235,0.22)"}`,
+                    fontFamily: "var(--font-fira)", fontWeight: 700,
+                    fontSize: "0.72rem", letterSpacing: "0.1em",
+                    color: dark ? "#64ffda" : "#2563EB",
+                    textDecoration: "none",
+                  }}
+                >
+                  <FiDownload size={13} />
+                  DOWNLOAD RESUME
+                </motion.a>
+
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  {[
+                    { href: "https://github.com/AbdulHanan49", icon: <FiGithub size={16} />, label: "GitHub" },
+                    { href: "https://linkedin.com/in/hanan-aslam-dev", icon: <FiLinkedin size={16} />, label: "LinkedIn" },
+                  ].map(({ href, icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      style={{
+                        flex: 1, height: 38, borderRadius: 9,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+                        border: `1px solid ${dark ? "rgba(255,255,255,0.09)" : "rgba(0,0,0,0.08)"}`,
+                        color: dark ? "#8892b0" : "#64748b",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </>
         )}

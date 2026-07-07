@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import ThemeProvider from "@/components/ThemeProvider";
-import CursorSpotlight from "@/components/CursorSpotlight";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -17,7 +16,6 @@ const Footer     = dynamic(() => import("@/components/Footer"));
 export default function Home() {
   return (
     <ThemeProvider>
-      <CursorSpotlight />
       <LoadingScreen />
       <Navbar />
       <main id="main-content">

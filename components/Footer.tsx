@@ -28,7 +28,7 @@ const footerColumns = [
       { label: "Email Me", href: "mailto:hananaslam90@gmail.com" },
       { label: "LinkedIn", href: "https://linkedin.com/in/hanan-aslam-b6160723a" },
       { label: "GitHub",   href: "https://github.com/AbdulHanan49" },
-      { label: "Resume",   href: "/resume.pdf" },
+      { label: "Resume",   href: "/resume.pdf", download: "Hanan's Resume.pdf" },
     ],
   },
 ];
@@ -99,7 +99,7 @@ export default function Footer() {
 
       {/* Footer content */}
       <div className="footer-content">
-        <div className="max-w-[1200px] mx-auto px-6 py-12">
+        <div className="max-w-[1200px] mx-auto px-6 py-20">
           <div className="footer-col-grid grid grid-cols-1 md:grid-cols-10 gap-10">
             {/* Brand column */}
             <motion.div
@@ -173,6 +173,7 @@ export default function Footer() {
                       <a
                         href={link.href}
                         className="footer-link"
+                        {...("download" in link && { download: link.download })}
                         {...(!link.href.startsWith("#") && {
                           target: "_blank",
                           rel: "noopener noreferrer",
@@ -189,12 +190,13 @@ export default function Footer() {
 
           {/* Bottom bar */}
           <div
-            className="mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+            className="mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3"
             style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
           >
             <p
               className="text-xs flex items-center gap-1"
               style={{ color: "rgba(255,255,255,0.4)" }}
+              suppressHydrationWarning
             >
               &copy; {new Date().getFullYear()} Abdul Hanan. Built with{" "}
               <span style={{ display: "inline-flex", animation: "heartBeat 1.2s ease-in-out infinite" }}>

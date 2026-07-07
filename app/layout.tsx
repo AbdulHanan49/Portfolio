@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Fira_Code, Sora } from "next/font/google";
 import "./globals.css";
 
@@ -20,6 +20,12 @@ const firaCode = Fira_Code({
   weight: ["400", "500", "600", "700"],
 });
 
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Abdul Hanan | Full-Stack Software Engineer",
@@ -114,15 +120,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="dark"
       className={`${sora.variable} ${spaceGrotesk.variable} ${firaCode.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
         <meta name="theme-color" content="#0E0808" />
-        {/* Inline theme bootstrap — runs before React hydrates, prevents flash */}
-        <script dangerouslySetInnerHTML={{
-          __html: `document.documentElement.setAttribute('data-theme','dark');(function(){var c=document.createElement('div');c.id='pre-react-cover';c.style.cssText='position:fixed;inset:0;background:#0a192f;z-index:99998;pointer-events:none;';document.addEventListener('DOMContentLoaded',function(){if(document.body)document.body.appendChild(c);});})();`
-        }} />
+        {/* JSON-LD — type="application/ld+json" is not executable JS, React does not warn */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useCallback, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
@@ -35,7 +35,7 @@ const projects: Project[] = [
     title: "Job Wallet",
     subtitle: "AI Job Tracking SaaS · Visnext Software Solutions",
     description:
-      "Modernised a struggling legacy UI into a production-grade SaaS — full frontend rebuilt in Vue 3 / Quasar with Pinia and Tailwind. Delivered 10+ Django REST APIs, JWT + RBAC auth, Celery / Redis async queue cutting manual follow-up effort for users, and Stripe freemium billing with dual-channel notifications (email + in-app).",
+      "Modernised a struggling legacy UI into a production-grade SaaS. Full frontend rebuilt in Vue 3 / Quasar with Pinia and Tailwind. Delivered 10+ Django REST APIs, JWT + RBAC auth, Celery / Redis async queue, and Stripe freemium billing with dual-channel notifications (email + in-app).",
     tags: ["Vue 3", "Quasar", "Django REST", "Python", "MySQL", "Celery", "Redis", "Stripe"],
     liveUrl: "https://jobwallet.co",
     gradient: "linear-gradient(135deg,#4A90E2 0%,#1a4a8a 55%,#020c1b 100%)",
@@ -46,7 +46,7 @@ const projects: Project[] = [
     title: "Screen Sizzle",
     subtitle: "Movie Seat Booking System · MERN",
     description:
-      "Solved the hardest problem in booking systems — concurrent double-booking. Implemented atomic MongoDB update patterns and real-time seat locking so multiple users racing for the same seat never both succeed. Full-stack MERN with Stripe checkout and Nodemailer confirmation emails.",
+      "Solved the hardest problem in booking systems: concurrent double-booking. Implemented atomic MongoDB update patterns and real-time seat locking so multiple users racing for the same seat never both succeed. Full-stack MERN with Stripe checkout and Nodemailer confirmation emails.",
     tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Stripe", "Nodemailer", "MERN"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/Screen-Sizzle",
@@ -70,7 +70,7 @@ const projects: Project[] = [
     title: "TourVista",
     subtitle: "Android Tour Booking App · Kotlin",
     description:
-      "End-to-end Android booking app covering the full traveller journey — search, participant selection, scheduling, and operator confirmation — all synced in real-time via Firestore. Firebase Auth handles secure login; MVVM architecture keeps the codebase testable and maintainable as features grow.",
+      "End-to-end Android booking app covering the full traveller journey: search, participant selection, scheduling, and operator confirmation, all synced in real-time via Firestore. Firebase Auth handles secure login; MVVM architecture keeps the codebase testable and maintainable as features grow.",
     tags: ["Kotlin", "Jetpack Compose", "Firebase Auth", "Firestore", "MVVM", "Android"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/TourVista",
@@ -82,7 +82,7 @@ const projects: Project[] = [
     title: "Brain Tumor Detection",
     subtitle: "Medical Imaging Pipeline · Python / OpenCV",
     description:
-      "Built a reproducible MRI preprocessing pipeline capable of ingesting mixed tumor / non-tumor datasets and outputting labelled sample grids for visual QA. Standardised input to 224×224 RGB, enabling drop-in compatibility with standard CNN classifiers — the bottleneck most ML projects skip.",
+      "Built a reproducible MRI preprocessing pipeline capable of ingesting mixed tumor / non-tumor datasets and outputting labelled sample grids for visual QA. Standardised input to 224x224 RGB, enabling drop-in compatibility with standard CNN classifiers, the bottleneck most ML projects skip.",
     tags: ["Python", "OpenCV", "Matplotlib", "NumPy", "Jupyter", "Data Science"],
     liveUrl: "#",
     githubUrl: "https://github.com/AbdulHanan49/Brain-Tumor-Detection",
@@ -94,12 +94,21 @@ const projects: Project[] = [
 /* ── Project preview mockups ── */
 function ScreenshotPreview({ src, alt }: { src: string; alt: string }) {
   return (
-    <div style={{ width:"100%", height:"100%", overflow:"hidden", position:"relative" }}>
+    <div
+      style={{ width:"100%", height:"100%", overflow:"hidden", position:"relative" }}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       <Image
         src={src} alt={alt}
         fill
         sizes="(max-width: 768px) 100vw, 33vw"
-        style={{ objectFit:"cover", objectPosition:"top" }}
+        style={{
+          objectFit:"cover", objectPosition:"top",
+          WebkitTouchCallout: "none",
+          userSelect: "none",
+          pointerEvents: "none",
+        }}
+        draggable={false}
         loading="lazy"
         quality={72}
       />
@@ -170,6 +179,11 @@ function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(hover: none)").matches);
+  }, []);
 
   const handleMove = useCallback((e: React.MouseEvent) => {
     if (window.matchMedia("(hover: none)").matches) return;
@@ -214,43 +228,62 @@ function ProjectCard({ project }: { project: Project }) {
         <div style={{ height: 4, background: project.gradient }} />
 
         {/* Visual preview mockup */}
-        <div style={{ height: 148, position: "relative", overflow: "hidden", borderBottom: "1px solid var(--border)" }}>
-          {/* Image — blurs on hover */}
+        <div
+          style={{ height: 148, position: "relative", overflow: "hidden", borderBottom: "1px solid var(--border)" }}
+          onContextMenu={(e) => e.preventDefault()}
+        >
+          {/* Image — blurs on hover (desktop only; stays sharp on touch) */}
           <div style={{
             position: "absolute", inset: 0,
-            filter: hovered ? "blur(3px) brightness(0.5)" : "blur(0px) brightness(0.9)",
-            transform: hovered ? "scale(1.04)" : "scale(1)",
+            filter: isTouch ? "brightness(1)" : hovered ? "blur(3px) brightness(0.5)" : "blur(0px) brightness(0.95)",
+            transform: hovered && !isTouch ? "scale(1.04)" : "scale(1)",
             transition: "filter 0.35s ease, transform 0.35s ease",
           }}>
             {PROJECT_PREVIEWS[project.number]}
           </div>
 
-          {/* Persistent normalising overlay */}
-          <div style={{
-            position: "absolute", inset: 0, pointerEvents: "none",
-            background: "rgba(10,25,47,0.18)",
-          }} />
-
-          {/* Dark overlay + CTA — fades in on hover */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "rgba(0,0,0,0.55)",
-            opacity: hovered ? 1 : 0,
-            transition: "opacity 0.3s ease",
-            display: "flex", flexDirection: "column",
-            alignItems: "center", justifyContent: "center", gap: "0.5rem",
-            pointerEvents: "none",
-          }}>
-            <span style={{
-              display: "inline-flex", alignItems: "center", gap: "0.4rem",
-              fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-              color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase",
-              background: project.gradient,
-              padding: "0.45rem 1.1rem", borderRadius: 999,
+          {/* Desktop: dark overlay + CTA — fades in on hover */}
+          {!isTouch && (
+            <div style={{
+              position: "absolute", inset: 0,
+              background: "rgba(0,0,0,0.55)",
+              opacity: hovered ? 1 : 0,
+              transition: "opacity 0.3s ease",
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center", gap: "0.5rem",
+              pointerEvents: "none",
             }}>
-              {project.liveUrl !== "#" ? "View Live →" : "Preview"}
-            </span>
-          </div>
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
+                color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase",
+                background: project.gradient,
+                padding: "0.45rem 1.1rem", borderRadius: 999,
+              }}>
+                {project.liveUrl !== "#" ? "View Live →" : "Preview"}
+              </span>
+            </div>
+          )}
+
+          {/* Mobile: permanent bottom gradient + always-visible badge */}
+          {isTouch && (
+            <div style={{
+              position: "absolute", inset: 0, pointerEvents: "none",
+              background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 55%, transparent 100%)",
+              display: "flex", alignItems: "flex-end", justifyContent: "flex-start",
+              padding: "0 0.85rem 0.7rem",
+            }}>
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: "0.35rem",
+                fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
+                color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase",
+                background: project.gradient,
+                padding: "0.3rem 0.75rem", borderRadius: 999,
+              }}>
+                {project.liveUrl !== "#" ? "View Live →" : "Preview"}
+              </span>
+            </div>
+          )}
 
           {/* Bottom fade into card */}
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 32, background: "linear-gradient(to bottom, transparent, var(--card-bg))", pointerEvents: "none" }} />
@@ -270,7 +303,7 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
 
           <h3 style={{
-            fontFamily: "var(--font-space)", fontWeight: 800, fontSize: "1.35rem",
+            fontFamily: "var(--font-space)", fontWeight: 700, fontSize: "1.15rem",
             color: "var(--text-primary)", marginBottom: "0.75rem", lineHeight: 1.2,
           }}>
             {project.title}
@@ -363,21 +396,21 @@ export default function Projects() {
       }} />
 
       {/* === SECTION CONTENT === */}
-      <div className="max-w-[1100px] mx-auto px-6 pt-20 pb-16">
+      <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-5">
 
         {/* Section header */}
         <ScrollReveal>
-          <div style={{ marginBottom: "4rem" }}>
+          <div style={{ marginBottom: "1.5rem" }}>
             <p style={{
               fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
               color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.28em",
               marginBottom: "0.75rem",
             }}>
-              03 — Projects
+              03. Projects
             </p>
             <h2 style={{
-              fontFamily: "var(--font-space)", fontWeight: 900,
-              fontSize: "clamp(2rem, 4vw, 3.4rem)", lineHeight: 1.05,
+              fontFamily: "var(--font-space)", fontWeight: 800,
+              fontSize: "clamp(1.75rem, 3vw, 2.6rem)", lineHeight: 1.05,
               color: "var(--text-primary)", letterSpacing: "-0.02em", marginBottom: "0.6rem",
             }}>
               Selected work
