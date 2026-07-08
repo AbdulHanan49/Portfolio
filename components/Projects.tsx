@@ -232,38 +232,14 @@ function ProjectCard({ project }: { project: Project }) {
           style={{ height: 148, position: "relative", overflow: "hidden", borderBottom: "1px solid var(--border)" }}
           onContextMenu={(e) => e.preventDefault()}
         >
-          {/* Image — blurs on hover (desktop only; stays sharp on touch) */}
+          {/* Image */}
           <div style={{
             position: "absolute", inset: 0,
-            filter: isTouch ? "brightness(1)" : hovered ? "blur(3px) brightness(0.5)" : "blur(0px) brightness(0.95)",
-            transform: hovered && !isTouch ? "scale(1.04)" : "scale(1)",
-            transition: "filter 0.35s ease, transform 0.35s ease",
+            filter: "brightness(1)",
+            transition: "transform 0.35s ease",
           }}>
             {PROJECT_PREVIEWS[project.number]}
           </div>
-
-          {/* Desktop: dark overlay + CTA — fades in on hover */}
-          {!isTouch && (
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "rgba(0,0,0,0.55)",
-              opacity: hovered ? 1 : 0,
-              transition: "opacity 0.3s ease",
-              display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center", gap: "0.5rem",
-              pointerEvents: "none",
-            }}>
-              <span style={{
-                display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase",
-                background: project.gradient,
-                padding: "0.45rem 1.1rem", borderRadius: 999,
-              }}>
-                {project.liveUrl !== "#" ? "View Live →" : "Preview"}
-              </span>
-            </div>
-          )}
 
           {/* Mobile: permanent bottom gradient + always-visible badge */}
           {isTouch && (
@@ -373,27 +349,9 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  }, []);
-
   return (
-    <section id="projects" ref={sectionRef} onMouseMove={handleMouseMove}
+    <section id="projects"
       style={{ background: "var(--bg-primary)", overflow: "hidden", position: "relative" }}>
-
-      {/* Cursor spotlight */}
-      <div aria-hidden="true" style={{
-        position: "absolute", pointerEvents: "none",
-        width: 700, height: 700, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(52,73,94,0.25) 0%, rgba(52,73,94,0.10) 40%, transparent 65%)",
-        transform: `translate(${mouse.x - 350}px, ${mouse.y - 350}px)`,
-        transition: "transform 0.12s ease-out",
-        top: 0, left: 0,
-      }} />
 
       {/* === SECTION CONTENT === */}
       <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-5">

@@ -118,66 +118,6 @@ export default function About() {
           {/* RIGHT — Bento grid */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
-            {/* Proof-point card */}
-            <ScrollReveal delay={0.15}>
-              <motion.div
-                whileHover={{ y: -4, boxShadow: "var(--shadow-md)" }}
-                transition={{ duration: 0.25 }}
-                style={{
-                  background: "var(--card-bg)", border: "1px solid var(--card-border)",
-                  borderRadius: 20, padding: "1.5rem 1.5rem 1.4rem",
-                  position: "relative", overflow: "hidden",
-                  cursor: "default",
-                }}
-              >
-                <div style={{
-                  position: "absolute", top: 0, left: 0, right: 0, height: 2,
-                  background: "linear-gradient(to right, var(--accent), var(--accent-secondary), transparent)",
-                }} />
-                <p style={{
-                  fontFamily: "var(--font-fira)", fontSize: "0.58rem", fontWeight: 700,
-                  color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.14em",
-                  marginBottom: "1rem",
-                }}>
-                  Shipped in production
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
-                  {[
-                    { name: "MixClip", at: "KCube Solutions", note: "AI video editing SaaS: Stripe billing, Azure CI/CD, Remotion 4 rendering, multi-tenant" },
-                    { name: "Job Wallet", at: "Visnext", note: "AI job-tracking SaaS: Django REST, Celery/Redis async queue, 10+ API resources" },
-                  ].map(({ name, at, note }) => (
-                    <div key={name} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
-                      <div style={{
-                        width: 6, height: 6, borderRadius: "50%",
-                        background: "var(--accent)", flexShrink: 0, marginTop: "0.42rem",
-                      }} />
-                      <div>
-                        <p style={{
-                          fontFamily: "var(--font-space)", fontWeight: 700,
-                          fontSize: "0.85rem", color: "var(--text-primary)",
-                          marginBottom: "0.15rem", lineHeight: 1.2,
-                        }}>
-                          {name}{" "}
-                          <span style={{
-                            fontFamily: "var(--font-fira)", fontSize: "0.58rem", fontWeight: 500,
-                            color: "var(--accent)", letterSpacing: "0.04em",
-                          }}>
-                            @ {at}
-                          </span>
-                        </p>
-                        <p style={{
-                          fontFamily: "var(--font-sora)", fontSize: "0.73rem",
-                          color: "var(--text-muted)", lineHeight: 1.55,
-                        }}>
-                          {note}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </ScrollReveal>
-
             {/* Role + Education row */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1rem" }}>
 

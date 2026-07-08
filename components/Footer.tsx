@@ -28,7 +28,7 @@ const footerColumns = [
       { label: "Email Me", href: "mailto:hananaslam90@gmail.com" },
       { label: "LinkedIn", href: "https://linkedin.com/in/hanan-aslam-b6160723a" },
       { label: "GitHub",   href: "https://github.com/AbdulHanan49" },
-      { label: "Resume",   href: "/resume.pdf", download: "Hanan's Resume.pdf" },
+      { label: "Resume",   href: "/resume.pdf" },
     ],
   },
 ];
@@ -173,7 +173,6 @@ export default function Footer() {
                       <a
                         href={link.href}
                         className="footer-link"
-                        {...("download" in link && { download: link.download })}
                         {...(!link.href.startsWith("#") && {
                           target: "_blank",
                           rel: "noopener noreferrer",

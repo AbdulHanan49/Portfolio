@@ -55,6 +55,31 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+    } else {
+      const top = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      if (top) window.scrollTo(0, -parseInt(top, 10));
+    }
+    return () => {
+      const top = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      if (top) window.scrollTo(0, -parseInt(top, 10));
+    };
+  }, [menuOpen]);
+
   const go = (href: string) => {
     setMenuOpen(false);
     // Update URL immediately on click
@@ -209,13 +234,12 @@ export default function Navbar() {
             {/* Resume — desktop only; mobile users get it inside the drawer */}
             <motion.a
               href="/resume.pdf"
-              download="Hanan's Resume.pdf"
               className="hidden lg:flex"
               whileHover={{ y: -1.5 }}
               whileTap={{ scale: 0.95 }}
               style={{
                 alignItems: "center", gap: "0.42rem",
-                padding: "0.55rem 1.25rem",
+                height: 44, padding: "0 1.25rem",
                 borderRadius: 12,
                 background: dark ? "rgba(100,255,218,0.08)"  : "rgba(46,46,46,0.07)",
                 border: `1px solid ${dark ? "rgba(100,255,218,0.25)" : "rgba(46,46,46,0.30)"}`,
@@ -363,7 +387,7 @@ export default function Navbar() {
               </div>
 
               {/* Nav links */}
-              <nav style={{ flex: 1, padding: "1rem 0.75rem", display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+              <nav style={{ flex: 1, padding: "1rem 0.75rem", display: "flex", flexDirection: "column", gap: "0.2rem", overflowY: "auto", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
                 {NAV_ITEMS.map(({ label, href }, i) => {
                   const isActive = active === href.slice(1);
                   return (

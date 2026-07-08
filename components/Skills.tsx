@@ -134,6 +134,7 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
             <span style={{
               fontFamily: "var(--font-space)", fontSize: "0.8rem", fontWeight: 700,
               color: "var(--text-primary)", lineHeight: 1,
+              minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
             }}>
               {skill.name}
             </span>
@@ -145,7 +146,7 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
               border: `1px solid ${isProd ? "var(--accent-mix-25)" : "var(--border)"}`,
               flexShrink: 0,
             }}>
-              {isProd ? "In prod" : "Familiar"}
+              {isProd ? "Professional" : "Familiar"}
             </span>
           </div>
         </div>
@@ -218,7 +219,7 @@ function SkillRow({ skill, delay, catAccent, isOpen, onOpen, onClose }: {
                       padding: "0.18rem 0.6rem", borderRadius: 999,
                       border: `1px solid ${isProd ? "var(--accent-mix-25)" : "var(--border)"}`,
                     }}>
-                      {isProd ? "Shipped in production" : "Working knowledge"}
+                      {isProd ? "Professional" : "Working knowledge"}
                     </span>
                     <span style={{ fontFamily: "var(--font-fira)", fontSize: "0.68rem", color: "var(--text-muted)" }}>
                       {skill.experience}
@@ -262,7 +263,7 @@ function SkillColumn({ col, colIndex, activeSkill, onOpen, onClose }: {
       <div style={{
         position: "relative",
         borderRadius: 18,
-        padding: "1.5rem",
+        padding: "clamp(1rem, 3vw, 1.5rem)",
         background: "var(--card-bg)",
         border: "1px solid var(--border)",
         overflow: "hidden",
@@ -360,7 +361,7 @@ export default function Skills() {
         WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%)",
       }} />
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1rem, 4vw, 2rem)", position: "relative", zIndex: 1 }}>
 
         {/* Section header */}
         <ScrollReveal>
@@ -387,7 +388,7 @@ export default function Skills() {
         <div className="skills-grid-responsive" style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
-          gap: "1.25rem",
+          gap: "clamp(0.75rem, 2vw, 1.25rem)",
           alignItems: "start",
         }}>
           {columns.map((col, ci) => (

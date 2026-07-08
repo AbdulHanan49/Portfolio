@@ -188,7 +188,7 @@ function ProfileCard() {
             }}>
               <span style={{
                 fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 600,
-                color: "rgba(180,192,220,0.85)", letterSpacing: "0.06em", textTransform: "uppercase",
+                color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em", textTransform: "uppercase",
               }}>{label}</span>
               <span style={{
                 fontFamily: "var(--font-sora)", fontSize: "0.78rem", fontWeight: 700,
@@ -209,7 +209,7 @@ function ProfileCard() {
         }}>
           <span style={{
             fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 600,
-            color: "rgba(136,146,176,0.55)", letterSpacing: "0.06em", textTransform: "uppercase",
+            color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em", textTransform: "uppercase",
           }}>Status</span>
           <span style={{
             display: "inline-flex", alignItems: "center", gap: "0.32rem",
@@ -343,14 +343,6 @@ export default function Hero() {
               <FiArrowRight size={14} />
             </a>
 
-            <a
-              href="mailto:hananaslam90@gmail.com"
-              className="hero-btn-secondary"
-            >
-              <FiMail size={14} />
-              Hire me
-            </a>
-
           </div>
 
           {/* Socials */}
@@ -409,7 +401,7 @@ export default function Hero() {
                 </div>
                 <div style={{
                   fontFamily: "var(--font-fira)", fontSize: "0.62rem", fontWeight: 700,
-                  color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.82)", letterSpacing: "0.08em", textTransform: "uppercase",
                 }}>
                   {s.label}
                 </div>

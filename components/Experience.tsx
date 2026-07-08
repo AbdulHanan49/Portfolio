@@ -239,32 +239,13 @@ export default function Experience() {
 
                     {/* Year watermark removed — was colliding with card text */}
 
-                    {/* ── Two-column header ── */}
-                    <div style={{
-                      display: "flex", flexWrap: "wrap",
-                      justifyContent: "space-between", alignItems: "flex-start",
-                      gap: "0.75rem", marginBottom: "0.9rem",
-                    }}>
-                      {/* Left: title + company */}
-                      <div>
-                        <h3 style={{
-                          fontFamily: "var(--font-space)", fontWeight: 700,
-                          fontSize: "1.05rem", color: "var(--text-primary)",
-                          marginBottom: "0.18rem", lineHeight: 1.2,
-                        }}>
-                          {item.title}
-                        </h3>
-                        <p style={{
-                          fontFamily: "var(--font-fira)", fontSize: "0.8rem",
-                          color: accentHex, fontWeight: 600,
-                          letterSpacing: "0.03em", margin: 0,
-                        }}>
-                          {item.company}
-                        </p>
-                      </div>
-
-                      {/* Right: period + badges */}
-                      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.4rem", flexShrink: 0 }}>
+                    {/* ── Header ── */}
+                    <div style={{ marginBottom: "0.9rem" }}>
+                      {/* Badges row — always on top, wraps freely */}
+                      <div style={{
+                        display: "flex", flexWrap: "wrap", alignItems: "center",
+                        gap: "0.4rem", marginBottom: "0.55rem",
+                      }}>
                         <span style={{
                           fontFamily: "var(--font-fira)", fontSize: "0.68rem", fontWeight: 600,
                           color: "var(--text-muted)", letterSpacing: "0.04em",
@@ -297,6 +278,22 @@ export default function Experience() {
                           </span>
                         )}
                       </div>
+
+                      {/* Title + company below badges */}
+                      <h3 style={{
+                        fontFamily: "var(--font-space)", fontWeight: 700,
+                        fontSize: "1.05rem", color: "var(--text-primary)",
+                        marginBottom: "0.18rem", lineHeight: 1.2,
+                      }}>
+                        {item.title}
+                      </h3>
+                      <p style={{
+                        fontFamily: "var(--font-fira)", fontSize: "0.8rem",
+                        color: accentHex, fontWeight: 600,
+                        letterSpacing: "0.03em", margin: 0,
+                      }}>
+                        {item.company}
+                      </p>
                     </div>
 
                     {/* ── Product / Project subheading ── */}
