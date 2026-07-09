@@ -98,7 +98,7 @@ a, button, [role="button"], input, label, select, textarea {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: calc(5rem + env(safe-area-inset-top));
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;

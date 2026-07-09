@@ -241,25 +241,6 @@ function ProjectCard({ project }: { project: Project }) {
             {PROJECT_PREVIEWS[project.number]}
           </div>
 
-          {/* Mobile: permanent bottom gradient + always-visible badge */}
-          {isTouch && (
-            <div style={{
-              position: "absolute", inset: 0, pointerEvents: "none",
-              background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 55%, transparent 100%)",
-              display: "flex", alignItems: "flex-end", justifyContent: "flex-start",
-              padding: "0 0.85rem 0.7rem",
-            }}>
-              <span style={{
-                display: "inline-flex", alignItems: "center", gap: "0.35rem",
-                fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
-                color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase",
-                background: project.gradient,
-                padding: "0.3rem 0.75rem", borderRadius: 999,
-              }}>
-                {project.liveUrl !== "#" ? "View Live →" : "Preview"}
-              </span>
-            </div>
-          )}
 
           {/* Bottom fade into card */}
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 32, background: "linear-gradient(to bottom, transparent, var(--card-bg))", pointerEvents: "none" }} />
@@ -310,38 +291,40 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
 
-          {project.liveUrl !== "#" ? (
-            <motion.a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              whileHover="hover"
-              initial="rest"
-              style={{
+          <div className="hidden sm:block">
+            {project.liveUrl !== "#" ? (
+              <motion.a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                whileHover="hover"
+                initial="rest"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                  fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
+                  color: "var(--accent)", textDecoration: "none", letterSpacing: "0.05em",
+                }}
+              >
+                Live Site
+                <motion.span
+                  variants={{ rest: { x: 0 }, hover: { x: 5 } }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <FiArrowRight size={13} />
+                </motion.span>
+              </motion.a>
+            ) : (
+              <span style={{
                 display: "inline-flex", alignItems: "center", gap: "0.4rem",
                 fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                color: "var(--accent)", textDecoration: "none", letterSpacing: "0.05em",
-              }}
-            >
-              Live Site
-              <motion.span
-                variants={{ rest: { x: 0 }, hover: { x: 5 } }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <FiArrowRight size={13} />
-              </motion.span>
-            </motion.a>
-          ) : (
-            <span style={{
-              display: "inline-flex", alignItems: "center", gap: "0.4rem",
-              fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-              color: "var(--text-muted)", letterSpacing: "0.05em",
-            }}>
-              Private
-            </span>
-          )}
+                color: "var(--text-muted)", letterSpacing: "0.05em",
+              }}>
+                Private
+              </span>
+            )}
+          </div>
         </div>
       </motion.div>
     </ScrollReveal>
