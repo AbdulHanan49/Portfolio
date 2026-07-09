@@ -57,7 +57,7 @@ const items: ExpItem[] = [
     tags: ["Vue 3", "Quasar", "Pinia", "Tailwind CSS", "Django REST", "Python", "MySQL", "JWT", "Celery", "Redis", "Stripe"],
   },
   {
-    period: "2020 · 2025",
+    period: "2020 · 2024",
     year: "2020",
     title: "BS Software Engineering",
     company: "FAST-NUCES Lahore",
@@ -117,7 +117,7 @@ export default function Experience() {
         WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
       }} />
 
-      <div className="max-w-[1100px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-6 relative z-10">
 
         {/* Section header */}
         <ScrollReveal>

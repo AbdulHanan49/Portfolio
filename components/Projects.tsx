@@ -354,7 +354,7 @@ export default function Projects() {
       style={{ background: "var(--bg-primary)", overflow: "hidden", position: "relative" }}>
 
       {/* === SECTION CONTENT === */}
-      <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-5">
+      <div className="max-w-[1200px] mx-auto px-6 pt-6 pb-5">
 
         {/* Section header */}
         <ScrollReveal>

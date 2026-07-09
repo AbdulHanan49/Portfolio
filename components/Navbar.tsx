@@ -87,6 +87,22 @@ export default function Navbar() {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const downloadResume = (e: React.MouseEvent) => {
+    e.preventDefault();
+    fetch("/resume.pdf")
+      .then(r => r.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Hanan Resume.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+  };
+
   /* Theme-aware pill colours */
   const pillBg     = dark
     ? scrolled ? "rgba(10,25,47,0.96)"       : "rgba(10,25,47,0.80)"
@@ -234,6 +250,7 @@ export default function Navbar() {
             {/* Resume — desktop only; mobile users get it inside the drawer */}
             <motion.a
               href="/resume.pdf"
+              onClick={downloadResume}
               className="hidden lg:flex"
               whileHover={{ y: -1.5 }}
               whileTap={{ scale: 0.95 }}
@@ -435,7 +452,7 @@ export default function Navbar() {
               }}>
                 <motion.a
                   href="/resume.pdf"
-                  download="Hanan's Resume.pdf"
+                  onClick={downloadResume}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: NAV_ITEMS.length * 0.045 + 0.06, duration: 0.28 }}

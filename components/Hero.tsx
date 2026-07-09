@@ -235,6 +235,13 @@ export default function Hero() {
     : "linear-gradient(135deg, #0d2b5e 0%, #1e56c4 55%, #2563EB 100%)";
 
   const spotlightRef = useRef<HTMLDivElement>(null);
+  const isDarkRef = useRef(isDark);
+  useEffect(() => { isDarkRef.current = isDark; }, [isDark]);
+
+  // Clear spotlight when theme switches so stale dark/light colour doesn't linger
+  useEffect(() => {
+    if (spotlightRef.current) spotlightRef.current.style.background = "";
+  }, [isDark]);
 
   useEffect(() => {
     if (window.matchMedia("(hover: none)").matches) return;
@@ -242,8 +249,11 @@ export default function Hero() {
       if (!spotlightRef.current) return;
       const rect = spotlightRef.current.parentElement?.getBoundingClientRect();
       if (!rect) return;
+      const color = isDarkRef.current
+        ? "rgba(36,52,71,0.12)"
+        : "rgba(74,144,226,0.07)";
       spotlightRef.current.style.background =
-        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(36,52,71,0.12), transparent 40%)`;
+        `radial-gradient(900px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, ${color}, transparent 40%)`;
     };
     window.addEventListener("mousemove", handler, { passive: true });
     return () => window.removeEventListener("mousemove", handler);
@@ -261,8 +271,8 @@ export default function Hero() {
 
       {/* Two-column layout */}
       <div
-        className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 px-5 sm:px-8 lg:px-16"
-        style={{ maxWidth: "1240px", margin: "0 auto", paddingTop: "clamp(5.5rem, 10vw, 7.5rem)", paddingBottom: "clamp(3rem, 5vw, 4.5rem)" }}
+        className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 px-6"
+        style={{ maxWidth: "1200px", margin: "0 auto", paddingTop: "clamp(5.5rem, 10vw, 7.5rem)", paddingBottom: "clamp(3rem, 5vw, 4.5rem)" }}
       >
 
         {/* LEFT — Name block */}
