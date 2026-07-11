@@ -189,11 +189,8 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <ScrollReveal delay={0.08} direction="up" className="h-full">
       <motion.div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onClick={() => {
-          if (project.liveUrl !== "#") window.open(project.liveUrl, "_blank", "noopener,noreferrer");
-        }}
+        onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); }}
+        onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
         animate={{
           boxShadow: hovered
             ? `0 28px 72px ${project.glow.replace("0.5", "0.50")}, 0 8px 28px rgba(0,0,0,0.35)`
@@ -207,7 +204,6 @@ function ProjectCard({ project }: { project: Project }) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          cursor: project.liveUrl !== "#" ? "pointer" : "default",
         }}
       >
         {/* Gradient banner */}

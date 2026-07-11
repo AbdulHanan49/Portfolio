@@ -288,7 +288,7 @@ export default function Contact() {
                   </div>
 
                   {/* Submit button */}
-                  <div>
+                  <div className="flex justify-center sm:justify-start">
                     <motion.button
                       type="submit"
                       disabled={sending}
@@ -297,7 +297,7 @@ export default function Contact() {
                       whileTap={!sending ? { scale: 0.97 } : {}}
                       variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.03, y: -2 } }}
                       transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                      className="btn-primary w-full sm:w-auto"
+                      className="btn-primary"
                       style={{
                         position: "relative", overflow: "hidden",
                         background: error
