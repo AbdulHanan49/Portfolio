@@ -2,13 +2,12 @@
 
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import { FiMapPin, FiBook, FiBriefcase, FiMoon } from "react-icons/fi";
+import { FiMapPin, FiBook, FiBriefcase } from "react-icons/fi";
 
 const TRAITS = [
   { icon: FiMapPin,    label: "Pakistan"       },
   { icon: FiBook,      label: "FAST-NUCES '24" },
   { icon: FiBriefcase, label: "Open to Remote" },
-  { icon: FiMoon,      label: "SaaS Builder"   },
 ];
 
 export default function About() {

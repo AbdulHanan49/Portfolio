@@ -1,10 +1,10 @@
 ﻿"use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiGithub } from "react-icons/fi";
 
 interface Project {
   number: string;
@@ -176,33 +176,13 @@ const PROJECT_PREVIEWS: Record<string, ReactNode> = {
 
 /* ── Detailed project card ── */
 function ProjectCard({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
-
-  useEffect(() => {
-    setIsTouch(window.matchMedia("(hover: none)").matches);
-  }, []);
-
-  const handleMove = useCallback((e: React.MouseEvent) => {
-    if (window.matchMedia("(hover: none)").matches) return;
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    setTilt({
-      x: ((e.clientX - rect.left) / rect.width - 0.5) * 10,
-      y: ((e.clientY - rect.top) / rect.height - 0.5) * -10,
-    });
-  }, []);
 
   return (
     <ScrollReveal delay={0.08} direction="up" className="h-full">
       <motion.div
-        ref={cardRef}
-        onMouseMove={handleMove}
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHovered(false); }}
+        onMouseLeave={() => setHovered(false)}
         onClick={() => {
           if (project.liveUrl !== "#") window.open(project.liveUrl, "_blank", "noopener,noreferrer");
         }}
@@ -219,8 +199,6 @@ function ProjectCard({ project }: { project: Project }) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
-          transition: "transform 0.2s ease-out",
           cursor: project.liveUrl !== "#" ? "pointer" : "default",
         }}
       >
@@ -291,8 +269,8 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
 
-          <div className="hidden sm:block">
-            {project.liveUrl !== "#" ? (
+          <div className="hidden sm:flex" style={{ alignItems: "center", gap: "1rem" }}>
+            {project.liveUrl !== "#" && (
               <motion.a
                 href={project.liveUrl}
                 target="_blank"
@@ -315,14 +293,35 @@ function ProjectCard({ project }: { project: Project }) {
                   <FiArrowRight size={13} />
                 </motion.span>
               </motion.a>
+            )}
+            {project.githubUrl ? (
+              <motion.a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                whileHover="hover"
+                initial="rest"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                  fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
+                  color: project.liveUrl !== "#" ? "var(--text-muted)" : "var(--accent)",
+                  textDecoration: "none", letterSpacing: "0.05em",
+                }}
+              >
+                <FiGithub size={13} />
+                View Code
+              </motion.a>
             ) : (
-              <span style={{
-                display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                color: "var(--text-muted)", letterSpacing: "0.05em",
-              }}>
-                Private
-              </span>
+              project.liveUrl === "#" && (
+                <span style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                  fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
+                  color: "var(--text-muted)", letterSpacing: "0.05em",
+                }}>
+                  Private
+                </span>
+              )
             )}
           </div>
         </div>

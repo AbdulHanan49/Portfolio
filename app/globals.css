@@ -357,6 +357,44 @@ body::after {
   background: rgba(74, 144, 226, 0.12);
 }
 
+/* Slow-moving aurora wash behind the hero grid/orbs */
+.hero-aurora {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(100, 255, 218, 0.16),
+    rgba(245, 158, 11, 0.10),
+    rgba(100, 255, 218, 0.16)
+  );
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: auroraDrift 26s linear infinite;
+  pointer-events: none;
+  will-change: transform;
+  mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 85%);
+}
+
+[data-theme="light"] .hero-aurora {
+  background: conic-gradient(
+    from 0deg,
+    rgba(74, 144, 226, 0.14),
+    rgba(245, 158, 11, 0.08),
+    rgba(74, 144, 226, 0.14)
+  );
+  opacity: 0.4;
+}
+
+@keyframes auroraDrift {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.12); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -30px) scale(1.05); }
@@ -1899,6 +1937,7 @@ body::after {
   }
 
   .hero-orb,
+  .hero-aurora,
   .particle,
   .particle-float {
     animation: none !important;
@@ -1952,6 +1991,8 @@ body::after {
   }
 
   .hero-orb { opacity: 0.15; }
+
+  .hero-aurora { opacity: 0.35; filter: blur(60px); }
 
   .hero-orb-1 { width: 300px; height: 300px; }
   .hero-orb-2 { width: 250px; height: 250px; }
@@ -2833,6 +2874,12 @@ body::after {
   .contact-orb {
     animation: none !important;
     filter: blur(60px) !important;
+  }
+
+  .hero-aurora {
+    animation: none !important;
+    filter: blur(50px) !important;
+    opacity: 0.3 !important;
   }
 
   .hero-grid {

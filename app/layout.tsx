@@ -57,21 +57,12 @@ export const metadata: Metadata = {
     description:
       "Building production SaaS with React 18, FastAPI, TypeScript, and Azure.",
     siteName: "Abdul Hanan Portfolio",
-    images: [
-      {
-        url: "/profile.png",
-        width: 1200,
-        height: 630,
-        alt: "Abdul Hanan — Full-Stack Software Engineer",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Abdul Hanan | Full-Stack Software Engineer",
     description:
       "Building production SaaS with React 18, FastAPI, TypeScript, and Azure.",
-    images: ["/profile.png"],
   },
   robots: {
     index: true,
