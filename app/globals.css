@@ -96,6 +96,11 @@ a, button, [role="button"], input, label, select, textarea {
   touch-action: manipulation;
 }
 
+/* Buttons don't reliably get a pointer cursor by default across browsers */
+button:not(:disabled), [role="button"] {
+  cursor: pointer;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(5rem + env(safe-area-inset-top));
@@ -1335,12 +1340,35 @@ body::after {
   transition: background 0.2s ease;
 }
 
+/* Browser autofill (Name/Email are common targets) forces its own background via
+   this pseudo-class, ignoring the background property above — override it back. */
+.contact-input-v2:-webkit-autofill,
+.contact-input-v2:-webkit-autofill:hover,
+.contact-input-v2:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-secondary) inset;
+  box-shadow: 0 0 0 1000px var(--bg-secondary) inset;
+  caret-color: var(--text-primary);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .contact-field-ring {
   box-shadow: 0 0 0 1.5px var(--card-border);
   transition: box-shadow 0.2s;
 }
 .contact-field-ring.focused {
   box-shadow: 0 0 0 2px var(--accent);
+}
+.contact-field-ring.error {
+  box-shadow: 0 0 0 1.5px #ef4444;
+}
+
+.contact-error-text {
+  font-family: var(--font-fira), monospace;
+  font-size: 0.72rem;
+  color: #ef4444;
+  margin-top: 0.35rem;
+  display: block;
 }
 
 .contact-input-v2:focus {
@@ -1350,6 +1378,7 @@ body::after {
 .contact-input-v2::placeholder {
   color: var(--text-muted);
   opacity: 0.6;
+  font-size: 0.82rem;
 }
 
 /* ============================================

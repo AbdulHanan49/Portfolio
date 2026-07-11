@@ -1,10 +1,10 @@
 ﻿"use client";
 
-import { useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, type ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
-import { FiArrowRight, FiGithub } from "react-icons/fi";
+import { FiArrowRight, FiGithub, FiX } from "react-icons/fi";
 
 interface Project {
   number: string;
@@ -177,6 +177,14 @@ const PROJECT_PREVIEWS: Record<string, ReactNode> = {
 /* ── Detailed project card ── */
 function ProjectCard({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (!showModal) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setShowModal(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showModal]);
 
   return (
     <ScrollReveal delay={0.08} direction="up" className="h-full">
@@ -214,6 +222,7 @@ function ProjectCard({ project }: { project: Project }) {
           <div style={{
             position: "absolute", inset: 0,
             filter: "brightness(1)",
+            transform: hovered ? "scale(1.08)" : "scale(1)",
             transition: "transform 0.35s ease",
           }}>
             {PROJECT_PREVIEWS[project.number]}
@@ -246,10 +255,16 @@ function ProjectCard({ project }: { project: Project }) {
 
           <p style={{
             fontFamily: "var(--font-sora)", fontSize: "0.875rem",
-            color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "1.25rem", flex: 1,
+            color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "1.25rem",
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
           }}>
             {project.description}
           </p>
+
+          <div style={{ flex: 1 }} />
 
           {/* Tag pills with hover */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem" }}>
@@ -269,7 +284,20 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.6rem" }}>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowModal(true); }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                fontFamily: "var(--font-fira)", fontSize: "0.72rem", fontWeight: 700,
+                color: "var(--bg-primary)", letterSpacing: "0.05em",
+                background: "var(--accent)", border: "none",
+                borderRadius: 999, padding: "0.4rem 0.85rem", cursor: "pointer",
+                boxShadow: "0 0 14px var(--accent-glow-strong)",
+              }}
+            >
+              View Details
+            </button>
             {project.liveUrl !== "#" && (
               <motion.a
                 href={project.liveUrl}
@@ -280,8 +308,10 @@ function ProjectCard({ project }: { project: Project }) {
                 initial="rest"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                  fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                  color: "var(--accent)", textDecoration: "none", letterSpacing: "0.05em",
+                  fontFamily: "var(--font-fira)", fontSize: "0.72rem", fontWeight: 700,
+                  color: "var(--bg-primary)", textDecoration: "none", letterSpacing: "0.05em",
+                  background: "var(--accent)", borderRadius: 999, padding: "0.4rem 0.85rem",
+                  boxShadow: "0 0 14px var(--accent-glow-strong)",
                 }}
               >
                 Live Site
@@ -304,9 +334,10 @@ function ProjectCard({ project }: { project: Project }) {
                 initial="rest"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                  fontFamily: "var(--font-fira)", fontSize: "0.75rem", fontWeight: 700,
-                  color: project.liveUrl !== "#" ? "var(--text-muted)" : "var(--accent)",
-                  textDecoration: "none", letterSpacing: "0.05em",
+                  fontFamily: "var(--font-fira)", fontSize: "0.72rem", fontWeight: 700,
+                  color: "var(--bg-primary)", textDecoration: "none", letterSpacing: "0.05em",
+                  background: "var(--accent)", borderRadius: 999, padding: "0.4rem 0.85rem",
+                  boxShadow: "0 0 14px var(--accent-glow-strong)",
                 }}
               >
                 <FiGithub size={13} />
@@ -326,6 +357,73 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
       </motion.div>
+
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1001] flex items-center justify-center p-4"
+            style={{ background: "rgba(6,5,20,0.85)", backdropFilter: "blur(12px)" }}
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.88, opacity: 0, y: 24 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.88, opacity: 0, y: 24 }}
+              transition={{ type: "spring", damping: 26, stiffness: 320 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: "relative", maxWidth: 520, width: "100%",
+                maxHeight: "85dvh", overflowY: "auto",
+                padding: "2rem", borderRadius: 22,
+                background: "var(--card-bg)",
+                border: "1.5px solid var(--border)",
+                boxShadow: "0 28px 72px rgba(0,0,0,0.6)",
+              }}
+            >
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 3,
+                borderRadius: "22px 22px 0 0",
+                background: project.gradient,
+              }} />
+              <button
+                onClick={() => setShowModal(false)}
+                style={{
+                  position: "absolute", top: "1rem", right: "1rem",
+                  width: 30, height: 30, borderRadius: 8,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  background: "var(--bg-tertiary)", color: "var(--text-muted)",
+                  border: "1px solid var(--border)", cursor: "pointer",
+                }}
+                aria-label="Close"
+              >
+                <FiX size={14} />
+              </button>
+
+              <span style={{
+                fontFamily: "var(--font-fira)", fontSize: "0.65rem", fontWeight: 700,
+                color: "var(--text-muted)", letterSpacing: "0.1em",
+              }}>
+                {project.number} / {project.subtitle}
+              </span>
+              <h3 style={{
+                fontFamily: "var(--font-space)", fontWeight: 700, fontSize: "1.3rem",
+                color: "var(--text-primary)", margin: "0.4rem 0 1rem", lineHeight: 1.2,
+              }}>
+                {project.title}
+              </h3>
+              <p style={{
+                fontFamily: "var(--font-sora)", fontSize: "0.9rem",
+                color: "var(--text-secondary)", lineHeight: 1.85,
+              }}>
+                {project.description}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </ScrollReveal>
   );
 }

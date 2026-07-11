@@ -10,15 +10,32 @@ const EMAILJS_SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? "";
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
 const EMAILJS_PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  ?? "";
 
+type FieldErrors = { name?: string; email?: string; subject?: string; message?: string };
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [focused,  setFocused]  = useState<string | null>(null);
   const [sent,     setSent]     = useState(false);
   const [sending,  setSending]  = useState(false);
   const [error,    setError]    = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const validate = () => {
+    const next: FieldErrors = {};
+    if (!formData.name.trim())    next.name    = "Name is required";
+    if (!formData.email.trim())   next.email   = "Email is required";
+    else if (!EMAIL_RE.test(formData.email)) next.email = "Enter a valid email address";
+    if (!formData.subject.trim()) next.subject = "Subject is required";
+    if (!formData.message.trim()) next.message = "Message is required";
+    setFieldErrors(next);
+    return Object.keys(next).length === 0;
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     setSending(true);
     setError(false);
     try {
@@ -197,69 +214,77 @@ export default function Contact() {
                 </div>
 
                 {/* Right — Form */}
-                <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-4">
+                <form onSubmit={handleSubmit} noValidate className="lg:col-span-3 space-y-4">
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Name */}
                     <div className="contact-field-wrap">
                       <label className="contact-label" htmlFor="name">Name</label>
-                      <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "name" ? " focused" : ""}`}>
+                      <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "name" ? " focused" : ""}${fieldErrors.name ? " error" : ""}`}>
                         <input
-                          id="name" type="text" placeholder="John Doe" required
+                          id="name" type="text" placeholder="John Doe"
                           value={formData.name}
-                          onChange={e => setFormData({ ...formData, name: e.target.value })}
+                          onChange={e => { setFormData({ ...formData, name: e.target.value }); setFieldErrors(prev => ({ ...prev, name: undefined })); }}
                           onFocus={() => setFocused("name")}
                           onBlur={() => setFocused(null)}
                           className="contact-input-v2"
+                          aria-invalid={!!fieldErrors.name}
                         />
                       </div>
+                      {fieldErrors.name && <span className="contact-error-text">{fieldErrors.name}</span>}
                     </div>
 
                     {/* Email */}
                     <div className="contact-field-wrap">
                       <label className="contact-label" htmlFor="email">Email</label>
-                      <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "email" ? " focused" : ""}`}>
+                      <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "email" ? " focused" : ""}${fieldErrors.email ? " error" : ""}`}>
                         <input
-                          id="email" type="email" placeholder="john@example.com" required
+                          id="email" type="email" placeholder="john@example.com"
                           value={formData.email}
-                          onChange={e => setFormData({ ...formData, email: e.target.value })}
+                          onChange={e => { setFormData({ ...formData, email: e.target.value }); setFieldErrors(prev => ({ ...prev, email: undefined })); }}
                           onFocus={() => setFocused("email")}
                           onBlur={() => setFocused(null)}
                           className="contact-input-v2"
+                          aria-invalid={!!fieldErrors.email}
                         />
                       </div>
+                      {fieldErrors.email && <span className="contact-error-text">{fieldErrors.email}</span>}
                     </div>
                   </div>
 
                   {/* Subject */}
                   <div className="contact-field-wrap">
                     <label className="contact-label" htmlFor="subject">Subject</label>
-                    <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "subject" ? " focused" : ""}`}>
+                    <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "subject" ? " focused" : ""}${fieldErrors.subject ? " error" : ""}`}>
                       <input
-                        id="subject" type="text" placeholder="Project discussion" required
+                        id="subject" type="text" placeholder="Project discussion"
                         value={formData.subject}
-                        onChange={e => setFormData({ ...formData, subject: e.target.value })}
+                        onChange={e => { setFormData({ ...formData, subject: e.target.value }); setFieldErrors(prev => ({ ...prev, subject: undefined })); }}
                         onFocus={() => setFocused("subject")}
                         onBlur={() => setFocused(null)}
                         className="contact-input-v2"
+                        aria-invalid={!!fieldErrors.subject}
                       />
                     </div>
+                    {fieldErrors.subject && <span className="contact-error-text">{fieldErrors.subject}</span>}
                   </div>
 
                   {/* Message */}
                   <div className="contact-field-wrap">
                     <label className="contact-label" htmlFor="message">Message</label>
-                    <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "message" ? " focused" : ""}`}>
+                    <div className={`rounded-xl overflow-hidden contact-field-ring${focused === "message" ? " focused" : ""}${fieldErrors.message ? " error" : ""}`}>
                       <textarea
-                        id="message" placeholder="Tell me about your project..." required
+                        id="message" placeholder="Tell me about your project..."
                         rows={5}
                         value={formData.message}
-                        onChange={e => setFormData({ ...formData, message: e.target.value })}
+                        onChange={e => { setFormData({ ...formData, message: e.target.value }); setFieldErrors(prev => ({ ...prev, message: undefined })); }}
                         onFocus={() => setFocused("message")}
                         onBlur={() => setFocused(null)}
                         className="contact-input-v2 resize-none"
+                        aria-invalid={!!fieldErrors.message}
                       />
                     </div>
+                    {fieldErrors.message && <span className="contact-error-text">{fieldErrors.message}</span>}
                   </div>
 
                   {/* Submit button */}
@@ -334,6 +359,14 @@ export default function Contact() {
                       </AnimatePresence>
                     </motion.button>
                   </div>
+
+                  <span role="status" aria-live="polite" className="sr-only">
+                    {sent
+                      ? "Message sent successfully."
+                      : error
+                      ? "Message failed to send. Please try again or email directly."
+                      : ""}
+                  </span>
 
                 </form>
               </div>

@@ -116,15 +116,15 @@ export default function Footer() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <span className="text-2xl font-light" style={{ color: "#64ffda" }}>
+                <span className="text-2xl font-light" style={{ color: "var(--accent)" }}>
                   &lt;
                 </span>
                 <span className="font-bold" style={{ color: "#ffffff" }}>AH</span>
-                <span className="text-2xl font-light" style={{ color: "#64ffda" }}>
+                <span className="text-2xl font-light" style={{ color: "var(--accent)" }}>
                   /&gt;
                 </span>
               </motion.a>
-              <p className="text-sm leading-6 mb-6" style={{ color: "var(--text-muted)" }}>
+              <p className="text-sm leading-6 mb-6" style={{ color: "rgba(255,255,255,0.6)" }}>
                 Full-Stack Software Engineer based in Lahore, Pakistan.
                 Building scalable web products from frontend to backend.
               </p>

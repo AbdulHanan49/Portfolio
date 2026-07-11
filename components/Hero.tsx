@@ -40,7 +40,7 @@ function ProfileCard() {
       style={{
         width: "min(340px, calc(100vw - 4rem))",
         height: "min(430px, calc(min(100vw - 4rem, 340px) * 1.27))",
-        cursor: "default", position: "relative",
+        cursor: "pointer", position: "relative",
         borderRadius: 24, overflow: "hidden",
         boxShadow: hovered
           ? "0 32px 80px rgba(10,25,47,0.55), 0 0 0 1.5px rgba(100, 255, 218,0.25)"
