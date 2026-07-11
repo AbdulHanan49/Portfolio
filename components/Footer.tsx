@@ -174,23 +174,7 @@ export default function Footer() {
                         href={link.href}
                         className="footer-link"
                         {...(link.href === "/resume.pdf"
-                          ? {
-                              onClick: (e: React.MouseEvent) => {
-                                e.preventDefault();
-                                fetch("/resume.pdf")
-                                  .then(r => r.blob())
-                                  .then(blob => {
-                                    const url = URL.createObjectURL(blob);
-                                    const a = document.createElement("a");
-                                    a.href = url;
-                                    a.download = "Hanan Resume.pdf";
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    document.body.removeChild(a);
-                                    URL.revokeObjectURL(url);
-                                  });
-                              },
-                            }
+                          ? { download: "Hanan Resume.pdf" }
                           : !link.href.startsWith("#")
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}

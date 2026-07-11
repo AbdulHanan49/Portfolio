@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSun, FiMoon, FiMenu, FiX, FiDownload, FiGithub, FiLinkedin } from "react-icons/fi";
 import { useTheme } from "./ThemeProvider";
@@ -21,8 +21,17 @@ export default function Navbar() {
   const [menuOpen,  setMenuOpen]  = useState(false);
   const dark = theme === "dark";
   const activeHrefRef = useRef("#home");
+  const menuOpenRef = useRef(false);
+  useEffect(() => { menuOpenRef.current = menuOpen; }, [menuOpen]);
 
   useEffect(() => {
+    // We drive scroll position ourselves via pushState/replaceState + scrollIntoView.
+    // Without this, the browser's own scroll-restoration can fight our scrolling and
+    // snap back to a remembered position when the history entry changes mid-scroll.
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
     // On mount: scroll to the hash if present (enables deep-linking)
     const hash = window.location.hash;
     if (hash) {
@@ -34,6 +43,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
+      // Body is locked (position:fixed) while the mobile drawer is open, which can
+      // make window.scrollY briefly read 0 as a side effect — ignore scroll events
+      // during that window so the active-section indicator doesn't get corrupted.
+      if (menuOpenRef.current) return;
       setScrolled(window.scrollY > 60);
       const pos = window.scrollY + 200;
       for (let i = NAV_ITEMS.length - 1; i >= 0; i--) {
@@ -55,7 +68,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // Runs synchronously before paint — avoids a visible two-step flicker where
+    // the drawer closes on one frame and the scroll-lock/restore only catches up
+    // on a later frame (regular useEffect fires after paint).
     if (menuOpen) {
       const scrollY = window.scrollY;
       document.body.style.position = "fixed";
@@ -68,7 +84,9 @@ export default function Navbar() {
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.overflow = "";
-      if (top) window.scrollTo(0, -parseInt(top, 10));
+      // behavior: "instant" overrides the global `html { scroll-behavior: smooth }" —
+      // without it this restore visibly animates instead of snapping back invisibly.
+      if (top) window.scrollTo({ top: -parseInt(top, 10), left: 0, behavior: "instant" });
     }
     return () => {
       const top = document.body.style.top;
@@ -76,31 +94,30 @@ export default function Navbar() {
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.overflow = "";
-      if (top) window.scrollTo(0, -parseInt(top, 10));
+      // behavior: "instant" overrides the global `html { scroll-behavior: smooth }" —
+      // without it this restore visibly animates instead of snapping back invisibly.
+      if (top) window.scrollTo({ top: -parseInt(top, 10), left: 0, behavior: "instant" });
     };
   }, [menuOpen]);
 
   const go = (href: string) => {
+    // Release the scroll lock ourselves, right now, and clear body.style.top.
+    // The [menuOpen] effect's own restore (meant for closing via the X/backdrop,
+    // where we want to stay put) checks that same style.top value — clearing it
+    // here means that restore no longer fires and fights with the scroll below.
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
     setMenuOpen(false);
-    // Update URL immediately on click
+    // Set the active section immediately rather than waiting for scroll events to
+    // catch up — the smooth-scroll animation takes a moment, and until it finishes
+    // (or if the drawer is reopened mid-scroll) the indicator should already reflect
+    // where the user is headed, not where they scrolled from.
+    activeHrefRef.current = href;
+    setActive(href.slice(1));
     window.history.pushState(null, "", href);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const downloadResume = (e: React.MouseEvent) => {
-    e.preventDefault();
-    fetch("/resume.pdf")
-      .then(r => r.blob())
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Hanan Resume.pdf";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      });
   };
 
   /* Theme-aware pill colours */
@@ -250,7 +267,7 @@ export default function Navbar() {
             {/* Resume — desktop only; mobile users get it inside the drawer */}
             <motion.a
               href="/resume.pdf"
-              onClick={downloadResume}
+              download="Hanan Resume.pdf"
               className="hidden lg:flex"
               whileHover={{ y: -1.5 }}
               whileTap={{ scale: 0.95 }}
@@ -452,7 +469,7 @@ export default function Navbar() {
               }}>
                 <motion.a
                   href="/resume.pdf"
-                  onClick={downloadResume}
+                  download="Hanan Resume.pdf"
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: NAV_ITEMS.length * 0.045 + 0.06, duration: 0.28 }}
