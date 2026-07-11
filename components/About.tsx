@@ -76,7 +76,7 @@ export default function About() {
                 <span style={{ color: "var(--accent)", fontWeight: 600 }}>Full-Stack Software Engineer</span>
                 {" "}based in Lahore, Pakistan, currently building{" "}
                 <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>MixClip</span>
-                {" "}(a production AI video editing SaaS) at{" "}
+                {" "}(a production AI video editing SaaS that's grown to 2,578 active users across 17+ countries) at{" "}
                 <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>KCube Solutions</span>
                 {" "}using React 18, FastAPI &amp; TypeScript as lead engineer in a cross-functional team of 4.
                 Previously at Visnext Software Solutions building{" "}
@@ -115,7 +115,7 @@ export default function About() {
           </ScrollReveal>
 
           {/* RIGHT — Bento grid */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }}>
 
             {/* Role + Education row */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1rem" }}>

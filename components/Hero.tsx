@@ -411,7 +411,7 @@ export default function Hero() {
                 </div>
                 <div style={{
                   fontFamily: "var(--font-fira)", fontSize: "0.62rem", fontWeight: 700,
-                  color: "rgba(255,255,255,0.82)", letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: "var(--text-secondary)", letterSpacing: "0.08em", textTransform: "uppercase",
                 }}>
                   {s.label}
                 </div>

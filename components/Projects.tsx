@@ -269,7 +269,7 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
 
-          <div className="hidden sm:flex" style={{ alignItems: "center", gap: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {project.liveUrl !== "#" && (
               <motion.a
                 href={project.liveUrl}

@@ -55,7 +55,7 @@ const LIGHT_VARS: Record<string, string> = {
   "--text-secondary":       "#4A4A4A",
   "--text-muted":           "#666666",
   "--accent":               "#2563EB",
-  "--accent-light":         "#60A5FA",
+  "--accent-light":         "#1D4ED8",
   "--accent-dark":          "#2E2E2E",
   "--accent-secondary":     "#2E2E2E",
   "--accent-glow":          "rgba(37,99,235,0.10)",

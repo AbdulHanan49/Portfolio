@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiMail, FiHeart, FiArrowUp } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiHeart } from "react-icons/fi";
 
 const footerLinks = [
   { icon: FiGithub, href: "https://github.com/AbdulHanan49", label: "GitHub" },
@@ -116,11 +116,11 @@ export default function Footer() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <span className="text-2xl font-light" style={{ color: "var(--accent)" }}>
+                <span className="text-2xl font-light" style={{ color: "#64ffda" }}>
                   &lt;
                 </span>
-                <span className="font-bold" style={{ color: "var(--text-primary)" }}>AH</span>
-                <span className="text-2xl font-light" style={{ color: "var(--accent)" }}>
+                <span className="font-bold" style={{ color: "#ffffff" }}>AH</span>
+                <span className="text-2xl font-light" style={{ color: "#64ffda" }}>
                   /&gt;
                 </span>
               </motion.a>
@@ -219,37 +219,6 @@ export default function Footer() {
                 <FiHeart size={10} style={{ color: "#64ffda" }} />
               </span>
             </p>
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
-                Designed &amp; Developed by Me
-              </p>
-              <motion.a
-                href="#home"
-                aria-label="Back to top"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  width: "32px", height: "32px", borderRadius: "8px",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  color: "rgba(255,255,255,0.4)",
-                  textDecoration: "none", flexShrink: 0,
-                  transition: "color 0.2s, border-color 0.2s",
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.color = "#64ffda";
-                  el.style.borderColor = "rgba(100, 255, 218,0.35)";
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.color = "rgba(255,255,255,0.4)";
-                  el.style.borderColor = "rgba(255,255,255,0.12)";
-                }}
-              >
-                <FiArrowUp size={14} />
-              </motion.a>
-            </div>
           </div>
         </div>
       </div>

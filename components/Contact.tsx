@@ -266,8 +266,10 @@ export default function Contact() {
                     <motion.button
                       type="submit"
                       disabled={sending}
-                      whileHover={!sending ? { scale: 1.03, y: -2 } : {}}
+                      initial="rest"
+                      whileHover={!sending ? "hover" : "rest"}
                       whileTap={!sending ? { scale: 0.97 } : {}}
+                      variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.03, y: -2 } }}
                       transition={{ type: "spring", stiffness: 400, damping: 18 }}
                       className="btn-primary w-full sm:w-auto"
                       style={{
@@ -318,7 +320,14 @@ export default function Contact() {
                             exit={{ opacity: 0, y: -10 }}
                             style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
                           >
-                            Send Message <FiSend size={16} />
+                            Send Message
+                            <motion.span
+                              variants={{ rest: { x: 0, rotate: 0 }, hover: { x: 4, rotate: 12 } }}
+                              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <FiSend size={16} />
+                            </motion.span>
                           </motion.span>
                         )}
                       </AnimatePresence>
