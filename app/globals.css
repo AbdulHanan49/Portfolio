@@ -38,7 +38,7 @@
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
 }
 
-[data-theme=”light”] {
+[data-theme="light"] {
   --bg-primary: #F4F4F4;
   --bg-secondary: #FFFFFF;
   --bg-tertiary: #EBEBEB;
@@ -70,7 +70,7 @@
 }
 
 /* Hide dark-mode decorative elements in light mode */
-[data-theme=”light”] .dark-orb { display: none !important; }
+[data-theme="light"] .dark-orb { display: none !important; }
 
 @theme inline {
   --color-background: var(--bg-primary);
@@ -375,8 +375,8 @@ body::after {
   animation: auroraDrift 26s linear infinite;
   pointer-events: none;
   will-change: transform;
-  mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 85%);
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 85%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 45%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 45%, transparent 85%);
 }
 
 [data-theme="light"] .hero-aurora {

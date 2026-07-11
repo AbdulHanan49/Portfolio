@@ -57,6 +57,7 @@ export default function Contact() {
         backgroundSize: "40px 40px",
         maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
         WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%)",
+        willChange: "opacity",
       }} />
 
       <div className="max-w-[1200px] mx-auto px-6 relative z-10">
