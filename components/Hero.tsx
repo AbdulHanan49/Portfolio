@@ -34,9 +34,9 @@ function ProfileCard() {
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={() => setHovered(v => !v)}
+      onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(true); }}
+      onMouseLeave={() => { if (window.matchMedia("(hover: hover)").matches) setHovered(false); }}
+      onClick={() => { if (window.matchMedia("(hover: none)").matches) setHovered(v => !v); }}
       style={{
         width: "min(340px, calc(100vw - 4rem))",
         height: "min(430px, calc(min(100vw - 4rem, 340px) * 1.27))",
@@ -62,6 +62,7 @@ function ProfileCard() {
         filter: hovered ? "blur(4px) brightness(0.45) saturate(0.8)" : "blur(0px) brightness(1) saturate(1)",
         transform: hovered ? "scale(1.06)" : "scale(1)",
         transition: `filter 0.55s ${ease}, transform 0.55s ${ease}`,
+        willChange: "filter, transform",
       }}>
         <Image
           src="/profile.png"
@@ -156,6 +157,7 @@ function ProfileCard() {
         padding: "1.5rem 1.4rem",
         transform: hovered ? "translateY(0%)" : "translateY(100%)",
         transition: `transform 0.55s ${ease}`,
+        willChange: "transform",
       }}>
         {/* Scrim behind text */}
         <div style={{
